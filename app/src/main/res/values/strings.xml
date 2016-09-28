@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReactiveFbExample</string>
+    <string name="facebook_app_id">1764840603767960</string>
 </resources>
