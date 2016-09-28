@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 24
@@ -8,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "0.1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -26,6 +27,39 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.facebook.android:facebook-android-sdk:4.15.0'
+    compile 'com.google.code.gson:gson:2.4'
+
+    compile 'io.reactivex.rxjava2:rxjava:2.0.0-RC2'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.0-RC1'
     testCompile 'junit:junit:4.12'
 }
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'reactivefb'
+
+    publishedGroupId = 'com.beltaief.reactivefb'
+    libraryName = 'reactivefb'
+    artifact = 'reactivefb'
+
+    libraryDescription = 'RxJava 2.0 wrapper around the Facebook SDK'
+
+    siteUrl = 'https://github.com/WassimBenltaief/ReactiveFB'
+    gitUrl = 'https://github.com/WassimBenltaief/ReactiveFB.git'
+    githubRepository= 'WassimBenltaief/ReactiveFB'
+
+    libraryVersion = '0.1.0'
+
+    developerId = 'wassimbenltaief'
+    developerName = 'Wassim Beltaief'
+    developerEmail = 'beltaief.wassim@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+// Place it at the end of the file
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

@@ -1,17 +1,21 @@
 package com.beltaief.reactivefbexample.views;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.beltaief.reactivefacebook.example.R;
-import com.beltaief.reactivefacebook.models.Profile;
-import com.beltaief.reactivefacebook.requests.ReactiveRequest;
-import com.beltaief.reactivefacebook.util.Attributes;
-import com.beltaief.reactivefacebook.util.PictureAttributes;
+import com.beltaief.reactivefb.models.Profile;
+import com.beltaief.reactivefb.requests.ReactiveRequest;
+import com.beltaief.reactivefbexample.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
@@ -20,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = ProfileActivity.class.getSimpleName();
     private TextView result;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         Button button = (Button) findViewById(R.id.button);
         result = (TextView) findViewById(R.id.result);
+        imageView = (ImageView) findViewById(R.id.imageView);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,53 +43,48 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-
     private void getProfile() {
 
-        Profile.Properties properties = getProperties();
+        String bundle = "picture.width(147).height(147),name,first_name";
 
         ReactiveRequest
-                .getCurrentProfile(properties)
+                .getCurrentProfile(bundle)
                 .subscribe(new SingleObserver<Profile>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.d(TAG, "onSubscribe");
-                        result.append("onSubscribe");
-                        result.append("\n");
                     }
 
                     @Override
                     public void onSuccess(Profile value) {
                         Log.d(TAG, "onSuccess");
-                        result.append("onSuccess");
-                        result.append("\n");
+                        fillProfile(value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.d(TAG, "onError");
-                        result.append("onError "+ e.getMessage());
+                        result.append("onError " + e.getMessage());
                         result.append("\n");
                     }
                 });
     }
 
+    private void fillProfile(Profile value) {
+        Glide.with(this)
+                .load(value.getPicture())
+                .asBitmap()
+                .centerCrop()
+                .into(new BitmapImageViewTarget(imageView) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        imageView.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
 
-    private Profile.Properties getProperties() {
-        PictureAttributes pictureAttributes = Attributes.createPictureAttributes();
-        pictureAttributes.setHeight(500);
-        pictureAttributes.setWidth(500);
-        pictureAttributes.setType(PictureAttributes.PictureType.SQUARE);
-
-        return new Profile.Properties.Builder()
-                .add(Profile.Properties.BIRTHDAY)
-                .add(Profile.Properties.PICTURE, pictureAttributes)
-                .add(Profile.Properties.FIRST_NAME)
-                .add(Profile.Properties.LAST_NAME)
-                .add(Profile.Properties.EMAIL)
-                .add(Profile.Properties.BIO)
-                .build();
+        result.setText(value.getName());
     }
-
-
 }

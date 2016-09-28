@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    compile project(':reactivefb')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -28,5 +29,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.1'
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
     testCompile 'junit:junit:4.12'
 }

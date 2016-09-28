@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.beltaief.reactivefacebook.actions.login.ReactiveLogin;
-import com.beltaief.reactivefacebook.example.R;
+import com.beltaief.reactivefb.actions.login.ReactiveLogin;
+import com.beltaief.reactivefbexample.R;
 import com.facebook.login.LoginResult;
 
 import io.reactivex.MaybeObserver;
@@ -54,6 +54,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult value) {
                 Log.d(TAG, "OnSuccess");
+                result.append("\n");
+                result.append("token = " + value.getAccessToken().getToken());
+                result.append("\n");
+                result.append("granted permissions = " + value.getRecentlyGrantedPermissions().size());
+                result.append("\n");
+                result.append("denied permissions = " + value.getRecentlyDeniedPermissions().size());
                 result.append("\n");
             }
 

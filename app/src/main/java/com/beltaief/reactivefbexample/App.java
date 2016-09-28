@@ -2,9 +2,9 @@ package com.beltaief.reactivefbexample;
 
 import android.app.Application;
 
-import com.beltaief.reactivefacebook.ReactiveFB;
-import com.beltaief.reactivefacebook.SimpleFacebookConfiguration;
-import com.beltaief.reactivefacebook.models.Permission;
+import com.beltaief.reactivefb.ReactiveFB;
+import com.beltaief.reactivefb.SimpleFacebookConfiguration;
+import com.beltaief.reactivefb.models.Permission;
 import com.facebook.login.DefaultAudience;
 
 /**

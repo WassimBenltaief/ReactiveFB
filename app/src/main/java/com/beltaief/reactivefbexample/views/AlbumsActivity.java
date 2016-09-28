@@ -11,15 +11,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.beltaief.reactivefacebook.ReactiveFB;
-import com.beltaief.reactivefacebook.actions.login.ReactiveLogin;
-import com.beltaief.reactivefacebook.example.R;
-import com.beltaief.reactivefacebook.example.util.AlbumsAdapter;
-import com.beltaief.reactivefacebook.example.util.RecyclerViewClickListener;
-import com.beltaief.reactivefacebook.models.Album;
-import com.beltaief.reactivefacebook.models.Permission;
-import com.beltaief.reactivefacebook.models.Photo;
-import com.beltaief.reactivefacebook.requests.ReactiveRequest;
+import com.beltaief.reactivefb.ReactiveFB;
+import com.beltaief.reactivefb.actions.login.ReactiveLogin;
+import com.beltaief.reactivefb.models.Album;
+import com.beltaief.reactivefb.models.Permission;
+import com.beltaief.reactivefb.models.Photo;
+import com.beltaief.reactivefb.requests.ReactiveRequest;
+import com.beltaief.reactivefbexample.R;
+import com.beltaief.reactivefbexample.util.AlbumsAdapter;
+import com.beltaief.reactivefbexample.util.RecyclerViewClickListener;
 import com.facebook.login.LoginResult;
 
 import java.util.ArrayList;
@@ -119,7 +119,11 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
                 .flatMap(new Function<Album, ObservableSource<Photo>>() { // get cover_photo data for every album
                     @Override
                     public ObservableSource<Photo> apply(Album album) throws Exception {
-                        return ReactiveRequest.getPhoto(album.getCover().getId()).toObservable();
+                        if (album.getCover() != null) {
+                            return ReactiveRequest.getPhoto(album.getCover().getId()).toObservable();
+                        } else {
+                            return Observable.empty();
+                        }
                     }
                 })
                 .subscribe(new DisposableObserver<Photo>() {

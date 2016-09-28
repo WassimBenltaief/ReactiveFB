@@ -56,7 +56,7 @@
                 android:value=".views.MainActivity" />
         </activity>
         <activity
-            android:name=".views.UserProfileActivity"
+            android:name=".views.SingleFriendActivity"
             android:label="Public Profile Example"
             android:parentActivityName=".views.MainActivity">
             <meta-data

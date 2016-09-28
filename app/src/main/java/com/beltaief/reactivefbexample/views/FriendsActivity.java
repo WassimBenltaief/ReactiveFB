@@ -1,40 +1,35 @@
 package com.beltaief.reactivefbexample.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.beltaief.reactivefacebook.example.R;
-import com.beltaief.reactivefacebook.models.Profile;
-import com.beltaief.reactivefacebook.models.Profile.Properties;
-import com.beltaief.reactivefacebook.requests.ReactiveRequest;
+import com.beltaief.reactivefb.models.Profile;
+import com.beltaief.reactivefb.requests.ReactiveRequest;
+import com.beltaief.reactivefbexample.R;
+import com.beltaief.reactivefbexample.util.FriendsAdapter;
+import com.beltaief.reactivefbexample.util.RecyclerViewClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
-import static com.beltaief.reactivefacebook.models.Profile.Properties.AGE_RANGE;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.BIRTHDAY;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.Builder;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.EMAIL;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.FIRST_NAME;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.GENDER;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.ID;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.INSTALLED;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.LAST_NAME;
-import static com.beltaief.reactivefacebook.models.Profile.Properties.NAME;
 
-public class FriendsActivity extends AppCompatActivity {
+public class FriendsActivity extends AppCompatActivity implements RecyclerViewClickListener {
 
     private static final String TAG = FriendsActivity.class.getSimpleName();
     private TextView emptyView;
-    private RecyclerView recyclerView;
-    private ProgressBar progressBar;
+
+    private RecyclerView recycler;
+    private FriendsAdapter mAdapter;
+    private List<Profile> friends = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +37,12 @@ public class FriendsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_friends);
 
         emptyView = (TextView) findViewById(R.id.empty);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        progressBar = (ProgressBar) findViewById(R.id.progress);
+        recycler = (RecyclerView) findViewById(R.id.recycler);
 
-        //recyclerView.
+        recycler.setLayoutManager(new GridLayoutManager(this, 2));
+        recycler.setNestedScrollingEnabled(false);
+        mAdapter = new FriendsAdapter(friends, this);
+        recycler.setAdapter(mAdapter);
 
         getFriends();
 
@@ -55,10 +52,9 @@ public class FriendsActivity extends AppCompatActivity {
      * get the user list of firends who also use the app
      */
     public void getFriends() {
-        final Properties properties = getProperties();
-        showProgress();
+        final String bundleAsString = "picture.width(147).height(147),name,first_name";
 
-        ReactiveRequest.getFriends(properties)
+        ReactiveRequest.getFriends(bundleAsString)
                 .subscribe(new SingleObserver<List<Profile>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -66,47 +62,40 @@ public class FriendsActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onSuccess(List<Profile> value) {
+                    public void onSuccess(List<Profile> profiles) {
                         Log.d(TAG, "onNext");
-                        hideProgress();
-                        fillList(value);
+                        fillList(profiles);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.d(TAG, "onError :" + e.getMessage());
-                        hideProgress();
                     }
-
                 });
     }
 
     private void fillList(List<Profile> profileList) {
-
+        if(profileList.isEmpty()){
+            setViewVisibility(recycler, View.GONE);
+            setViewVisibility(emptyView, View.VISIBLE);
+        } else {
+            setViewVisibility(recycler, View.VISIBLE);
+            setViewVisibility(emptyView, View.GONE);
+        }
+        friends = profileList;
+        mAdapter.setData(friends);
+        mAdapter.notifyDataSetChanged();
     }
 
-    private void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setIndeterminate(true);
-    }
-
-    private void hideProgress() {
-        progressBar.setVisibility(View.GONE);
-        progressBar.setIndeterminate(false);
+    private void setViewVisibility(View view, int visibility) {
+        view.setVisibility(visibility);
     }
 
 
-    public Properties getProperties() {
-        return new Builder()
-                .add(ID)
-                .add(FIRST_NAME)
-                .add(LAST_NAME)
-                .add(NAME)
-                .add(BIRTHDAY)
-                .add(AGE_RANGE)
-                .add(EMAIL)
-                .add(GENDER)
-                .add(INSTALLED)
-                .build();
+    @Override
+    public void recyclerViewListClicked(View v, int position, int id) {
+        Intent intent = new Intent(this, SingleFriendActivity.class);
+        intent.putExtra("id", friends.get(position).getId());
+        startActivity(intent);
     }
 }

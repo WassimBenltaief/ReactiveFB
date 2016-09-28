@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".views.UserProfileActivity">
+    tools:context=".views.SingleFriendActivity">
 
     <Button
         android:id="@+id/button"
@@ -15,10 +15,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:id="@+id/imageView" />
+
     <TextView
         android:id="@+id/result"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:layout_below="@+id/button"
+        android:paddingTop="32dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_below="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

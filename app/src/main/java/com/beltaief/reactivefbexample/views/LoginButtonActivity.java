@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.beltaief.reactivefacebook.actions.login.ReactiveLogin;
-import com.beltaief.reactivefacebook.example.R;
+import com.beltaief.reactivefb.actions.login.ReactiveLogin;
+import com.beltaief.reactivefbexample.R;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -46,7 +46,13 @@ public class LoginButtonActivity extends AppCompatActivity {
                     @Override
                     public void onNext(LoginResult value) {
                         Log.d(TAG, "onNext");
-                        result.append("Result : " + value.toString());
+                        result.append("\n");
+                        result.append("token = " + value.getAccessToken().getToken());
+                        result.append("\n");
+                        result.append("granted permissions = " + value.getRecentlyGrantedPermissions().size());
+                        result.append("\n");
+                        result.append("denied permissions = " + value.getRecentlyDeniedPermissions().size());
+                        result.append("\n");
                     }
 
                     @Override

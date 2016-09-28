@@ -9,11 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.beltaief.reactivefacebook.ReactiveFB;
-import com.beltaief.reactivefacebook.example.R;
-import com.beltaief.reactivefacebook.example.util.Example;
-import com.beltaief.reactivefacebook.example.util.ExampleAdapter;
-import com.beltaief.reactivefacebook.example.util.RecyclerViewClickListener;
+import com.beltaief.reactivefb.ReactiveFB;
+import com.beltaief.reactivefbexample.R;
+import com.beltaief.reactivefbexample.util.Example;
+import com.beltaief.reactivefbexample.util.ExampleAdapter;
+import com.beltaief.reactivefbexample.util.RecyclerViewClickListener;
 
 import java.util.ArrayList;
 
@@ -32,11 +32,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         mExamples.add(new Example("Login ", LoginActivity.class, false));
         mExamples.add(new Example("Login with button", LoginButtonActivity.class, false));
         mExamples.add(new Example("Current Profile", ProfileActivity.class, true));
-        mExamples.add(new Example("Friends Profile", FriendsActivity.class, true));
-        mExamples.add(new Example("Friend Profile", UserProfileActivity.class, true));
         mExamples.add(new Example("Albums Profile", AlbumsActivity.class, true));
-        /*mExamples.add(new Example("Send message to one", SendMessageToOneFragment.class, true));
-        mExamples.add(new Example("Send message to suggested", SendMessageToSuggestedFragment.class, true));*/
+        mExamples.add(new Example("Friends", FriendsActivity.class, true));
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
