@@ -10,13 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefb.requests.ReactiveRequest;
 import com.beltaief.reactivefbexample.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 

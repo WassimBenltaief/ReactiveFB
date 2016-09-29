@@ -21,17 +21,17 @@ public class PictureAttributes extends Attributes {
         attributes.put(TYPE, type.getValue());
     }
 
-    public static enum PictureType {
+    private enum PictureType {
         SMALL("small"),
         NORMAL("normal"),
         LARGE("large"),
         SQUARE("square");
 
-        private String mValue;
-
-        private PictureType(String value) {
+        PictureType(String value) {
             mValue = value;
         }
+
+        private String mValue;
 
         public String getValue() {
             return mValue;
