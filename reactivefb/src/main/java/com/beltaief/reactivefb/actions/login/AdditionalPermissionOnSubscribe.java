@@ -15,23 +15,19 @@ import io.reactivex.MaybeOnSubscribe;
  * Created by wassim on 9/21/16.
  */
 
-public class AdditionalPermissionOnSubscribe implements MaybeOnSubscribe<LoginResult> {
+class AdditionalPermissionOnSubscribe implements MaybeOnSubscribe<LoginResult> {
 
 
-    SessionManager sessionManager;
-    List<Permission> mPermissions;
+    private SessionManager sessionManager;
+    private List<Permission> mPermissions;
 
-    public AdditionalPermissionOnSubscribe(List<Permission> permissions) {
+    AdditionalPermissionOnSubscribe(List<Permission> permissions) {
         sessionManager = ReactiveFB.getSessionManager();
         mPermissions = permissions;
     }
 
     @Override
     public void subscribe(MaybeEmitter<LoginResult> emitter) throws Exception {
-        login(emitter);
-    }
-
-    private void login(MaybeEmitter<LoginResult> emitter) {
         SimpleFacebookConfiguration mConfiguration = ReactiveFB.getConfiguration();
 
         int flag = mConfiguration.getType(mPermissions);

@@ -1,15 +1,15 @@
-package com.beltaief.reactivefb.requests;
+package com.beltaief.reactivefb.requests.common;
 
 import com.facebook.GraphRequest;
 
-public class Cursor<T> {
+class Cursor<T> {
 
     private final GetAction<T> mGetAction;
     private GraphRequest mNextPage = null;
     private GraphRequest mPrevPage = null;
     private int mPageNum = 0;
 
-    public Cursor(GetAction<T> getAction) {
+    Cursor(GetAction<T> getAction) {
         mGetAction = getAction;
     }
 

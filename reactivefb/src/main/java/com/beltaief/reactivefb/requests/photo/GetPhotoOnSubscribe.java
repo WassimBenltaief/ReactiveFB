@@ -1,10 +1,11 @@
-package com.beltaief.reactivefb.requests.photos;
+package com.beltaief.reactivefb.requests.photo;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.models.Photo;
+import com.beltaief.reactivefb.util.Utils;
 
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
@@ -16,27 +17,19 @@ import io.reactivex.SingleOnSubscribe;
 public class GetPhotoOnSubscribe implements SingleOnSubscribe<Photo> {
 
     private String photoId;
+    private String bundleAsString;
 
-    public GetPhotoOnSubscribe(@NonNull String id) {
+    public GetPhotoOnSubscribe(@NonNull String id, @Nullable String bundle) {
         photoId = id;
+        bundleAsString = bundle;
     }
 
     @Override
     public void subscribe(SingleEmitter<Photo> e) throws Exception {
-        get(photoId, e);
-    }
-
-    private void get(String photoId, SingleEmitter<Photo> emitter) {
         GetPhotoAction getPhotoAction = new GetPhotoAction(ReactiveFB.getSessionManager());
-        getPhotoAction.setSingleEmitter(emitter);
+        getPhotoAction.setSingleEmitter(e);
         getPhotoAction.setTarget(photoId);
-        getPhotoAction.setBundle(getBundle());
+        getPhotoAction.setBundle(Utils.getBundle(bundleAsString));
         getPhotoAction.execute();
-    }
-
-    public Bundle getBundle() {
-        Bundle bundle = new Bundle();
-        bundle.putString("fields", "album,images");
-        return bundle;
     }
 }

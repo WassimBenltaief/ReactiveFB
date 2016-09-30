@@ -5,9 +5,10 @@ import android.os.Bundle;
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefb.models.Profile.Properties;
-import com.beltaief.reactivefb.requests.GetAction;
-import com.beltaief.reactivefb.util.JsonUtils;
+import com.beltaief.reactivefb.requests.common.GetAction;
 import com.facebook.GraphResponse;
+import com.beltaief.reactivefb.util.JsonUtils;
+
 
 public class GetProfileAction extends GetAction<Profile> {
 
@@ -37,6 +38,7 @@ public class GetProfileAction extends GetAction<Profile> {
     @Override
     protected Profile processResponse(GraphResponse response) {
         return JsonUtils.fromJson(response.getRawResponse(), Profile.class);
+
     }
 
 }

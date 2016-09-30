@@ -14,28 +14,22 @@ public class ReactiveLoginCallback<T> implements FacebookCallback<T> {
 
     private static final String TAG = ReactiveLoginCallback.class.getSimpleName();
     private MaybeEmitter<T> maybeEmitter;
-    public boolean askPublishPermissions;
-    public List<String> publishPermissions;
+    boolean askPublishPermissions;
+    List<String> publishPermissions;
 
     @Override
     public void onSuccess(T loginResult) {
-        if(!maybeEmitter.isCancelled()) {
-            maybeEmitter.onSuccess(loginResult);
-        }
+        maybeEmitter.onSuccess(loginResult);
     }
 
     @Override
     public void onCancel() {
-        if(!maybeEmitter.isCancelled()) {
-            maybeEmitter.onComplete();
-        }
+        maybeEmitter.onComplete();
     }
 
     @Override
     public void onError(FacebookException error) {
-        if(!maybeEmitter.isCancelled()) {
-            maybeEmitter.onError(new Throwable(error));
-        }
+        maybeEmitter.onError(new Throwable(error));
     }
 
     public void setEmitter(MaybeEmitter<T> emitter) {

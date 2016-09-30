@@ -14,23 +14,17 @@ public class ReactiveLoginWithButtonCallback<T> implements FacebookCallback<T> {
 
     @Override
     public void onSuccess(T loginResult) {
-        if(!maybeEmitter.isCancelled()) {
-            maybeEmitter.onNext(loginResult);
-        }
+        maybeEmitter.onNext(loginResult);
     }
 
     @Override
     public void onCancel() {
-        if(!maybeEmitter.isCancelled()) {
-            maybeEmitter.onError(new FacebookException("user canceled the operation"));
-        }
+        maybeEmitter.onError(new FacebookException("user canceled the operation"));
     }
 
     @Override
     public void onError(FacebookException error) {
-        if(!maybeEmitter.isCancelled()) {
-            maybeEmitter.onError(new Throwable(error));
-        }
+        maybeEmitter.onError(new Throwable(error));
     }
 
     public void setEmitter(ObservableEmitter<T> emitter) {

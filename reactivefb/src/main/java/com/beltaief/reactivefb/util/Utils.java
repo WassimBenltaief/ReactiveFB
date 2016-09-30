@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.Signature;
+import android.os.Bundle;
 import android.util.Base64;
 
 import com.beltaief.reactivefb.models.IdName;
@@ -24,9 +25,12 @@ import java.util.Map.Entry;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-public class Utils {
-    public static final String EMPTY = "";
+public final class Utils {
+    private static final String EMPTY = "";
     public static final String CHARSET_NAME = "UTF-8";
+
+    private Utils(){
+    }
 
     public String getFacebookSDKVersion() {
         String sdkVersion = null;
@@ -35,13 +39,11 @@ public class Utils {
             Class<?> cls = classLoader.loadClass("com.facebook.FacebookSdkVersion");
             Field field = cls.getField("BUILD");
             sdkVersion = String.valueOf(field.get(null));
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (ClassNotFoundException |
+                NoSuchFieldException |
+                IllegalArgumentException |
+                IllegalAccessException e) {
+
             e.printStackTrace();
         }
         return sdkVersion;
@@ -185,6 +187,12 @@ public class Utils {
             names.add(idName.getName());
         }
         return names;
+    }
+
+    public static Bundle getBundle(String mBundleString) {
+        Bundle bundle = new Bundle();
+        bundle.putString("fields", mBundleString);
+        return bundle;
     }
 
     public static class DataResult<T> {

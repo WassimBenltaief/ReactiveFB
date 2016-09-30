@@ -1,14 +1,14 @@
-package com.beltaief.reactivefb.requests.photos;
+package com.beltaief.reactivefb.requests.photo;
 
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.models.Photo;
-import com.beltaief.reactivefb.requests.GetAction;
+import com.beltaief.reactivefb.requests.common.GetAction;
 import com.beltaief.reactivefb.util.JsonUtils;
 import com.facebook.GraphResponse;
 
-public class GetPhotoAction extends GetAction<Photo> {
+class GetPhotoAction extends GetAction<Photo> {
 
-    public GetPhotoAction(SessionManager sessionManager) {
+    GetPhotoAction(SessionManager sessionManager) {
         super(sessionManager);
     }
 

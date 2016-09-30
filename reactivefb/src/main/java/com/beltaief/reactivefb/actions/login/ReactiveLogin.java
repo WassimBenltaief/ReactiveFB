@@ -24,6 +24,17 @@ import static com.beltaief.reactivefb.util.Checker.checkNotNull;
  */
 public class ReactiveLogin {
 
+    /**
+     * Login with {@link com.facebook.login.LoginManager}
+     * The reason why this method returns a MayBe is that when a user cancel the operation, it
+     * does not emit any value neither an error. Maybe have a onComplete method that is covering
+     * this case.
+     * Use onSuccess to handle a success result.
+     * Use onComplete to handle canceled operation.
+     *
+     * @param activity instance of the current activity
+     * @return a Maybe of LoginResult
+     */
     @NonNull
     public static Maybe<LoginResult> login(Activity activity) {
         checkNotNull(activity, "view == null");
@@ -34,9 +45,14 @@ public class ReactiveLogin {
     }
 
     /**
-     * To be called from an Activity
-     * @param loginButton
-     * @return
+     * Login with {@link LoginButton}
+     * To be called from an Activity.
+     * The reason why it's returning an Observable and not a MayBe like login() is that with MayBe
+     * the subscribtion is done only one time. We need an observable in order to subscribe
+     * continuously.
+     *
+     * @param loginButton instance of a {@link LoginButton}
+     * @return an Observable of LoginResult
      */
     @NonNull
     public static Observable<LoginResult> loginWithButton(@NonNull final LoginButton loginButton) {
@@ -48,9 +64,11 @@ public class ReactiveLogin {
     }
 
     /**
-     * To be called from an android.support.v4.app.fragment
-     * @param loginButton instance of the facebook LoginButton
-     * @param fragment support lib fragment
+     * Login with {@link LoginButton}
+     * To be called from an @{@link Fragment}
+     *
+     * @param loginButton instance of a {@link LoginButton}
+     * @param fragment    instance of support {@link Fragment}
      * @return
      */
     @NonNull
@@ -64,9 +82,11 @@ public class ReactiveLogin {
     }
 
     /**
-     * To be called from an android.app.fragment
+     * Login with {@link LoginButton}
+     * To be called from an {@link android.app.Fragment}
+     *
      * @param loginButton instance of the facebook LoginButton
-     * @param fragment support lib fragment
+     * @param fragment    instance of {@link android.app.Fragment}
      * @return
      */
     @NonNull
@@ -80,6 +100,14 @@ public class ReactiveLogin {
     }
 
 
+    /**
+     * Redirect facebook callback onActivityResult to this library callback.
+     * This is necessary with login/ loginWithButton methods.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @NonNull
     public static void onActivityResult(int requestCode, int resultCode, Intent data) {
         ReactiveFB.getSessionManager()
@@ -87,6 +115,14 @@ public class ReactiveLogin {
                 .onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Request additional permissions from facebook. This launches a new login with additional
+     * permissions.
+     *
+     * @param permissions List of {@link Permission}
+     * @param activity    current activity instance
+     * @return a Maybe of LoginResult.
+     */
     public static Maybe<LoginResult> requestAdditionalPermission(List<Permission> permissions,
                                                                  Activity activity) {
 

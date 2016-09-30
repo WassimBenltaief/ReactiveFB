@@ -1,10 +1,10 @@
 package com.beltaief.reactivefb.requests.profile;
 
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.models.Profile;
+import com.beltaief.reactivefb.util.Utils;
 
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
@@ -14,8 +14,8 @@ import io.reactivex.SingleOnSubscribe;
  */
 public class GetProfileOnSubscribe implements SingleOnSubscribe<Profile> {
 
-    String mBundleString;
-    String mProfileId;
+    private String mBundleString;
+    private String mProfileId;
 
     public GetProfileOnSubscribe(@Nullable String bundle, @Nullable String profileId) {
         mBundleString = bundle;
@@ -24,20 +24,10 @@ public class GetProfileOnSubscribe implements SingleOnSubscribe<Profile> {
 
     @Override
     public void subscribe(SingleEmitter<Profile> emitter) throws Exception {
-        getProfile(emitter);
-    }
-
-    private void getProfile(SingleEmitter<Profile> emitter) {
         GetProfileAction getProfileAction = new GetProfileAction(ReactiveFB.getSessionManager());
-        getProfileAction.setBundle(getBundle());
+        getProfileAction.setBundle(Utils.getBundle(mBundleString));
         getProfileAction.setTarget(mProfileId);
         getProfileAction.setSingleEmitter(emitter);
         getProfileAction.execute();
-    }
-
-    public Bundle getBundle() {
-        Bundle bundle = new Bundle();
-        bundle.putString("fields", mBundleString);
-        return bundle;
     }
 }

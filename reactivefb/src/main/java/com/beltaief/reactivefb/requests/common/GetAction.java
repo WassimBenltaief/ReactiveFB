@@ -1,4 +1,4 @@
-package com.beltaief.reactivefb.requests;
+package com.beltaief.reactivefb.requests.common;
 
 import android.os.Bundle;
 
@@ -39,9 +39,7 @@ public class GetAction<T> extends AbstractAction {
                         "Failed to get what you have requested", error.getException());
 
                 if (mSingleEmitter != null) {
-                    if(!mSingleEmitter.isCancelled()) {
                         mSingleEmitter.onError(error.getException());
-                    }
                 }
             } else {
                 if (response.getRawResponse() == null) {

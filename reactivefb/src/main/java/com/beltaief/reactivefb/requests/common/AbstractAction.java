@@ -1,15 +1,15 @@
-package com.beltaief.reactivefb.requests;
+package com.beltaief.reactivefb.requests.common;
 
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.SimpleFacebookConfiguration;
 
-public abstract class AbstractAction {
+abstract class AbstractAction {
 
-    protected SessionManager sessionManager;
-    protected SimpleFacebookConfiguration configuration = ReactiveFB.getConfiguration();
+    SessionManager sessionManager;
+    SimpleFacebookConfiguration configuration = ReactiveFB.getConfiguration();
 
-    public AbstractAction(SessionManager sessionManager) {
+    AbstractAction(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
     }
 

@@ -22,13 +22,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class JsonUtils {
+public final class JsonUtils {
+
+    private JsonUtils() {
+    }
 
     private static Gson buildGson() {
-        Gson gson = new GsonBuilder()
+        return new GsonBuilder()
                 .registerTypeAdapter(Date.class, new DateTypeAdapter())
                 .create();
-        return gson;
     }
 
     /**
@@ -37,7 +39,7 @@ public class JsonUtils {
      * @param obj
      * @return String in JSON format
      */
-    public static String toJson(Object obj) {
+    private static String toJson(Object obj) {
         Gson gson = buildGson();
         return gson.toJson(obj);
     }
@@ -48,14 +50,14 @@ public class JsonUtils {
      * @param json
      * @return Object filled with JSON string data
      */
-    public static <T> T fromJson(String json, Class<T> cls) {
+    private static <T> T fromJson(String json, Class<T> cls) {
         Gson gson = buildGson();
 
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(json);
 
         // check if the Class type is array but the Json is an object
-        if (cls != null && cls.isArray() && element instanceof JsonArray == false) {
+        if (cls != null && cls.isArray() && !(element instanceof JsonArray)) {
             JsonArray jsonArray = new JsonArray();
             jsonArray.add(element);
 
@@ -73,11 +75,12 @@ public class JsonUtils {
      * @param json
      * @return Object filled with JSON string data
      */
-    public static <T> T fromJson(byte[] json, Class<T> cls) {
+    private static <T> T fromJson(byte[] json, Class<T> cls) {
         try {
             String decoded = new String(json, "UTF-8");
             return fromJson(decoded, cls);
         } catch (Exception e) {
+            Logger.logError(cls, "Exception", e);
             return null;
         }
     }
@@ -87,7 +90,7 @@ public class JsonUtils {
      *
      * @return Object filled with JSON string data
      */
-    public static <T> T fromJson(byte[] bytes, Type type) {
+    private static <T> T fromJson(byte[] bytes, Type type) {
         try {
             String decoded = new String(bytes, "UTF-8");
             return fromJson(decoded, type);
@@ -99,6 +102,7 @@ public class JsonUtils {
     /**
      * Get JSON string and convert to T (Object) you need. <br>
      * <br>
+     *
      * @param json
      * @return Object filled with JSON string data
      */
@@ -119,14 +123,14 @@ public class JsonUtils {
      * @param cls
      * @return
      */
-    public static <T> T fromJsonExcludeFields(String json, Class<T> cls) {
+    private static <T> T fromJsonExcludeFields(String json, Class<T> cls) {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(json);
 
         // check if the Class type is array but the Json is an object
-        if (cls.isArray() && element instanceof JsonArray == false) {
+        if (cls.isArray() && !(element instanceof JsonArray)) {
             JsonArray jsonArray = new JsonArray();
             jsonArray.add(element);
 
@@ -141,6 +145,7 @@ public class JsonUtils {
     private static class DateTypeAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
 
         private static List<DateFormat> formats;
+
         {
             formats = new ArrayList<DateFormat>();
             formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
@@ -165,6 +170,7 @@ public class JsonUtils {
                 try {
                     return new JsonPrimitive(dateFormat.format(date));
                 } catch (Exception e) {
+                    Logger.logError(DateTypeAdapter.class, "Exception on serialize", e);
                 }
             }
 
@@ -180,6 +186,7 @@ public class JsonUtils {
                 try {
                     return dateFormat.parse(dateString);
                 } catch (Exception e) {
+                    Logger.logError(DateTypeAdapter.class, "Exception on deserialize", e);
                     le = e;
                 }
             }

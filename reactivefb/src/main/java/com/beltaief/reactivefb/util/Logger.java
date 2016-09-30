@@ -1,14 +1,16 @@
 package com.beltaief.reactivefb.util;
 
 import android.util.Log;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public class Logger {
+public final class Logger {
 
-    public static boolean DEBUG = false;
-    public static boolean DEBUG_WITH_STACKTRACE = false;
+    private static boolean DEBUG = false;
+    private static boolean DEBUG_WITH_STACKTRACE = false;
+
+    private Logger() {
+    }
 
     public static <T> void logInfo(Class<T> cls, String message) {
         if (DEBUG || DEBUG_WITH_STACKTRACE) {

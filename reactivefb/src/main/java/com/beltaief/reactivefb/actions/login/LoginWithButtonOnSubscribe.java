@@ -1,16 +1,13 @@
 package com.beltaief.reactivefb.actions.login;
 
 import android.app.Fragment;
-
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.SimpleFacebookConfiguration;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
 import java.lang.ref.WeakReference;
 import java.util.List;
-
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 
@@ -19,13 +16,12 @@ import io.reactivex.ObservableOnSubscribe;
  */
 final class LoginWithButtonOnSubscribe implements ObservableOnSubscribe<LoginResult> {
 
-    final LoginButton mLoginButton;
-    final SessionManager sessionManager;
-    List<String> mPermissions;
-    SimpleFacebookConfiguration simpleFacebookConfiguration;
-    WeakReference<Fragment> mFragment;
+    private final LoginButton mLoginButton;
+    private final SessionManager sessionManager;
+    private SimpleFacebookConfiguration simpleFacebookConfiguration;
+    private WeakReference<Fragment> mFragment;
 
-    public LoginWithButtonOnSubscribe(LoginButton loginButton) {
+    LoginWithButtonOnSubscribe(LoginButton loginButton) {
         mLoginButton = loginButton;
         sessionManager = ReactiveFB.getSessionManager();
         simpleFacebookConfiguration = ReactiveFB.getConfiguration();
@@ -40,19 +36,13 @@ final class LoginWithButtonOnSubscribe implements ObservableOnSubscribe<LoginRes
 
     @Override
     public void subscribe(ObservableEmitter<LoginResult> emitter) throws Exception {
-        loginWithButton(emitter);
-    }
-
-    private void loginWithButton(ObservableEmitter<LoginResult> emitter) {
         if (sessionManager.isLoggedIn()) {
             LoginResult loginResult = sessionManager.createLastLoginResult();
-            if(!emitter.isCancelled()) {
-                emitter.onNext(loginResult);
-                emitter.onComplete();
-            }
+            emitter.onNext(loginResult);
+            emitter.onComplete();
             return;
         }
-        mPermissions = simpleFacebookConfiguration.getReadPermissions();
+        List<String> mPermissions = simpleFacebookConfiguration.getReadPermissions();
         if (mPermissions != null) {
             mLoginButton.setReadPermissions(mPermissions);
         }
@@ -61,7 +51,7 @@ final class LoginWithButtonOnSubscribe implements ObservableOnSubscribe<LoginRes
         // This allows the button to be embedded inside a Fragment, and will allow the fragment
         // to receive the {@link Fragment#onActivityResult(int, int, android.content.Intent)
         // onActivityResult} call rather than the Activity.
-        if (mFragment != null ) {
+        if (mFragment != null) {
             mLoginButton.setFragment(mFragment.get());
         }
 

@@ -9,7 +9,7 @@ import com.beltaief.reactivefb.models.Photo;
 import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefb.requests.albums.GetAlbumsOnSubscribe;
 import com.beltaief.reactivefb.requests.friends.GetFriendsOnSubscribe;
-import com.beltaief.reactivefb.requests.photos.GetPhotoOnSubscribe;
+import com.beltaief.reactivefb.requests.photo.GetPhotoOnSubscribe;
 import com.beltaief.reactivefb.requests.profile.GetProfileOnSubscribe;
 
 import java.util.List;
@@ -44,16 +44,16 @@ public class ReactiveRequest {
     }
 
     @NonNull
-    public static Single<List<Album>> getAlbums(){
+    public static Single<List<Album>> getAlbums(String bundle){
         ReactiveFB.checkInit();
         // getProfile
-        return Single.create(new GetAlbumsOnSubscribe());
+        return Single.create(new GetAlbumsOnSubscribe(bundle));
     }
 
     @NonNull
-    public static Single<Photo> getPhoto(String id) {
+    public static Single<Photo> getPhoto(String id, String bundle) {
         ReactiveFB.checkInit();
         // getProfile
-        return Single.create(new GetPhotoOnSubscribe(id));
+        return Single.create(new GetPhotoOnSubscribe(id, bundle));
     }
 }

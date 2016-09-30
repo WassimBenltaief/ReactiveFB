@@ -25,16 +25,10 @@ final class LoginOnSubscribe implements MaybeOnSubscribe<LoginResult> {
 
     @Override
     public void subscribe(MaybeEmitter<LoginResult> emitter) throws Exception {
-        login(emitter);
-    }
-
-    private void login(MaybeEmitter<LoginResult> emitter) {
         if (sessionManager.isLoggedIn()) {
             LoginResult loginResult = sessionManager.createLastLoginResult();
-            if(!emitter.isCancelled()) {
-                emitter.onSuccess(loginResult);
-            }
-            return ;
+            emitter.onSuccess(loginResult);
+            return;
         }
         // set observableEmitter
         sessionManager.setCallbackAsLogin(emitter);
