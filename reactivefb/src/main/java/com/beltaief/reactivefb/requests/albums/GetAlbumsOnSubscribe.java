@@ -2,7 +2,6 @@ package com.beltaief.reactivefb.requests.albums;
 
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.models.Album;
-import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Utils;
 
 import java.util.List;
@@ -25,10 +24,7 @@ public class GetAlbumsOnSubscribe implements SingleOnSubscribe<List<Album>> {
     @Override
     public void subscribe(SingleEmitter<List<Album>> e) throws Exception {
 
-        String target = String.format("%s/%s", "me", GraphPath.ALBUMS);
-
         GetAlbumsAction getAction = new GetAlbumsAction(ReactiveFB.getSessionManager());
-        getAction.setTarget(target);
         getAction.setSingleEmitter(e);
         getAction.setBundle(Utils.getBundle(bundleAsString));
         getAction.execute();

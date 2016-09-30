@@ -1,21 +1,23 @@
 package com.beltaief.reactivefb.models;
 
-import com.google.gson.annotations.SerializedName;
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.util.Locale;
 
 /**
  * Created by sromku on 6/9/15.
  */
+@JsonObject
 public class IdName {
 
     private static final String ID = "id";
     private static final String NAME = "name";
 
-    @SerializedName(ID)
+    @JsonField(name = ID)
     protected String mId;
 
-    @SerializedName(NAME)
+    @JsonField(name = NAME)
     protected String mName;
 
     public String getId() {

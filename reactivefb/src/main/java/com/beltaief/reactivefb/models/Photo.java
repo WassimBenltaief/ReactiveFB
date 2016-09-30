@@ -5,19 +5,19 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 
+import com.beltaief.reactivefb.util.Converters;
 import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Logger;
-import com.google.gson.annotations.SerializedName;
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author sromku
- * // @see https://developers.facebook.com/docs/graph-api/reference/photo
- */
+
+@JsonObject
 public class Photo implements Publishable {
 
     private static final String ID = "id";
@@ -40,55 +40,58 @@ public class Photo implements Publishable {
     private static final String MESSAGE = "message"; // same as NAME
     private static final String PRIVACY = "privacy";
 
-    @SerializedName(ID)
+    @JsonField(name = ID)
     private String mId;
 
-    @SerializedName(ALBUM)
+    @JsonField(name = ALBUM)
     private Album mAlbum;
 
-    @SerializedName(BACKDATED_TIME)
+    @JsonField(name = BACKDATED_TIME,
+            typeConverter = Converters.DateTimeZoneConverter.class)
     private Date mBackDatetime;
 
-    @SerializedName(BACKDATED_TIME_GRANULARITY)
+    @JsonField(name = BACKDATED_TIME_GRANULARITY,
+            typeConverter = Converters.BackDatetimeGranularityConverter.class)
     private BackDatetimeGranularity mBackDatetimeGranularity;
 
-    @SerializedName(CREATED_TIME)
+    @JsonField(name = CREATED_TIME, typeConverter =
+            Converters.DateTimeZoneConverter.class)
     private Date mCreatedTime;
 
-    @SerializedName(FROM)
+    @JsonField(name = FROM)
     private User mFrom;
 
-    @SerializedName(HEIGHT)
+    @JsonField(name = HEIGHT)
     private Integer mHeight;
 
-    @SerializedName(ICON)
+    @JsonField(name = ICON)
     private String mIcon;
 
-    @SerializedName(IMAGES)
+    @JsonField(name = IMAGES)
     private List<Image> mImages;
 
-    @SerializedName(LINK)
+    @JsonField(name = LINK)
     private String mLink;
 
-    @SerializedName(NAME)
+    @JsonField(name = NAME)
     private String mName;
 
-    @SerializedName(PAGE_STORY_ID)
+    @JsonField(name = PAGE_STORY_ID)
     private String mPageStoryId;
 
-    @SerializedName(PICTURE)
+    @JsonField(name = PICTURE)
     private String mPicture;
 
-    @SerializedName(SOURCE)
+    @JsonField(name = SOURCE)
     private String mSource;
 
-    @SerializedName(UPDATED_TIME)
+    @JsonField(name = UPDATED_TIME, typeConverter = Converters.DateTimeZoneConverter.class)
     private Date mUpdatedTime;
 
-    @SerializedName(WIDTH)
+    @JsonField(name = WIDTH)
     private Integer mWidth;
 
-    @SerializedName(PLACE)
+    @JsonField(name = PLACE)
     private Place mPlace;
 
     private String mPlaceId = null;
@@ -308,8 +311,7 @@ public class Photo implements Publishable {
         /**
          * Add name/description to the photo
          *
-         * @param name
-         *            The name/description of the photo
+         * @param name The name/description of the photo
          */
         public Builder setName(String name) {
             mName = name;
@@ -319,8 +321,7 @@ public class Photo implements Publishable {
         /**
          * Add place id of the photo
          *
-         * @param placeId
-         *            The place id of the photo
+         * @param placeId The place id of the photo
          */
         public Builder setPlace(String placeId) {
             mPlaceId = placeId;
@@ -330,8 +331,7 @@ public class Photo implements Publishable {
         /**
          * Add privacy setting to the photo
          *
-         * @param privacy
-         *            The privacy setting of the photo
+         * @param privacy The privacy setting of the photo
          * @see Privacy
          */
         public Builder setPrivacy(Privacy privacy) {

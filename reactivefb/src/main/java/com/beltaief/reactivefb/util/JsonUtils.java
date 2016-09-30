@@ -1,30 +1,8 @@
 package com.beltaief.reactivefb.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
 public final class JsonUtils {
 
-    private JsonUtils() {
+    /*private JsonUtils() {
     }
 
     private static Gson buildGson() {
@@ -33,23 +11,23 @@ public final class JsonUtils {
                 .create();
     }
 
-    /**
+    *//**
      * Parse Object to String in JSON format
      *
      * @param obj
      * @return String in JSON format
-     */
+     *//*
     private static String toJson(Object obj) {
         Gson gson = buildGson();
         return gson.toJson(obj);
     }
 
-    /**
+    *//**
      * Get JSON string and convert to T (Object) you need
      *
      * @param json
      * @return Object filled with JSON string data
-     */
+     *//*
     private static <T> T fromJson(String json, Class<T> cls) {
         Gson gson = buildGson();
 
@@ -69,12 +47,12 @@ public final class JsonUtils {
         return gson.fromJson(json, cls);
     }
 
-    /**
+    *//**
      * Get JSON string and convert to T (Object) you need
      *
      * @param json
      * @return Object filled with JSON string data
-     */
+     *//*
     private static <T> T fromJson(byte[] json, Class<T> cls) {
         try {
             String decoded = new String(json, "UTF-8");
@@ -85,11 +63,11 @@ public final class JsonUtils {
         }
     }
 
-    /**
+    *//**
      * Get JSON string and convert to T (Object) you need
      *
      * @return Object filled with JSON string data
-     */
+     *//*
     private static <T> T fromJson(byte[] bytes, Type type) {
         try {
             String decoded = new String(bytes, "UTF-8");
@@ -99,13 +77,13 @@ public final class JsonUtils {
         }
     }
 
-    /**
+    *//**
      * Get JSON string and convert to T (Object) you need. <br>
      * <br>
      *
      * @param json
      * @return Object filled with JSON string data
-     */
+     *//*
     public static <T> T fromJson(String json, Type type) {
         Gson gson = buildGson();
 
@@ -115,14 +93,14 @@ public final class JsonUtils {
         return gson.fromJson(element, type);
     }
 
-    /**
+    *//**
      * Build object from json and inoke to fields that are marked with @Expose
      * annotation
      *
      * @param json
      * @param cls
      * @return
-     */
+     *//*
     private static <T> T fromJsonExcludeFields(String json, Class<T> cls) {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
@@ -192,6 +170,6 @@ public final class JsonUtils {
             }
             throw new JsonParseException(le);
         }
-    }
+    }*/
 
 }

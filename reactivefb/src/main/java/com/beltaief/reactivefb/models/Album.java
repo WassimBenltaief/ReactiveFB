@@ -2,17 +2,17 @@ package com.beltaief.reactivefb.models;
 
 import android.os.Bundle;
 
+import com.beltaief.reactivefb.util.Converters;
 import com.beltaief.reactivefb.util.GraphPath;
-import com.google.gson.annotations.SerializedName;
-
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
 import java.util.Date;
 
 /**
- * Album entity.
- *
- * @author sromku
+ * @author wassim
  * // @see https://developers.facebook.com/docs/reference/api/album
  */
+@JsonObject
 public class Album implements Publishable {
 
     private static final String ID = "id";
@@ -30,43 +30,45 @@ public class Album implements Publishable {
     private static final String UPDATED_TIME = "updated_time";
     private static final String CAN_UPLOAD = "can_upload";
 
-    @SerializedName(ID)
+    @JsonField(name = ID)
     private String mId = null;
 
-    @SerializedName(FROM)
+    @JsonField(name = FROM)
     private User mFrom = null;
 
-    @SerializedName(NAME)
+    @JsonField(name = NAME)
     private String mName = null;
 
-    @SerializedName(DESCRIPTION)
+    @JsonField(name = DESCRIPTION)
     private String mDescription = null;
 
-    @SerializedName(LOCATION)
+    @JsonField(name = LOCATION)
     private String mLocation = null;
 
-    @SerializedName(LINK)
+    @JsonField(name = LINK)
     private String mLink = null;
 
-    @SerializedName(COUNT)
+    @JsonField(name = COUNT)
     private Integer mCount = null;
 
-    @SerializedName(PRIVACY)
+    @JsonField(name = PRIVACY)
     private String mPrivacy = null;
 
-    @SerializedName(COVER_PHOTO)
+    @JsonField(name = COVER_PHOTO)
     private Cover mCover = null;
 
-    @SerializedName(TYPE)
+    @JsonField(name = TYPE)
     private String mType = null;
 
-    @SerializedName(CREATED_TIME)
+    @JsonField(name = CREATED_TIME,
+            typeConverter = Converters.DateTimeZoneConverter.class)
     private Date mCreatedTime;
 
-    @SerializedName(UPDATED_TIME)
+    @JsonField(name = UPDATED_TIME,
+            typeConverter = Converters.DateTimeZoneConverter.class)
     private Date mUpdatedTime;
 
-    @SerializedName(CAN_UPLOAD)
+    @JsonField(name = CAN_UPLOAD)
     private boolean mCanUpload;
 
     private Privacy mPublishPrivacy = null;

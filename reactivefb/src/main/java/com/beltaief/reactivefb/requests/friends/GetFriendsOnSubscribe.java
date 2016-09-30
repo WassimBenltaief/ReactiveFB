@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.models.Profile;
-import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Utils;
 
 import java.util.List;
@@ -25,11 +24,9 @@ public class GetFriendsOnSubscribe implements SingleOnSubscribe<List<Profile>> {
 
     @Override
     public void subscribe(SingleEmitter<List<Profile>> emitter) throws Exception {
-        String target = String.format("%s/%s", "me", GraphPath.FRIENDS);
 
         GetFriendsAction getAction = new GetFriendsAction(ReactiveFB.getSessionManager());
         getAction.setBundle(Utils.getBundle(mBundleString));
-        getAction.setTarget(target);
         getAction.setSingleEmitter(emitter);
         getAction.execute();
     }

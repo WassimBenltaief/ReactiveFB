@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import com.beltaief.reactivefb.util.Attributes;
 import com.beltaief.reactivefb.util.Utils;
-import com.google.gson.annotations.SerializedName;
-
+import com.bluelinelabs.logansquare.annotation.JsonField;
+import com.bluelinelabs.logansquare.annotation.JsonObject;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,102 +14,104 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The facebook user
- *
- * @author sromku
+ * @author wassim
  * // @see https://developers.facebook.com/docs/graph-api/reference/user
  */
+@JsonObject
 public class Profile extends User {
 
-    @SerializedName(Properties.FIRST_NAME)
+    @JsonField(name = Properties.FIRST_NAME)
     private String mFirstName;
 
-    @SerializedName(Properties.MIDDLE_NAME)
+    @JsonField(name = Properties.MIDDLE_NAME)
     private String mMiddleName;
 
-    @SerializedName(Properties.LAST_NAME)
+    @JsonField(name = Properties.LAST_NAME)
     private String mLastName;
 
-    @SerializedName(Properties.GENDER)
+    @JsonField(name = Properties.GENDER)
     private String mGender;
 
-    @SerializedName(Properties.LOCALE)
+    @JsonField(name = Properties.LOCALE)
     private String mLocale;
 
-    @SerializedName(Properties.LANGUAGE)
+    @JsonField(name = Properties.LANGUAGE)
     private List<Language> mLanguages;
 
-    @SerializedName(Properties.LINK)
+    @JsonField(name = Properties.LINK)
     private String mLink;
 
-    @SerializedName(Properties.AGE_RANGE)
+    @JsonField(name = Properties.AGE_RANGE)
     private AgeRange mAgeRange;
 
-    @SerializedName(Properties.THIRD_PARTY_ID)
+    @JsonField(name = Properties.THIRD_PARTY_ID)
     private String mThirdPartyId;
 
-    @SerializedName(Properties.INSTALLED)
+    @JsonField(name = Properties.INSTALLED)
     private Boolean mIsInstalled;
 
-    @SerializedName(Properties.TIMEZONE)
+    @JsonField(name = Properties.TIMEZONE)
     private Integer mTimeZone;
 
-    @SerializedName(Properties.UPDATED_TIME)
+    @JsonField(name = Properties.UPDATED_TIME)
     private Date mUpdatedTime;
 
-    @SerializedName(Properties.VERIFIED)
+    @JsonField(name = Properties.VERIFIED)
     private Boolean mVerified;
 
-    @SerializedName(Properties.BIO)
+    @JsonField(name = Properties.BIO)
     private String mBio;
 
-    @SerializedName(Properties.BIRTHDAY)
+    @JsonField(name = Properties.BIRTHDAY)
     private String mBirthday;
 
-    @SerializedName(Properties.COVER)
+    @JsonField(name = Properties.COVER)
     private Photo mCover;
 
-    @SerializedName(Properties.CURRENCY)
+    @JsonField(name = Properties.CURRENCY)
     private String mCurrency;
 
-    @SerializedName(Properties.EDUCATION)
+    @JsonField(name = Properties.EDUCATION)
     private List<Education> mEducation;
 
-    @SerializedName(Properties.EMAIL)
+    @JsonField(name = Properties.EMAIL)
     private String mEmail;
 
-    @SerializedName(Properties.HOMETOWN)
+    @JsonField(name = Properties.HOMETOWN)
     private IdName mHometown;
 
-    @SerializedName(Properties.LOCATION)
+    @JsonField(name = Properties.LOCATION)
     private IdName mCurrentLocation;
 
-    @SerializedName(Properties.POLITICAL)
+    @JsonField(name = Properties.POLITICAL)
     private String mPolitical;
 
-    @SerializedName(Properties.FAVORITE_ATHLETES)
+    @JsonField(name = Properties.FAVORITE_ATHLETES)
     private List<String> mFavoriteAthletes;
 
-    @SerializedName(Properties.FAVORITE_TEAMS)
+    @JsonField(name = Properties.FAVORITE_TEAMS)
     private List<String> mFavoriteTeams;
 
-    @SerializedName(Properties.PICTURE)
+    @JsonField(name = Properties.PICTURE)
     private Utils.SingleDataResult<Image> mPicture;
 
-    @SerializedName(Properties.QUOTES)
+    @JsonField(name = Properties.QUOTES)
     private String mQuotes;
 
-    @SerializedName(Properties.RELATIONSHIP_STATUS)
+    @JsonField(name = Properties.RELATIONSHIP_STATUS)
     private String mRelationshipStatus;
 
-    @SerializedName(Properties.RELIGION)
+    @JsonField(name = Properties.RELIGION)
     private String mReligion;
 
-    @SerializedName(Properties.WEBSITE)
+    @JsonField(name = Properties.WEBSITE)
     private String mWebsite;
 
-    @SerializedName(Properties.WORK)
+    @JsonField(name = Properties.WORK)
     private List<Work> mWorks;
+
+    public Profile() {
+    }
 
     /**
      * Returns the ID of the user. <br>
