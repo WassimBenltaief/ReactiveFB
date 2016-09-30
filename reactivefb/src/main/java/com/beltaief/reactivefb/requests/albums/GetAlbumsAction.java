@@ -2,7 +2,7 @@ package com.beltaief.reactivefb.requests.albums;
 
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.models.Album;
-import com.beltaief.reactivefb.requests.GetAction;
+import com.beltaief.reactivefb.requests.common.GetAction;
 import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Utils;
 import com.facebook.GraphResponse;
@@ -10,9 +10,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-public class GetAlbumsAction extends GetAction<List<Album>> {
+class GetAlbumsAction extends GetAction<List<Album>> {
 
-    public GetAlbumsAction(SessionManager sessionManager) {
+    GetAlbumsAction(SessionManager sessionManager) {
         super(sessionManager);
     }
 

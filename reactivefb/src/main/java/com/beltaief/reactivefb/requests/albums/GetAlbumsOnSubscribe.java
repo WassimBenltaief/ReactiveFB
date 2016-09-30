@@ -1,9 +1,9 @@
 package com.beltaief.reactivefb.requests.albums;
 
-import android.os.Bundle;
-
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.models.Album;
+import com.beltaief.reactivefb.util.GraphPath;
+import com.beltaief.reactivefb.util.Utils;
 
 import java.util.List;
 
@@ -16,24 +16,21 @@ import io.reactivex.SingleOnSubscribe;
 
 public class GetAlbumsOnSubscribe implements SingleOnSubscribe<List<Album>> {
 
-    public GetAlbumsOnSubscribe() {
+    private String bundleAsString;
+
+    public GetAlbumsOnSubscribe(String bundle) {
+        bundleAsString = bundle;
     }
 
     @Override
     public void subscribe(SingleEmitter<List<Album>> e) throws Exception {
-        getAlbums(e);
-    }
 
-    private void getAlbums(SingleEmitter<List<Album>> singleEmitter) {
-        GetAlbumsAction getAlbumsAction = new GetAlbumsAction(ReactiveFB.getSessionManager());
-        getAlbumsAction.setSingleEmitter(singleEmitter);
-        getAlbumsAction.setBundle(getBundle());
-        getAlbumsAction.execute();
-    }
+        String target = String.format("%s/%s", "me", GraphPath.ALBUMS);
 
-    private Bundle getBundle(){
-        Bundle bundle = new Bundle();
-        bundle.putString("fields", "cover_photo,description,created_time,count");
-        return bundle;
+        GetAlbumsAction getAction = new GetAlbumsAction(ReactiveFB.getSessionManager());
+        getAction.setTarget(target);
+        getAction.setSingleEmitter(e);
+        getAction.setBundle(Utils.getBundle(bundleAsString));
+        getAction.execute();
     }
 }

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beltaief.reactivefb.ReactiveFB;
@@ -35,8 +34,6 @@ import io.reactivex.observers.DisposableObserver;
 public class AlbumsActivity extends AppCompatActivity implements RecyclerViewClickListener {
 
     private static final String TAG = AlbumsActivity.class.getSimpleName();
-    private TextView result;
-    private RecyclerView recycler;
     private AlbumsAdapter mAdapter;
     private List<Photo> photos = new ArrayList<>();
 
@@ -45,8 +42,7 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_albums);
 
-        result = (TextView) findViewById(R.id.result);
-        recycler = (RecyclerView) findViewById(R.id.recycler);
+        RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setNestedScrollingEnabled(false);
         mAdapter = new AlbumsAdapter(photos, this);
@@ -107,8 +103,11 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
 
     public void getAlbums() {
 
+        String albumFields = "cover_photo,description,created_time,count";
+        final String photoFields = "album,images";
+
         ReactiveRequest
-                .getAlbums()  // get albums
+                .getAlbums(albumFields)  // get albums
                 .toObservable()
                 .flatMap(new Function<List<Album>, ObservableSource<Album>>() {
                     @Override
@@ -116,11 +115,12 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
                         return Observable.fromIterable(alba);
                     }
                 })
-                .flatMap(new Function<Album, ObservableSource<Photo>>() { // get cover_photo data for every album
+                .flatMap(new Function<Album, ObservableSource<Photo>>() { // get cover_photo
                     @Override
                     public ObservableSource<Photo> apply(Album album) throws Exception {
                         if (album.getCover() != null) {
-                            return ReactiveRequest.getPhoto(album.getCover().getId()).toObservable();
+                            return ReactiveRequest.getPhoto(album.getCover().getId(), photoFields)
+                                    .toObservable();
                         } else {
                             return Observable.empty();
                         }
