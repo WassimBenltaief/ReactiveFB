@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefb.models.Profile.Properties;
-import com.beltaief.reactivefb.requests.GetAction;
+import com.beltaief.reactivefb.requests.common.GetAction;
 import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Utils;
 import com.facebook.GraphResponse;
@@ -13,11 +13,11 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-public class GetFriendsAction extends GetAction<List<Profile>> {
+class GetFriendsAction extends GetAction<List<Profile>> {
 
     private Properties mProperties;
 
-    public GetFriendsAction(SessionManager sessionManager) {
+    GetFriendsAction(SessionManager sessionManager) {
         super(sessionManager);
     }
 
