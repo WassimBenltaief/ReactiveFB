@@ -102,6 +102,7 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
     }
 
     public void getAlbums() {
+        mAdapter.clear();
 
         String albumFields = "cover_photo,description,created_time,count";
         final String photoFields = "album,images";

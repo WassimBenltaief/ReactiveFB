@@ -1,175 +1,215 @@
 package com.beltaief.reactivefb.util;
 
+import com.beltaief.reactivefb.models.Album;
+import com.beltaief.reactivefb.models.Cover;
+import com.beltaief.reactivefb.models.IdName;
+import com.beltaief.reactivefb.models.Image;
+import com.beltaief.reactivefb.models.Language;
+import com.beltaief.reactivefb.models.Photo;
+import com.beltaief.reactivefb.models.Profile;
+import com.beltaief.reactivefb.models.Profile.Properties;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public final class JsonUtils {
 
-    /*private JsonUtils() {
+    private JsonUtils() {
     }
 
-    private static Gson buildGson() {
-        return new GsonBuilder()
-                .registerTypeAdapter(Date.class, new DateTypeAdapter())
-                .create();
+    // TODO finish the mapper with the rest of the fields
+    public static Profile parseProfile(String jsonProfile) throws JSONException {
+        Profile profile = new Profile();
+        JSONObject jProfile = new JSONObject(jsonProfile);
+
+        if (jProfile.has(Properties.ID)) {
+            profile.setId(jProfile.getString(IdName.ID));
+        }
+
+        if (jProfile.has(Properties.NAME)) {
+            profile.setName(jProfile.getString(IdName.NAME));
+        }
+
+        if (jProfile.has(Properties.FIRST_NAME)) {
+            profile.setFirstName(jProfile.getString(Properties.FIRST_NAME));
+        }
+
+        if (jProfile.has(Properties.MIDDLE_NAME)) {
+            profile.setMiddleName(jProfile.getString(Properties.MIDDLE_NAME));
+        }
+
+        if (jProfile.has(Properties.LAST_NAME)) {
+            profile.setLastName(jProfile.getString(Properties.LAST_NAME));
+        }
+
+        if (jProfile.has(Properties.GENDER)) {
+            profile.setGender(jProfile.getString(Properties.GENDER));
+        }
+
+        if (jProfile.has(Properties.LOCALE)) {
+            profile.setLocale(jProfile.getString(Properties.LOCALE));
+        }
+
+        if (jProfile.has(Properties.LANGUAGE)) {
+            profile.setLanguages(parseLanguages(jProfile.getJSONArray(Properties.LANGUAGE)));
+        }
+
+        profile.setPicture(parsePicture(jProfile.getJSONObject(Properties.PICTURE)));
+
+        return profile;
     }
 
-    *//**
-     * Parse Object to String in JSON format
-     *
-     * @param obj
-     * @return String in JSON format
-     *//*
-    private static String toJson(Object obj) {
-        Gson gson = buildGson();
-        return gson.toJson(obj);
+    private static Utils.SingleDataResult<Image> parsePicture(JSONObject jsonObject) throws JSONException {
+        Utils.SingleDataResult<Image> dataResult = new Utils.SingleDataResult<>();
+        dataResult.data = new Image();
+
+        JSONObject jsonImage = new JSONObject(String.valueOf(jsonObject.get("data")));
+
+        if (jsonImage.has(Image.HEIGHT)) {
+            dataResult.data.setHeight(jsonImage.getInt(Image.HEIGHT));
+        }
+
+        if (jsonImage.has(Image.WIDTH)) {
+            dataResult.data.setWidth(jsonImage.getInt(Image.WIDTH));
+        }
+
+        if (jsonImage.has(Image.IS_SILHOUETTE)) {
+            dataResult.data.setSilhouette(jsonImage.getBoolean(Image.IS_SILHOUETTE));
+        }
+
+        if (jsonImage.has(Image.URL)) {
+            dataResult.data.setUrl(jsonImage.getString(Image.URL));
+        }
+
+        return dataResult;
     }
 
-    *//**
-     * Get JSON string and convert to T (Object) you need
-     *
-     * @param json
-     * @return Object filled with JSON string data
-     *//*
-    private static <T> T fromJson(String json, Class<T> cls) {
-        Gson gson = buildGson();
-
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-
-        // check if the Class type is array but the Json is an object
-        if (cls != null && cls.isArray() && !(element instanceof JsonArray)) {
-            JsonArray jsonArray = new JsonArray();
-            jsonArray.add(element);
-
-            Type listType = new TypeToken<T>() {
-            }.getType();
-            return gson.fromJson(jsonArray, listType);
-        }
-
-        return gson.fromJson(json, cls);
+    private static List<Language> parseLanguages(JSONArray jLanguagesArray) throws JSONException {
+        return null;
     }
 
-    *//**
-     * Get JSON string and convert to T (Object) you need
-     *
-     * @param json
-     * @return Object filled with JSON string data
-     *//*
-    private static <T> T fromJson(byte[] json, Class<T> cls) {
-        try {
-            String decoded = new String(json, "UTF-8");
-            return fromJson(decoded, cls);
-        } catch (Exception e) {
-            Logger.logError(cls, "Exception", e);
-            return null;
+    public static List<Album> parseAlbums(String rawResponse) throws JSONException {
+        List<Album> albumList = new ArrayList<>();
+        JSONObject jsonObject = new JSONObject(rawResponse);
+
+        JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
+        for (int i = 0; i < jsonArray.length(); i++) {
+            Album album = parseAlbum(jsonArray.getJSONObject(i));
+            albumList.add(album);
         }
+        return albumList;
     }
 
-    *//**
-     * Get JSON string and convert to T (Object) you need
-     *
-     * @return Object filled with JSON string data
-     *//*
-    private static <T> T fromJson(byte[] bytes, Type type) {
-        try {
-            String decoded = new String(bytes, "UTF-8");
-            return fromJson(decoded, type);
-        } catch (Exception e) {
-            return null;
+    private static Album parseAlbum(JSONObject jsonAlbum) throws JSONException {
+        Album album = new Album();
+
+        if (jsonAlbum.has(Album.ID)) {
+            album.setId(jsonAlbum.getString(Album.ID));
         }
+
+        if (jsonAlbum.has(Album.NAME)) {
+            album.setName(jsonAlbum.getString(Album.NAME));
+        }
+
+
+        if (jsonAlbum.has(Album.COUNT)) {
+            album.setCount(jsonAlbum.getInt(Album.COUNT));
+        }
+
+        if (jsonAlbum.has(Album.CREATED_TIME)) {
+            String stringDate = jsonAlbum.getString(Album.CREATED_TIME);
+            album.setCreatedTime(Utils.formatDate(stringDate));
+        }
+
+        if (jsonAlbum.has(Album.DESCRIPTION)) {
+            album.setDescription(jsonAlbum.getString(Album.DESCRIPTION));
+        }
+
+        if (jsonAlbum.has(Album.COVER_PHOTO)) {
+            album.setCover(parseCoverPhoto(jsonAlbum.getJSONObject(Album.COVER_PHOTO)));
+        }
+
+        return album;
     }
 
-    *//**
-     * Get JSON string and convert to T (Object) you need. <br>
-     * <br>
-     *
-     * @param json
-     * @return Object filled with JSON string data
-     *//*
-    public static <T> T fromJson(String json, Type type) {
-        Gson gson = buildGson();
+    private static Cover parseCoverPhoto(JSONObject jsonCover) throws JSONException {
+        Cover cover = new Cover();
 
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
+        if (jsonCover.has(Cover.ID)) {
+            cover.setId(jsonCover.getString(Cover.ID));
+        }
 
-        return gson.fromJson(element, type);
+        if (jsonCover.has(Cover.CREATED_TIME)) {
+            String stringDate = jsonCover.getString(Cover.CREATED_TIME);
+            cover.setCreatedTime(Utils.formatDate(stringDate));
+        }
+
+        return cover;
     }
 
-    *//**
-     * Build object from json and inoke to fields that are marked with @Expose
-     * annotation
-     *
-     * @param json
-     * @param cls
-     * @return
-     *//*
-    private static <T> T fromJsonExcludeFields(String json, Class<T> cls) {
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    public static Photo parsePhoto(String rawResponse) throws JSONException {
+        JSONObject jsonPhoto = new JSONObject(rawResponse);
+        Photo photo = new Photo();
 
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-
-        // check if the Class type is array but the Json is an object
-        if (cls.isArray() && !(element instanceof JsonArray)) {
-            JsonArray jsonArray = new JsonArray();
-            jsonArray.add(element);
-
-            Type listType = new TypeToken<T>() {
-            }.getType();
-            return gson.fromJson(jsonArray, listType);
+        if (jsonPhoto.has(Photo.ALBUM)) {
+            Album album = parseAlbum(jsonPhoto.getJSONObject(Photo.ALBUM));
+            photo.setAlbum(album);
         }
 
-        return gson.fromJson(json, cls);
+        if (jsonPhoto.has(Photo.IMAGES)) {
+            List<Image> images = parseImages(jsonPhoto.getJSONArray(Photo.IMAGES));
+            photo.setImages(images);
+        }
+
+        if (jsonPhoto.has(Photo.ID)) {
+            photo.setId(jsonPhoto.getString(Photo.ID));
+        }
+
+        return photo;
     }
 
-    private static class DateTypeAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
+    private static List<Image> parseImages(JSONArray jsonArray) throws JSONException {
+        List<Image> images = new ArrayList<>();
 
-        private static List<DateFormat> formats;
-
-        {
-            formats = new ArrayList<DateFormat>();
-            formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
-            formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"));
-            formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"));
-            formats.add(createDateFormat("yyyy-MM-dd"));
+        for (int i = 0; i < jsonArray.length(); i++) {
+            Image image = parseImage(jsonArray.getJSONObject(i));
+            images.add(image);
         }
 
-        private static DateFormat createDateFormat(String format) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
-            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-            return dateFormat;
+        return images;
+    }
+
+    private static Image parseImage(JSONObject jsonImage) throws JSONException {
+        Image image = new Image();
+
+        if (jsonImage.has(Image.HEIGHT)) {
+            image.setHeight(jsonImage.getInt(Image.HEIGHT));
         }
 
-        private DateTypeAdapter() {
+        if (jsonImage.has(Image.WIDTH)) {
+            image.setWidth(jsonImage.getInt(Image.WIDTH));
         }
 
-        @Override
-        public synchronized JsonElement serialize(Date date, Type type,
-                                                  JsonSerializationContext jsonSerializationContext) {
-            for (DateFormat dateFormat : formats) {
-                try {
-                    return new JsonPrimitive(dateFormat.format(date));
-                } catch (Exception e) {
-                    Logger.logError(DateTypeAdapter.class, "Exception on serialize", e);
-                }
-            }
-
-            return null;
+        if (jsonImage.has(Image.SOURCE)) {
+            image.setSource(jsonImage.getString(Image.SOURCE));
         }
 
-        @Override
-        public synchronized Date deserialize(JsonElement jsonElement, Type type,
-                                             JsonDeserializationContext jsonDeserializationContext) {
-            Exception le = null;
-            String dateString = jsonElement.getAsString();
-            for (DateFormat dateFormat : formats) {
-                try {
-                    return dateFormat.parse(dateString);
-                } catch (Exception e) {
-                    Logger.logError(DateTypeAdapter.class, "Exception on deserialize", e);
-                    le = e;
-                }
-            }
-            throw new JsonParseException(le);
-        }
-    }*/
+        return image;
+    }
 
+    public static List<Profile> parseFriends(String rawResponse) throws JSONException {
+        JSONArray jsonArray = new JSONObject(rawResponse).getJSONArray("data");
+        List<Profile> profiles = new ArrayList<>();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            Profile profile = parseProfile(jsonArray.getString(0));
+            profiles.add(profile);
+        }
+
+        return profiles;
+    }
 }

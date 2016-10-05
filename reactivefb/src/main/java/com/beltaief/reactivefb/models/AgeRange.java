@@ -1,7 +1,5 @@
 package com.beltaief.reactivefb.models;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Age range (min-max) of the user.
  *
@@ -9,11 +7,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public class AgeRange {
 
-    @SerializedName("min")
-    private String mMin;
+    String mMin;
 
-    @SerializedName("max")
-    private String mMax;
+    String mMax;
 
     public String getMin() {
         return mMin;

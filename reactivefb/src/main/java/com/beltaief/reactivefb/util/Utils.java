@@ -9,18 +9,21 @@ import android.os.Bundle;
 import android.util.Base64;
 
 import com.beltaief.reactivefb.models.IdName;
-import com.facebook.GraphResponse;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Formatter;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TimeZone;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -28,8 +31,15 @@ import javax.crypto.spec.SecretKeySpec;
 public final class Utils {
     private static final String EMPTY = "";
     public static final String CHARSET_NAME = "UTF-8";
+    private static List<DateFormat> formats = new ArrayList<>();
 
     private Utils(){
+    }
+
+    private static SimpleDateFormat createDateFormat(String format){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return dateFormat;
     }
 
     public String getFacebookSDKVersion() {
@@ -195,6 +205,27 @@ public final class Utils {
         return bundle;
     }
 
+    static Date formatDate(String stringDate) {
+        Exception le = null;
+        if(formats.isEmpty()){
+            formats = new ArrayList<DateFormat>();
+            formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+            formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+            formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"));
+            formats.add(createDateFormat("yyyy-MM-dd"));
+        }
+
+        for (DateFormat dateFormat : formats) {
+            try {
+                return dateFormat.parse(stringDate);
+            } catch (Exception e) {
+                Logger.logError(Date.class, "Exception on deserialize", e);
+                le = e;
+            }
+        }
+        throw new RuntimeException(le);
+    }
+
     public static class DataResult<T> {
         public List<T> data;
     }
@@ -209,14 +240,6 @@ public final class Utils {
             }
             return super.toString();
         }
-    }
-
-    public static <T> T convert(GraphResponse response, Type type) {
-        return JsonUtils.fromJson(response.getRawResponse(), type);
-    }
-
-    public static <T> T convert(String json, Type type) {
-        return JsonUtils.fromJson(json, type);
     }
 
 

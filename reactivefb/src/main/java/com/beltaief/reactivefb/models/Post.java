@@ -2,7 +2,6 @@ package com.beltaief.reactivefb.models;
 
 import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Utils;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,94 +81,64 @@ public class Post {
     private static final String UPDATED_TIME = "updated_time";
     private static final String WITH_TAGS = "with_tags";
 
-    @SerializedName(ACTIONS)
     private List<Action> mActions;
 
-    @SerializedName(APPLICATION)
     private Application mApplication;
 
-    @SerializedName(ATTACHMENTS)
     private Attachment mAttachment;
 
-    @SerializedName(CAPTION)
     private String mCaption;
 
-    @SerializedName(COMMENTS)
     private Utils.DataResult<Comment> mComments;
 
-    @SerializedName(LIKES)
     private Utils.DataResult<Like> mLikes;
 
-    @SerializedName(CREATED_TIME)
     private Date mCreatedTime;
 
-    @SerializedName(DESCRIPTION)
     private String mDescription;
 
-    @SerializedName(FROM)
     private User mFrom;
 
-    @SerializedName(ICON)
     private String mIcon;
 
-    @SerializedName(ID)
     private String mId;
 
-    @SerializedName(IS_HIDDEN)
     private Boolean mIsHidden;
 
-    @SerializedName(LINK)
     private String mLink;
 
-    @SerializedName(MESSAGE)
     private String mMessage;
 
-    @SerializedName(MESSAGE_TAGS)
     private Map<String, List<InlineTag>> mMessageTags;
 
-    @SerializedName(NAME)
     private String mName;
 
-    @SerializedName(OBJECT_ID)
     private String mObjectId;
 
-    @SerializedName(PICTURE)
     private String mPicture;
 
-    @SerializedName(PLACE)
     private Place mPlace;
 
-//    @SerializedName(PRIVACY)
-//    private Privacy mPrivacy;
+    private Privacy mPrivacy;
 
-    @SerializedName(PROPERTIES)
     private List<Property> mProperties;
 
-    @SerializedName(SHARES)
     private Shares mShares;
 
-    @SerializedName(SOURCE)
     private String mSource;
 
-    @SerializedName(STATUS_TYPE)
     private String mStatusType;
 
-    @SerializedName(STORY)
     private String mStory;
 
-    @SerializedName(STORY_TAGS)
     private Map<String, List<InlineTag>> mStoryTags;
 
-    @SerializedName(TO)
     private Utils.DataResult<User> mTo;
 
-    @SerializedName(TYPE)
     private String mType;
 
-    @SerializedName(UPDATED_TIME)
     private Date mUpdatedTime;
 
-    @SerializedName(WITH_TAGS)
     private Utils.DataResult<User> mWithTags;
 
     private static class Shares {
@@ -419,10 +388,8 @@ public class Post {
         private static final String NAME = "name";
         private static final String LINK = "link";
 
-        @SerializedName(NAME)
         private String mName;
 
-        @SerializedName(LINK)
         private String mLink;
 
         public String getName() {
@@ -439,10 +406,8 @@ public class Post {
         private static final String NAME = "name";
         private static final String TEXT = "text";
 
-        @SerializedName(NAME)
         private String mName;
 
-        @SerializedName(TEXT)
         private String mText;
 
         public String getName() {
@@ -462,19 +427,14 @@ public class Post {
         private static final String LENGTH = "length";
         private static final String TYPE = "type";
 
-        @SerializedName(ID)
         private String mId;
 
-        @SerializedName(NAME)
         private String mName;
 
-        @SerializedName(OFFSET)
         private Integer mOffset;
 
-        @SerializedName(LENGTH)
         private Integer mLength;
 
-        @SerializedName(TYPE)
         private String mType;
 
         public String getId() {

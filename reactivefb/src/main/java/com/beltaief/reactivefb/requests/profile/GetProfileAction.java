@@ -7,10 +7,10 @@ import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefb.models.Profile.Properties;
 import com.beltaief.reactivefb.requests.common.GetAction;
-import com.bluelinelabs.logansquare.LoganSquare;
+import com.beltaief.reactivefb.util.JsonUtils;
 import com.facebook.GraphResponse;
 
-import java.io.IOException;
+import org.json.JSONException;
 
 
 public class GetProfileAction extends GetAction<Profile> {
@@ -43,8 +43,8 @@ public class GetProfileAction extends GetAction<Profile> {
     protected Profile processResponse(GraphResponse response) {
         Exception el;
         try {
-            return LoganSquare.parse(response.getRawResponse(), Profile.class);
-        } catch (IOException e) {
+            return JsonUtils.parseProfile(response.getRawResponse());
+        } catch (JSONException e) {
             e.printStackTrace();
             Log.e(TAG, e.getMessage()+"");
             el = e;

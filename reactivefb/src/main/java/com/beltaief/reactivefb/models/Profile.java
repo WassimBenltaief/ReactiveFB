@@ -4,8 +4,7 @@ import android.os.Bundle;
 
 import com.beltaief.reactivefb.util.Attributes;
 import com.beltaief.reactivefb.util.Utils;
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,97 +16,67 @@ import java.util.Set;
  * @author wassim
  * // @see https://developers.facebook.com/docs/graph-api/reference/user
  */
-@JsonObject
+
 public class Profile extends User {
 
-    @JsonField(name = Properties.FIRST_NAME)
     private String mFirstName;
 
-    @JsonField(name = Properties.MIDDLE_NAME)
     private String mMiddleName;
 
-    @JsonField(name = Properties.LAST_NAME)
     private String mLastName;
 
-    @JsonField(name = Properties.GENDER)
     private String mGender;
 
-    @JsonField(name = Properties.LOCALE)
     private String mLocale;
 
-    @JsonField(name = Properties.LANGUAGE)
     private List<Language> mLanguages;
 
-    @JsonField(name = Properties.LINK)
     private String mLink;
 
-    @JsonField(name = Properties.AGE_RANGE)
     private AgeRange mAgeRange;
 
-    @JsonField(name = Properties.THIRD_PARTY_ID)
     private String mThirdPartyId;
 
-    @JsonField(name = Properties.INSTALLED)
     private Boolean mIsInstalled;
 
-    @JsonField(name = Properties.TIMEZONE)
     private Integer mTimeZone;
 
-    @JsonField(name = Properties.UPDATED_TIME)
     private Date mUpdatedTime;
 
-    @JsonField(name = Properties.VERIFIED)
     private Boolean mVerified;
 
-    @JsonField(name = Properties.BIO)
     private String mBio;
 
-    @JsonField(name = Properties.BIRTHDAY)
     private String mBirthday;
 
-    @JsonField(name = Properties.COVER)
     private Photo mCover;
 
-    @JsonField(name = Properties.CURRENCY)
     private String mCurrency;
 
-    @JsonField(name = Properties.EDUCATION)
     private List<Education> mEducation;
 
-    @JsonField(name = Properties.EMAIL)
     private String mEmail;
 
-    @JsonField(name = Properties.HOMETOWN)
     private IdName mHometown;
 
-    @JsonField(name = Properties.LOCATION)
     private IdName mCurrentLocation;
 
-    @JsonField(name = Properties.POLITICAL)
     private String mPolitical;
 
-    @JsonField(name = Properties.FAVORITE_ATHLETES)
     private List<String> mFavoriteAthletes;
 
-    @JsonField(name = Properties.FAVORITE_TEAMS)
     private List<String> mFavoriteTeams;
 
-    @JsonField(name = Properties.PICTURE)
     private Utils.SingleDataResult<Image> mPicture;
 
-    @JsonField(name = Properties.QUOTES)
     private String mQuotes;
 
-    @JsonField(name = Properties.RELATIONSHIP_STATUS)
     private String mRelationshipStatus;
 
-    @JsonField(name = Properties.RELIGION)
     private String mReligion;
 
-    @JsonField(name = Properties.WEBSITE)
     private String mWebsite;
 
-    @JsonField(name = Properties.WORK)
     private List<Work> mWorks;
 
     public Profile() {
@@ -538,6 +507,126 @@ public class Profile extends User {
      */
     public List<Work> getWork() {
         return mWorks;
+    }
+
+    public void setFirstName(String firstName) {
+        mFirstName = firstName;
+    }
+
+    public void setMiddleName(String middleName) {
+        mMiddleName = middleName;
+    }
+
+    public void setLastName(String lastName) {
+        mLastName = lastName;
+    }
+
+    public void setGender(String gender) {
+        mGender = gender;
+    }
+
+    public void setLocale(String locale) {
+        mLocale = locale;
+    }
+
+    public void setLanguages(List<Language> languages) {
+        mLanguages = languages;
+    }
+
+    public void setLink(String link) {
+        mLink = link;
+    }
+
+    public void setAgeRange(AgeRange ageRange) {
+        mAgeRange = ageRange;
+    }
+
+    public void setThirdPartyId(String thirdPartyId) {
+        mThirdPartyId = thirdPartyId;
+    }
+
+    public void setInstalled(Boolean installed) {
+        mIsInstalled = installed;
+    }
+
+    public void setTimeZone(Integer timeZone) {
+        mTimeZone = timeZone;
+    }
+
+    public void setUpdatedTime(Date updatedTime) {
+        mUpdatedTime = updatedTime;
+    }
+
+    public void setVerified(Boolean verified) {
+        mVerified = verified;
+    }
+
+    public void setBio(String bio) {
+        mBio = bio;
+    }
+
+    public void setBirthday(String birthday) {
+        mBirthday = birthday;
+    }
+
+    public void setCover(Photo cover) {
+        mCover = cover;
+    }
+
+    public void setCurrency(String currency) {
+        mCurrency = currency;
+    }
+
+    public void setEducation(List<Education> education) {
+        mEducation = education;
+    }
+
+    public void setEmail(String email) {
+        mEmail = email;
+    }
+
+    public void setHometown(IdName hometown) {
+        mHometown = hometown;
+    }
+
+    public void setCurrentLocation(IdName currentLocation) {
+        mCurrentLocation = currentLocation;
+    }
+
+    public void setPolitical(String political) {
+        mPolitical = political;
+    }
+
+    public void setFavoriteAthletes(List<String> favoriteAthletes) {
+        mFavoriteAthletes = favoriteAthletes;
+    }
+
+    public void setFavoriteTeams(List<String> favoriteTeams) {
+        mFavoriteTeams = favoriteTeams;
+    }
+
+    public void setPicture(Utils.SingleDataResult<Image> picture) {
+        mPicture = picture;
+    }
+
+    public void setQuotes(String quotes) {
+        mQuotes = quotes;
+    }
+
+    public void setRelationshipStatus(String relationshipStatus) {
+        mRelationshipStatus = relationshipStatus;
+    }
+
+    public void setReligion(String religion) {
+        mReligion = religion;
+    }
+
+    public void setWebsite(String website) {
+        mWebsite = website;
+    }
+
+    public void setWorks(List<Work> works) {
+        mWorks = works;
     }
 
     public static class Properties {
@@ -995,6 +1084,8 @@ public class Profile extends User {
          */
         public static final String WORK = "work";
 
+
+
         public static class Builder {
             Set<String> properties;
 
@@ -1042,5 +1133,4 @@ public class Profile extends User {
 
         }
     }
-
 }

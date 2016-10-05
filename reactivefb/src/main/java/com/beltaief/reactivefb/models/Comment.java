@@ -3,7 +3,6 @@ package com.beltaief.reactivefb.models;
 import android.os.Bundle;
 
 import com.beltaief.reactivefb.util.GraphPath;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 import java.util.List;
@@ -28,43 +27,30 @@ public class Comment implements Publishable {
     private static final String ATTACHMENT = "attachment";
     private static final String ATTACHMENT_URL = "attachment_url";
 
-    @SerializedName(ID)
     private String mId;
 
-    @SerializedName(ATTACHMENT)
     private Attachment mAttachment;
 
-    @SerializedName(CAN_COMMENT)
     private Boolean mCanComment;
 
-    @SerializedName(CAN_REMOVE)
     private Boolean mCanRemove;
 
-    @SerializedName(COMMENT_COUNT)
     private Integer mCommentCount;
 
-    @SerializedName(CREATED_TIME)
     private Date mCreatedTime;
 
-    @SerializedName(FROM)
     private User mFrom;
 
-    @SerializedName(LIKE_COUNT)
     private Integer mLikeCount;
 
-    @SerializedName(MESSAGE)
     private String mMessage;
 
-    @SerializedName(MESSAGE_TAGS)
     private List<Post.InlineTag> mMessageTags;
 
-    @SerializedName(PARENT)
     private Comment mParent;
 
-    @SerializedName(USER_LIKES)
     private Boolean mUserLikes;
 
-    @SerializedName(ATTACHMENT_URL)
     private String mAttachmentUrl;
 
     private Comment(Builder builder) {

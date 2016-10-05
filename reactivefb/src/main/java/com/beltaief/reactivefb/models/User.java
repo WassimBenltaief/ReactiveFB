@@ -1,8 +1,5 @@
 package com.beltaief.reactivefb.models;
 
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
-@JsonObject
 public class User extends IdName {
 
     public User() {

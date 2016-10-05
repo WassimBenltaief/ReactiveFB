@@ -63,13 +63,13 @@ public class FriendsActivity extends AppCompatActivity implements RecyclerViewCl
 
                     @Override
                     public void onSuccess(List<Profile> profiles) {
-                        Log.d(TAG, "onNext");
+                        Log.d(TAG, "onSuccess");
                         fillList(profiles);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, "onError :" + e.getMessage());
+                        Log.e(TAG, "onError :" + e.getMessage());
                     }
                 });
     }

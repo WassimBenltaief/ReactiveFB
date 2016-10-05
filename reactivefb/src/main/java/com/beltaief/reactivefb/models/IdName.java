@@ -1,24 +1,26 @@
 package com.beltaief.reactivefb.models;
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
-
 import java.util.Locale;
 
 /**
  * Created by sromku on 6/9/15.
  */
-@JsonObject
 public class IdName {
 
-    private static final String ID = "id";
-    private static final String NAME = "name";
+    public static final String ID = "id";
+    public static final String NAME = "name";
 
-    @JsonField(name = ID)
     protected String mId;
 
-    @JsonField(name = NAME)
-    protected String mName;
+    String mName;
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
 
     public String getId() {
         return mId;

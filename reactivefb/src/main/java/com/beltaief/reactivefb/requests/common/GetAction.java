@@ -15,11 +15,6 @@ import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 
-import org.json.JSONException;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-
 import io.reactivex.SingleEmitter;
 
 public class GetAction<T> extends AbstractAction {
@@ -133,22 +128,10 @@ public class GetAction<T> extends AbstractAction {
     }
 
     /**
-     * It is better to override this method and implement your faster
-     * conversion.
+     * To be overriden by the implementation class
      */
     protected T processResponse(GraphResponse response) {
-        Type type = mSingleEmitter.getClass().getGenericSuperclass();
-        if (type instanceof ParameterizedType) {
-            Object arrayJson;
-            try {
-                arrayJson = response.getJSONObject().get("data");
-            } catch (JSONException e) {
-                return null;
-            }
-            T data = Utils.convert(String.valueOf(arrayJson), type);
-            return data;
-        }
-        return Utils.convert(response, type);
+        return null;
     }
 
     void runRequest(GraphRequest request) {

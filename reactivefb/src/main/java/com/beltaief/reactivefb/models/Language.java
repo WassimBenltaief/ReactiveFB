@@ -1,5 +1,6 @@
 package com.beltaief.reactivefb.models;
 
+
 public class Language extends IdName {
 
     /**

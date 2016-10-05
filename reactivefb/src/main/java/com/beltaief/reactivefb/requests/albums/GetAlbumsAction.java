@@ -6,10 +6,11 @@ import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.models.Album;
 import com.beltaief.reactivefb.requests.common.GetAction;
 import com.beltaief.reactivefb.util.GraphPath;
-import com.bluelinelabs.logansquare.LoganSquare;
+import com.beltaief.reactivefb.util.JsonUtils;
 import com.facebook.GraphResponse;
 
-import java.io.IOException;
+import org.json.JSONException;
+
 import java.util.List;
 
 class GetAlbumsAction extends GetAction<List<Album>> {
@@ -29,10 +30,10 @@ class GetAlbumsAction extends GetAction<List<Album>> {
     protected List<Album> processResponse(GraphResponse response) {
         Exception el;
         try {
-            return LoganSquare.parseList(response.getRawResponse(), Album.class);
-        } catch (IOException e) {
+            return JsonUtils.parseAlbums(response.getRawResponse());
+        } catch (JSONException e) {
             e.printStackTrace();
-            Log.e(TAG, e.getMessage()+"");
+            Log.e(TAG, e.getMessage() + "");
             el = e;
         }
         throw new RuntimeException("Exception while serializing Album.class :" + el.getMessage());

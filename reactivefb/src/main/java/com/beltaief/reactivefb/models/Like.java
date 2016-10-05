@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.beltaief.reactivefb.util.GraphPath;
 
-
 public class Like extends User implements Publishable {
 
     public User getUser() {

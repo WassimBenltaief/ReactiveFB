@@ -8,10 +8,11 @@ import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefb.models.Profile.Properties;
 import com.beltaief.reactivefb.requests.common.GetAction;
 import com.beltaief.reactivefb.util.GraphPath;
-import com.bluelinelabs.logansquare.LoganSquare;
+import com.beltaief.reactivefb.util.JsonUtils;
 import com.facebook.GraphResponse;
 
-import java.io.IOException;
+import org.json.JSONException;
+
 import java.util.List;
 
 class GetFriendsAction extends GetAction<List<Profile>> {
@@ -21,10 +22,6 @@ class GetFriendsAction extends GetAction<List<Profile>> {
 
     GetFriendsAction(SessionManager sessionManager) {
         super(sessionManager);
-    }
-
-    public void setProperties(Properties properties) {
-        mProperties = properties;
     }
 
     @Override
@@ -44,8 +41,8 @@ class GetFriendsAction extends GetAction<List<Profile>> {
     protected List<Profile> processResponse(GraphResponse response) {
         Exception el;
         try {
-            return LoganSquare.parseList(response.getRawResponse(), Profile.class);
-        } catch (IOException e) {
+            return JsonUtils.parseFriends(response.getRawResponse());
+        } catch (JSONException e) {
             e.printStackTrace();
             Log.e(TAG, e.getMessage()+"");
             el = e;

@@ -5,10 +5,10 @@ import android.util.Log;
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.models.Photo;
 import com.beltaief.reactivefb.requests.common.GetAction;
-import com.bluelinelabs.logansquare.LoganSquare;
+import com.beltaief.reactivefb.util.JsonUtils;
 import com.facebook.GraphResponse;
 
-import java.io.IOException;
+import org.json.JSONException;
 
 class GetPhotoAction extends GetAction<Photo> {
 
@@ -27,8 +27,8 @@ class GetPhotoAction extends GetAction<Photo> {
     protected Photo processResponse(GraphResponse response) {
         Exception el;
         try {
-            return LoganSquare.parse(response.getRawResponse(), Photo.class);
-        } catch (IOException e) {
+            return JsonUtils.parsePhoto(response.getRawResponse());
+        } catch (JSONException e) {
             e.printStackTrace();
             Log.e(TAG, e.getMessage()+"");
             el = e;

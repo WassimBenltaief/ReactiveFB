@@ -2,7 +2,6 @@ package com.beltaief.reactivefb.models;
 
 import com.beltaief.reactivefb.util.Logger;
 import com.beltaief.reactivefb.util.Utils;
-import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,16 +24,44 @@ public class Privacy {
     private static final String DESCRIPTION = "description";
     // private static final String FRIENDS = "friends";
 
-    @SerializedName(PRIVACY)
+    public void setPrivacySetting(PrivacySettings privacySetting) {
+        mPrivacySetting = privacySetting;
+    }
+
+    public void setAllowedUsers(ArrayList<String> allowedUsers) {
+        mAllowedUsers = allowedUsers;
+    }
+
+    public void setDeniedUsers(ArrayList<String> deniedUsers) {
+        mDeniedUsers = deniedUsers;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public PrivacySettings getPrivacySetting() {
+        return mPrivacySetting;
+    }
+
+    public ArrayList<String> getAllowedUsers() {
+        return mAllowedUsers;
+    }
+
+    public ArrayList<String> getDeniedUsers() {
+        return mDeniedUsers;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
     private PrivacySettings mPrivacySetting = null;
 
-    @SerializedName(ALLOW)
     private ArrayList<String> mAllowedUsers = new ArrayList<String>();
 
-    @SerializedName(DENY)
     private ArrayList<String> mDeniedUsers = new ArrayList<String>();
 
-    @SerializedName(DESCRIPTION)
     private String mDescription;
 
     public enum PrivacySettings {

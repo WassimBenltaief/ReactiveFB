@@ -1,8 +1,5 @@
 package com.beltaief.reactivefb.models;
 
-import com.beltaief.reactivefb.util.Utils;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
@@ -18,46 +15,63 @@ public class Education {
     private static final String TYPE = "type";
     private static final String WITH = "with";
 
-    @SerializedName(SCHOOL)
     private IdName mSchool;
 
-    @SerializedName(DEGREE)
     private IdName mDegree;
 
-    @SerializedName(YEAR)
     private IdName mYear;
 
-    @SerializedName(CONCENTRATION)
     private List<IdName> mConcentration;
 
-    @SerializedName(WITH)
     private List<User> mWith;
 
-    @SerializedName(TYPE)
     private String mType;
 
-    public String getSchool() {
-        return mSchool.getName();
+    public IdName getSchool() {
+        return mSchool;
     }
 
-    public String getDegree() {
-        return mDegree == null ? null : mDegree.getName();
+    public void setSchool(IdName school) {
+        mSchool = school;
     }
 
-    public String getYear() {
-        return mYear.getName();
+    public IdName getDegree() {
+        return mDegree;
     }
 
-    public List<String> getConcentrations() {
-        return Utils.extract(mConcentration);
+    public void setDegree(IdName degree) {
+        mDegree = degree;
+    }
+
+    public IdName getYear() {
+        return mYear;
+    }
+
+    public void setYear(IdName year) {
+        mYear = year;
+    }
+
+    public List<IdName> getConcentration() {
+        return mConcentration;
+    }
+
+    public void setConcentration(List<IdName> concentration) {
+        mConcentration = concentration;
     }
 
     public List<User> getWith() {
         return mWith;
     }
 
+    public void setWith(List<User> with) {
+        mWith = with;
+    }
+
     public String getType() {
         return mType;
     }
 
+    public void setType(String type) {
+        mType = type;
+    }
 }

@@ -1,42 +1,77 @@
 package com.beltaief.reactivefb.models;
 
-import com.google.gson.annotations.SerializedName;
+
+import java.util.Date;
 
 /**
  * Created by sromku on 6/9/15.
  */
 public class Cover {
 
-    private static final String ID = "id";
-    private static final String SOURCE = "source";
-    private static final String CREATED_TIME = "created_time";
-    private static final String OFFSET_X = "offset_x";
-    private static final String OFFSET_Y = "offset_y";
-    private static final String COVER_ID = "cover_id";
+    public static final String ID = "id";
+    public static final String SOURCE = "source";
+    public static final String CREATED_TIME = "created_time";
+    public static final String OFFSET_X = "offset_x";
+    public static final String OFFSET_Y = "offset_y";
+    public static final String COVER_ID = "cover_id";
 
-    @SerializedName(ID)
     private String mId = null;
 
-    @SerializedName(SOURCE)
     private String mSource = null;
 
-    @SerializedName(OFFSET_X)
     private String mOffsetX = null;
 
-    @SerializedName(OFFSET_Y)
     private String mOffsetY = null;
 
-    @SerializedName(COVER_ID)
     private String mCoverId = null;
 
-    @SerializedName(CREATED_TIME)
-    private String mCreatedTime = null;
+    private Date mCreatedTime = null;
 
     public String getId() {
         return mId;
     }
 
-    public String getCreatedTime() {
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public String getSource() {
+        return mSource;
+    }
+
+    public void setSource(String source) {
+        mSource = source;
+    }
+
+    public String getOffsetX() {
+        return mOffsetX;
+    }
+
+    public void setOffsetX(String offsetX) {
+        mOffsetX = offsetX;
+    }
+
+    public String getOffsetY() {
+        return mOffsetY;
+    }
+
+    public void setOffsetY(String offsetY) {
+        mOffsetY = offsetY;
+    }
+
+    public String getCoverId() {
+        return mCoverId;
+    }
+
+    public void setCoverId(String coverId) {
+        mCoverId = coverId;
+    }
+
+    public Date getCreatedTime() {
         return mCreatedTime;
+    }
+
+    public void setCreatedTime(Date createdTime) {
+        mCreatedTime = createdTime;
     }
 }

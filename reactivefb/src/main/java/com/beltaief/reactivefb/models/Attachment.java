@@ -1,7 +1,5 @@
 package com.beltaief.reactivefb.models;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
@@ -21,29 +19,21 @@ public class Attachment {
     private static final String TYPE = "type";
     private static final String URL = "url";
 
-    @SerializedName(DESCRIPTION)
-    private String mDescription;
+    String mDescription;
 
-    @SerializedName(DESCRIPTION_TAGS)
-    private List<Profile> mDescriptionTags;
+    List<Profile> mDescriptionTags;
 
-    @SerializedName(MEDIA)
-    private StoryAttachmentMedia mMedia;
+    StoryAttachmentMedia mMedia;
 
-    @SerializedName(SUBATTACHMENTS)
-    private List<Attachment> mSubAttachments;
+    List<Attachment> mSubAttachments;
 
-    @SerializedName(TARGET)
-    private StoryAttachmentTarget mTarget;
+    StoryAttachmentTarget mTarget;
 
-    @SerializedName(TITLE)
-    private String mTitle;
+    String mTitle;
 
-    @SerializedName(TYPE)
-    private String mType;
+    String mType;
 
-    @SerializedName(URL)
-    private String mUrl;
+    String mUrl;
 
     public String getDescription() {
         return mDescription;
@@ -77,24 +67,24 @@ public class Attachment {
 
         private static final String IMAGE = "image";
 
-        @SerializedName(IMAGE)
         private Image mImage;
 
         public Image getImage() {
             return mImage;
         }
-    }
 
+        public void setImage(Image mImage) {
+            this.mImage = mImage;
+        }
+    }
     public static class StoryAttachmentTarget {
 
         private static final String ID = "id";
         private static final String URL = "url";
 
-        @SerializedName(ID)
-        private String mId;
+        String mId;
 
-        @SerializedName(URL)
-        private String mUrl;
+        String mUrl;
 
         public String getId() {
             return mId;

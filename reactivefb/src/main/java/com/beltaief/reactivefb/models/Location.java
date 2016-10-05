@@ -1,7 +1,5 @@
 package com.beltaief.reactivefb.models;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Location {
 
     private static final String STREET = "street";
@@ -12,25 +10,46 @@ public class Location {
     private static final String LATITUDE = "latitude";
     private static final String LONGITUDE = "longitude";
 
-    @SerializedName(STREET)
+    public void setStreet(String street) {
+        mStreet = street;
+    }
+
+    public void setCity(String city) {
+        mCity = city;
+    }
+
+    public void setState(String state) {
+        mState = state;
+    }
+
+    public void setCountry(String country) {
+        mCountry = country;
+    }
+
+    public void setZip(String zip) {
+        mZip = zip;
+    }
+
+    public void setLatitude(Double latitude) {
+        mLatitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        mLongitude = longitude;
+    }
+
     private String mStreet;
 
-    @SerializedName(CITY)
     private String mCity;
 
-    @SerializedName(STATE)
     private String mState;
 
-    @SerializedName(COUNTRY)
     private String mCountry;
 
-    @SerializedName(ZIP)
     private String mZip;
 
-    @SerializedName(LATITUDE)
     private Double mLatitude;
 
-    @SerializedName(LONGITUDE)
     private Double mLongitude;
 
     public String getStreet() {

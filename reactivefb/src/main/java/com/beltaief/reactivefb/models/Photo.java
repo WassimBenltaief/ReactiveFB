@@ -5,99 +5,162 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 
-import com.beltaief.reactivefb.util.Converters;
 import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Logger;
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
-
-@JsonObject
 public class Photo implements Publishable {
 
-    private static final String ID = "id";
-    private static final String ALBUM = "album";
-    private static final String BACKDATED_TIME = "backdated_time";
-    private static final String BACKDATED_TIME_GRANULARITY = "backdate_time_granularity";
-    private static final String CREATED_TIME = "created_time";
-    private static final String FROM = "from";
-    private static final String HEIGHT = "height";
-    private static final String ICON = "icon";
-    private static final String IMAGES = "images";
-    private static final String LINK = "link";
-    private static final String PAGE_STORY_ID = "page_story_id";
-    private static final String PICTURE = "picture";
-    private static final String PLACE = "place";
-    private static final String SOURCE = "source";
-    private static final String UPDATED_TIME = "updated_time";
-    private static final String WIDTH = "width";
-    private static final String NAME = "name";
-    private static final String MESSAGE = "message"; // same as NAME
-    private static final String PRIVACY = "privacy";
+    public Photo() {
+    }
 
-    @JsonField(name = ID)
+    public static final String ID = "id";
+    public static final String ALBUM = "album";
+    public static final String BACKDATED_TIME = "backdated_time";
+    public static final String BACKDATED_TIME_GRANULARITY = "backdate_time_granularity";
+    public static final String CREATED_TIME = "created_time";
+    public static final String FROM = "from";
+    public static final String HEIGHT = "height";
+    public static final String ICON = "icon";
+    public static final String IMAGES = "images";
+    public static final String LINK = "link";
+    public static final String PAGE_STORY_ID = "page_story_id";
+    public static final String PICTURE = "picture";
+    public static final String PLACE = "place";
+    public static final String SOURCE = "source";
+    public static final String UPDATED_TIME = "updated_time";
+    public static final String WIDTH = "width";
+    public static final String NAME = "name";
+    public static final String MESSAGE = "message"; // same as NAME
+    public static final String PRIVACY = "privacy";
+
     private String mId;
 
-    @JsonField(name = ALBUM)
     private Album mAlbum;
 
-    @JsonField(name = BACKDATED_TIME,
-            typeConverter = Converters.DateTimeZoneConverter.class)
     private Date mBackDatetime;
 
-    @JsonField(name = BACKDATED_TIME_GRANULARITY,
-            typeConverter = Converters.BackDatetimeGranularityConverter.class)
     private BackDatetimeGranularity mBackDatetimeGranularity;
 
-    @JsonField(name = CREATED_TIME, typeConverter =
-            Converters.DateTimeZoneConverter.class)
     private Date mCreatedTime;
 
-    @JsonField(name = FROM)
     private User mFrom;
 
-    @JsonField(name = HEIGHT)
     private Integer mHeight;
 
-    @JsonField(name = ICON)
     private String mIcon;
 
-    @JsonField(name = IMAGES)
     private List<Image> mImages;
 
-    @JsonField(name = LINK)
     private String mLink;
 
-    @JsonField(name = NAME)
     private String mName;
 
-    @JsonField(name = PAGE_STORY_ID)
     private String mPageStoryId;
 
-    @JsonField(name = PICTURE)
     private String mPicture;
 
-    @JsonField(name = SOURCE)
     private String mSource;
 
-    @JsonField(name = UPDATED_TIME, typeConverter = Converters.DateTimeZoneConverter.class)
     private Date mUpdatedTime;
 
-    @JsonField(name = WIDTH)
     private Integer mWidth;
 
-    @JsonField(name = PLACE)
     private Place mPlace;
 
     private String mPlaceId = null;
     private Parcelable mParcelable = null;
     private byte[] mBytes = null;
     private Privacy mPrivacy = null;
+
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public void setAlbum(Album album) {
+        mAlbum = album;
+    }
+
+    public void setBackDatetime(Date backDatetime) {
+        mBackDatetime = backDatetime;
+    }
+
+    public void setBackDatetimeGranularity(BackDatetimeGranularity backDatetimeGranularity) {
+        mBackDatetimeGranularity = backDatetimeGranularity;
+    }
+
+    public void setCreatedTime(Date createdTime) {
+        mCreatedTime = createdTime;
+    }
+
+    public void setFrom(User from) {
+        mFrom = from;
+    }
+
+    public void setHeight(Integer height) {
+        mHeight = height;
+    }
+
+    public void setIcon(String icon) {
+        mIcon = icon;
+    }
+
+    public void setImages(List<Image> images) {
+        mImages = images;
+    }
+
+    public void setLink(String link) {
+        mLink = link;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public void setPageStoryId(String pageStoryId) {
+        mPageStoryId = pageStoryId;
+    }
+
+    public void setPicture(String picture) {
+        mPicture = picture;
+    }
+
+    public void setSource(String source) {
+        mSource = source;
+    }
+
+    public void setUpdatedTime(Date updatedTime) {
+        mUpdatedTime = updatedTime;
+    }
+
+    public void setWidth(Integer width) {
+        mWidth = width;
+    }
+
+    public void setPlace(Place place) {
+        mPlace = place;
+    }
+
+    public void setPlaceId(String placeId) {
+        mPlaceId = placeId;
+    }
+
+    public void setParcelable(Parcelable parcelable) {
+        mParcelable = parcelable;
+    }
+
+    public void setBytes(byte[] bytes) {
+        mBytes = bytes;
+    }
+
+    public void setPrivacy(Privacy privacy) {
+        mPrivacy = privacy;
+    }
 
     private Photo(Builder builder) {
         mName = builder.mName;

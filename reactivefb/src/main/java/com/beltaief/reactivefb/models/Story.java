@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.util.GraphPath;
-import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -156,36 +155,26 @@ public class Story implements Publishable {
         private static final String OBJECT = "object";
         private static final String PRIVACY = "privacy";
 
-        @SerializedName(ID)
         private String mId;
 
-        @SerializedName(TYPE)
         private String mType;
 
-        @SerializedName(TITLE)
         private String mTitle;
 
-        @SerializedName(URL)
         private String mUrl;
 
         private String mImage;
 
-        @SerializedName(IMAGE)
         private List<ImageUrl> mImageUrl;
 
-        @SerializedName(DESCRIPTION)
         private String mDescription;
 
-        @SerializedName(UPDATED_TIME)
         private Date mUpdatedTime;
 
-        @SerializedName(CREATED_TIME)
         private Date mCreatedTime;
 
-        @SerializedName(APPLICATION)
         private Application mApplication;
 
-        @SerializedName(PRIVACY)
         private Privacy mPrivacy;
 
         private String mNoun;

@@ -62,14 +62,19 @@ public class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyItemInserted(getItemCount() - 1);
     }
 
+    public void clear() {
+        mCollection.clear();
+        notifyDataSetChanged();
+    }
 
-    class AlbumHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    private class AlbumHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView image;
         TextView title;
         RelativeLayout container;
 
-        public AlbumHolder(View itemView) {
+        AlbumHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
             title = (TextView) itemView.findViewById(R.id.title);

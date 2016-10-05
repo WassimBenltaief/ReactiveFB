@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Logger;
 import com.beltaief.reactivefb.util.Utils;
-import com.google.gson.annotations.SerializedName;
 
 import org.w3c.dom.Comment;
 
@@ -72,43 +71,30 @@ public class Video implements Publishable {
     private static final String TITLE = "title"; // same as TITLE
     private static final String PRIVACY = "privacy";
 
-    @SerializedName(COMMENTS)
     private Utils.DataResult<Comment> mComments;
 
-    @SerializedName(CREATED_TIME)
     private Date mCreatedTime = null;
 
-    @SerializedName(DESCRIPTION)
     private String mDescription = null;
 
-    @SerializedName(EMBED_HTML)
     private String mEmbedHtml = null;
 
-    @SerializedName(FROM)
     private User mFrom = null;
 
-    @SerializedName(ICON)
     private String mIcon = null;
 
-    @SerializedName(ID)
     private String mId = null;
 
-    @SerializedName(NAME)
     private String mName = null;
 
-    @SerializedName(PICTURE)
     private String mPicture = null;
 
-    @SerializedName(SOURCE)
     private String mSource = null;
 
-    @SerializedName(TAGS)
     private Utils.DataResult<User> mTags = null;
 
-    @SerializedName(UPDATED_TIME)
     private Date mUpdatedTime = null;
 
-    @SerializedName(PRIVACY)
     private Privacy mPrivacy = null;
 
     private String mFileName = null;
