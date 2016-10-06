@@ -87,9 +87,7 @@ permissions.add(Permission.RSVP_EVENT);
 ReactiveLogin.requestAdditionalPermission(permissions, activityInstance).subscribe(...)
 ```
 
-## Configure permissions on initialization :
-
-Provide a configuration and a list of permissions when initializing ReactiveFB :
+Alternatively, you can configure the permissions when initializing the lib. Provide a configuration and a list of permissions and set it just after initialization :
 
 ```java
 // define list of permissions
