@@ -18,7 +18,7 @@ compile 'com.beltaief.reactivefacebook:reactivefb:0.1.0-alpha.1'
 
 This lib depends on :
 - facebook-android-sdk:4.15.0
-- rxjava:2.0.0-RC2
+- rxjava:2.0.0-RC3
 - rxandroid:2.0.0-RC1
 
 
