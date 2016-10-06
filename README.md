@@ -87,6 +87,37 @@ permissions.add(Permission.RSVP_EVENT);
 ReactiveLogin.requestAdditionalPermission(permissions, activityInstance).subscribe(...)
 ```
 
+## Configure permissions on initialization :
+
+Provide a configuration and a list of permissions when initializing ReactiveFB :
+
+```java
+// define list of permissions
+Permission[] permissions = new Permission[]{
+        Permission.USER_ABOUT_ME,
+        Permission.EMAIL,
+        Permission.USER_PHOTOS,
+        Permission.USER_EVENTS,
+        Permission.USER_ACTIONS_MUSIC,
+        Permission.USER_FRIENDS,
+        Permission.USER_GAMES_ACTIVITY,
+        Permission.USER_BIRTHDAY,
+        Permission.USER_TAGGED_PLACES,
+        Permission.USER_MANAGED_GROUPS,
+        Permission.PUBLISH_ACTION};
+
+// add permission to a configuration
+SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
+        .setAppId(String.valueOf(R.string.facebook_app_id))
+        .setPermissions(permissions)
+        .setDefaultAudience(DefaultAudience.FRIENDS)
+        .setAskForAllPermissionsAtOnce(false)
+        .build();
+
+// init lib
+ReactiveFB.sdkInitialize(this);
+ReactiveFB.setConfiguration(configuration);
+```
 
 ### Graph Api Requests
 
