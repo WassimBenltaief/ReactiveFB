@@ -13,12 +13,12 @@ The aim of the library is to :
 Add this dependency to your app ```build.gradle``` file :
 
 ```groovy
-compile 'com.beltaief.reactivefacebook:reactivefb:0.1.0'
+compile 'com.beltaief.reactivefacebook:reactivefb:0.1.0-alpha.1'
 ```
 
 This lib depends on :
 - facebook-android-sdk:4.15.0
-- rxjava:2.0.0-RC2
+- rxjava:2.0.0-RC3
 - rxandroid:2.0.0-RC1
 
 
@@ -87,6 +87,35 @@ permissions.add(Permission.RSVP_EVENT);
 ReactiveLogin.requestAdditionalPermission(permissions, activityInstance).subscribe(...)
 ```
 
+Alternatively, you can configure the permissions when initializing the lib. Provide a configuration and a list of permissions and set it just after initialization :
+
+```java
+// define list of permissions
+Permission[] permissions = new Permission[]{
+        Permission.USER_ABOUT_ME,
+        Permission.EMAIL,
+        Permission.USER_PHOTOS,
+        Permission.USER_EVENTS,
+        Permission.USER_ACTIONS_MUSIC,
+        Permission.USER_FRIENDS,
+        Permission.USER_GAMES_ACTIVITY,
+        Permission.USER_BIRTHDAY,
+        Permission.USER_TAGGED_PLACES,
+        Permission.USER_MANAGED_GROUPS,
+        Permission.PUBLISH_ACTION};
+
+// add permission to a configuration
+SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
+        .setAppId(String.valueOf(R.string.facebook_app_id))
+        .setPermissions(permissions)
+        .setDefaultAudience(DefaultAudience.FRIENDS)
+        .setAskForAllPermissionsAtOnce(false)
+        .build();
+
+// init lib
+ReactiveFB.sdkInitialize(this);
+ReactiveFB.setConfiguration(configuration);
+```
 
 ### Graph Api Requests
 
