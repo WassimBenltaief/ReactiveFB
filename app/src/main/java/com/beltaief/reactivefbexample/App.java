@@ -18,7 +18,7 @@ public class App extends Application {
 
         // initialize facebook configuration
         Permission[] permissions = new Permission[]{
-                // Permission.PUBLIC_PROFILE,
+                Permission.USER_ABOUT_ME,
                 Permission.EMAIL,
                 Permission.USER_PHOTOS,
                 Permission.USER_EVENTS,
@@ -35,7 +35,6 @@ public class App extends Application {
                 .setPermissions(permissions)
                 .setDefaultAudience(DefaultAudience.FRIENDS)
                 .setAskForAllPermissionsAtOnce(false)
-                //.setGraphVersion("v2.7")
                 .build();
 
         // init lib
