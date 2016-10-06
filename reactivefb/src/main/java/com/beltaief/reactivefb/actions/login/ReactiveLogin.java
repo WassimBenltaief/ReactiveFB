@@ -25,7 +25,7 @@ import static com.beltaief.reactivefb.util.Checker.checkNotNull;
 public class ReactiveLogin {
 
     /**
-     * Login with {@link com.facebook.login.LoginManager}
+     * Login with com.facebook.login.LoginManager
      * The reason why this method returns a MayBe is that when a user cancel the operation, it
      * does not emit any value neither an error. Maybe have a onComplete method that is covering
      * this case.
@@ -45,13 +45,13 @@ public class ReactiveLogin {
     }
 
     /**
-     * Login with {@link LoginButton}
+     * Login with com.facebook.login.widget.LoginButton
      * To be called from an Activity.
      * The reason why it's returning an Observable and not a MayBe like login() is that with MayBe
      * the subscribtion is done only one time. We need an observable in order to subscribe
      * continuously.
      *
-     * @param loginButton instance of a {@link LoginButton}
+     * @param loginButton instance of a com.facebook.login.widget.LoginButton
      * @return an Observable of LoginResult
      */
     @NonNull
@@ -64,11 +64,11 @@ public class ReactiveLogin {
     }
 
     /**
-     * Login with {@link LoginButton}
-     * To be called from an @{@link Fragment}
+     * Login with com.facebook.login.widget.LoginButton
+     * To be called from an android.support.v4.app.Fragment
      *
-     * @param loginButton instance of a {@link LoginButton}
-     * @param fragment    instance of support {@link Fragment}
+     * @param loginButton instance of a com.facebook.login.widget.LoginButton
+     * @param fragment    instance of support android.support.v4.app.Fragment
      * @return
      */
     @NonNull
@@ -82,11 +82,11 @@ public class ReactiveLogin {
     }
 
     /**
-     * Login with {@link LoginButton}
-     * To be called from an {@link android.app.Fragment}
+     * Login with com.facebook.login.widget.LoginButton
+     * To be called from an android.app.Fragment
      *
-     * @param loginButton instance of the facebook LoginButton
-     * @param fragment    instance of {@link android.app.Fragment}
+     * @param loginButton instance of com.facebook.login.widget.LoginButton
+     * @param fragment    instance of android.app.Fragment
      * @return
      */
     @NonNull
