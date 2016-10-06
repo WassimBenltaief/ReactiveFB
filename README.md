@@ -13,7 +13,7 @@ The aim of the library is to :
 Add this dependency to your app ```build.gradle``` file :
 
 ```groovy
-compile 'com.beltaief.reactivefacebook:reactivefb:0.1.0'
+compile 'com.beltaief.reactivefacebook:reactivefb:0.1.0-alpha.1'
 ```
 
 This lib depends on :
