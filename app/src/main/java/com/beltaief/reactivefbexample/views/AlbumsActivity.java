@@ -109,8 +109,7 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
 
         ReactiveRequest
                 .getAlbums(albumFields)  // get albums
-                .toObservable()
-                .flatMap(new Function<List<Album>, ObservableSource<Album>>() {
+                .flatMapObservable(new Function<List<Album>, ObservableSource<Album>>() {
                     @Override
                     public ObservableSource<Album> apply(List<Album> alba) throws Exception {
                         return Observable.fromIterable(alba);
