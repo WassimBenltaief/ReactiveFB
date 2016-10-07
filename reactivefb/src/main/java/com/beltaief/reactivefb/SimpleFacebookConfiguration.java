@@ -1,6 +1,6 @@
 package com.beltaief.reactivefb;
 
-import com.beltaief.reactivefb.models.Permission;
+import com.beltaief.reactivefb.util.PermissionHelper;
 import com.facebook.internal.ServerProtocol;
 import com.facebook.login.DefaultAudience;
 import com.facebook.login.LoginBehavior;
@@ -131,14 +131,14 @@ public class SimpleFacebookConfiguration {
      * @param permissions
      * @return 0 - no new permissions, 1 - added only read, 2 - added only write, 3 - added both read and write
      * */
-    public int getType(List<Permission> permissions) {
+    public int getType(List<PermissionHelper> permissions) {
         int flag = 0;
 
         if (permissions == null || permissions.size() == 0) {
             return flag;
         }
 
-        for (Permission permission : permissions) {
+        for (PermissionHelper permission : permissions) {
             switch (permission.getType()) {
                 case READ:
                     flag |= 1;
@@ -197,8 +197,8 @@ public class SimpleFacebookConfiguration {
          *
          * @param permissions
          */
-        public Builder setPermissions(Permission[] permissions) {
-            for (Permission permission : permissions) {
+        public Builder setPermissions(PermissionHelper[] permissions) {
+            for (PermissionHelper permission : permissions) {
                 switch (permission.getType()) {
                     case READ:
                         mReadPermissions.add(permission.getValue());

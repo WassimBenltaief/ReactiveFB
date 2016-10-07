@@ -1,4 +1,4 @@
-package com.beltaief.reactivefb.models;
+package com.beltaief.reactivefbexample.models;
 
 public class User extends IdName {
 

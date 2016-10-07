@@ -1,4 +1,4 @@
-package com.beltaief.reactivefb.actions.login;
+package com.beltaief.reactivefb.actions;
 
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.SessionManager;

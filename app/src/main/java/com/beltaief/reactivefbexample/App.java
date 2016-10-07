@@ -1,10 +1,9 @@
 package com.beltaief.reactivefbexample;
 
 import android.app.Application;
-
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.SimpleFacebookConfiguration;
-import com.beltaief.reactivefb.models.Permission;
+import com.beltaief.reactivefb.util.PermissionHelper;
 import com.facebook.login.DefaultAudience;
 
 /**
@@ -17,18 +16,18 @@ public class App extends Application {
         super.onCreate();
 
         // initialize facebook configuration
-        Permission[] permissions = new Permission[]{
-                Permission.USER_ABOUT_ME,
-                Permission.EMAIL,
-                Permission.USER_PHOTOS,
-                Permission.USER_EVENTS,
-                Permission.USER_ACTIONS_MUSIC,
-                Permission.USER_FRIENDS,
-                Permission.USER_GAMES_ACTIVITY,
-                Permission.USER_BIRTHDAY,
-                Permission.USER_TAGGED_PLACES,
-                Permission.USER_MANAGED_GROUPS,
-                Permission.PUBLISH_ACTION};
+        PermissionHelper[] permissions = new PermissionHelper[]{
+                PermissionHelper.USER_ABOUT_ME,
+                PermissionHelper.EMAIL,
+                PermissionHelper.USER_PHOTOS,
+                PermissionHelper.USER_EVENTS,
+                PermissionHelper.USER_ACTIONS_MUSIC,
+                PermissionHelper.USER_FRIENDS,
+                PermissionHelper.USER_GAMES_ACTIVITY,
+                PermissionHelper.USER_BIRTHDAY,
+                PermissionHelper.USER_TAGGED_PLACES,
+                PermissionHelper.USER_MANAGED_GROUPS,
+                PermissionHelper.PUBLISH_ACTION};
 
         SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
                 .setAppId(String.valueOf(R.string.facebook_app_id))

@@ -11,9 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefb.requests.ReactiveRequest;
 import com.beltaief.reactivefbexample.R;
+import com.beltaief.reactivefbexample.models.Profile;
+import com.beltaief.reactivefbexample.util.JsonTransformer;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
@@ -25,7 +26,7 @@ public class SingleFriendActivity extends AppCompatActivity {
     private static final String TAG = SingleFriendActivity.class.getSimpleName();
     private TextView result;
     private String userId;
-    private String bundle;
+    private String fields;
     private ImageView imageView;
 
     @Override
@@ -33,7 +34,7 @@ public class SingleFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        bundle = "picture.width(147).height(147),name,first_name";
+        fields = "picture.width(147).height(147),name,first_name";
 
         userId = savedInstanceState != null ?
                 savedInstanceState.getString("id") : getIntent().getStringExtra("id");
@@ -45,13 +46,14 @@ public class SingleFriendActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getProfile(bundle, userId);
+                getProfile(fields, userId);
             }
         });
     }
 
-    private void getProfile(String bundle, String userId) {
-        ReactiveRequest.getProfileById(bundle, userId)
+    private void getProfile(String fields, String userId) {
+        ReactiveRequest.getProfile(fields, userId)
+                .compose(new JsonTransformer<Profile>(Profile.class))
                 .subscribe(new SingleObserver<Profile>() {
                     @Override
                     public void onSubscribe(Disposable d) {

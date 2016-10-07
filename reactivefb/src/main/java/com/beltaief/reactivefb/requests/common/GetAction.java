@@ -2,7 +2,9 @@ package com.beltaief.reactivefb.requests.common;
 
 import android.os.Bundle;
 
+import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.SessionManager;
+import com.beltaief.reactivefb.SimpleFacebookConfiguration;
 import com.beltaief.reactivefb.util.Errors;
 import com.beltaief.reactivefb.util.Logger;
 import com.beltaief.reactivefb.util.Utils;
@@ -24,6 +26,8 @@ public class GetAction<T> extends AbstractAction {
     private SingleEmitter<T> mSingleEmitter = null;
     private Cursor<T> mCursor = null;
     private Bundle bundle;
+    private SessionManager sessionManager = ReactiveFB.getSessionManager();
+    private SimpleFacebookConfiguration configuration = ReactiveFB.getConfiguration();
 
     private GraphRequest.Callback mCallback = new GraphRequest.Callback() {
         @Override

@@ -1,9 +1,10 @@
-package com.beltaief.reactivefb.models;
+package com.beltaief.reactivefbexample.models;
 
 import android.os.Bundle;
 
 import com.beltaief.reactivefb.util.Attributes;
 import com.beltaief.reactivefb.util.Utils;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -13,80 +14,108 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author wassim
+ * The facebook user
+ *
+ * @author sromku
  * // @see https://developers.facebook.com/docs/graph-api/reference/user
  */
-
 public class Profile extends User {
 
+    @SerializedName(Properties.FIRST_NAME)
     private String mFirstName;
 
+    @SerializedName(Properties.MIDDLE_NAME)
     private String mMiddleName;
 
+    @SerializedName(Properties.LAST_NAME)
     private String mLastName;
 
+    @SerializedName(Properties.GENDER)
     private String mGender;
 
+    @SerializedName(Properties.LOCALE)
     private String mLocale;
 
+    @SerializedName(Properties.LANGUAGE)
     private List<Language> mLanguages;
 
+    @SerializedName(Properties.LINK)
     private String mLink;
 
+    @SerializedName(Properties.AGE_RANGE)
     private AgeRange mAgeRange;
 
+    @SerializedName(Properties.THIRD_PARTY_ID)
     private String mThirdPartyId;
 
+    @SerializedName(Properties.INSTALLED)
     private Boolean mIsInstalled;
 
+    @SerializedName(Properties.TIMEZONE)
     private Integer mTimeZone;
 
+    @SerializedName(Properties.UPDATED_TIME)
     private Date mUpdatedTime;
 
+    @SerializedName(Properties.VERIFIED)
     private Boolean mVerified;
 
+    @SerializedName(Properties.BIO)
     private String mBio;
 
+    @SerializedName(Properties.BIRTHDAY)
     private String mBirthday;
 
+    @SerializedName(Properties.COVER)
     private Photo mCover;
 
+    @SerializedName(Properties.CURRENCY)
     private String mCurrency;
 
+    @SerializedName(Properties.EDUCATION)
     private List<Education> mEducation;
 
+    @SerializedName(Properties.EMAIL)
     private String mEmail;
 
+    @SerializedName(Properties.HOMETOWN)
     private IdName mHometown;
 
+    @SerializedName(Properties.LOCATION)
     private IdName mCurrentLocation;
 
+    @SerializedName(Properties.POLITICAL)
     private String mPolitical;
 
+    @SerializedName(Properties.FAVORITE_ATHLETES)
     private List<String> mFavoriteAthletes;
 
+    @SerializedName(Properties.FAVORITE_TEAMS)
     private List<String> mFavoriteTeams;
 
+    @SerializedName(Properties.PICTURE)
     private Utils.SingleDataResult<Image> mPicture;
 
+    @SerializedName(Properties.QUOTES)
     private String mQuotes;
 
+    @SerializedName(Properties.RELATIONSHIP_STATUS)
     private String mRelationshipStatus;
 
+    @SerializedName(Properties.RELIGION)
     private String mReligion;
 
+    @SerializedName(Properties.WEBSITE)
     private String mWebsite;
 
+    @SerializedName(Properties.WORK)
     private List<Work> mWorks;
-
-    public Profile() {
-    }
 
     /**
      * Returns the ID of the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the ID of the user
      */
@@ -98,7 +127,7 @@ public class Profile extends User {
      * Returns the name of the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the name of the user
      */
@@ -110,7 +139,7 @@ public class Profile extends User {
      * Returns the first name of the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the first name of the user
      */
@@ -122,7 +151,7 @@ public class Profile extends User {
      * Returns the middle name of the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the middle name of the user
      */
@@ -134,7 +163,7 @@ public class Profile extends User {
      * Returns the last name of the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the last name of the user
      */
@@ -146,7 +175,7 @@ public class Profile extends User {
      * Returns the gender of the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the gender of the user
      */
@@ -158,7 +187,7 @@ public class Profile extends User {
      * Return the ISO language code and ISO country code of the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the ISO language code and ISO country code of the user
      */
@@ -170,7 +199,7 @@ public class Profile extends User {
      * Return the languages of the user.<br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_LIKES}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_LIKES}
      *
      * @return the languages of the user
      */
@@ -182,7 +211,7 @@ public class Profile extends User {
      * Returns the Facebook URL of the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the Facebook URL of the user
      */
@@ -194,7 +223,7 @@ public class Profile extends User {
      * The user's age range. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the user's age range
      */
@@ -206,7 +235,7 @@ public class Profile extends User {
      * An anonymous, but unique identifier for the user. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return the an anonymous, but unique identifier for the user
      */
@@ -219,7 +248,7 @@ public class Profile extends User {
      * the app access token that is used to make the request. <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return <code>True</code> if installed, otherwise <code>False</code>
      */
@@ -231,7 +260,7 @@ public class Profile extends User {
      * Return the timezone of the user.<br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * <br>
      * <br>
@@ -251,7 +280,7 @@ public class Profile extends User {
      * value.<br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * <br>
      * <br>
@@ -266,17 +295,14 @@ public class Profile extends User {
      * The user's account verification status.<br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * <br>
      * <br>
      * <b>Note:</b> <br>
      * A user is considered verified if she takes any of the following actions:
-     *Registers for mobile
-     * Confirms her account via SMS
-     *
-     * Enters a valid credit card
-     * <br>
+     * <li>Registers for mobile</li> <li>Confirms her account via SMS</li> <li>
+     * Enters a valid credit card</li> <br>
      * <br>
      *
      * @return The user's account verification status
@@ -289,7 +315,7 @@ public class Profile extends User {
      * Return the biography of the user.<br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}<br>
      *
      * @return the biography of the user
      */
@@ -301,7 +327,7 @@ public class Profile extends User {
      * Returns the birthday of the user. <b>MM/DD/YYYY</b> format <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_BIRTHDAY} <br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_BIRTHDAY} <br>
      *
      * @return the birthday of the user
      */
@@ -314,7 +340,7 @@ public class Profile extends User {
      * {@link Photo#getSource()} <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return The user's cover photo
      */
@@ -326,7 +352,7 @@ public class Profile extends User {
      * The user's currency settings <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return The user's currency settings
      */
@@ -338,7 +364,7 @@ public class Profile extends User {
      * The user's education history <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_EDUCATION_HISTORY}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_EDUCATION_HISTORY}<br>
      *
      * @return The user's education history
      */
@@ -350,7 +376,7 @@ public class Profile extends User {
      * Return the email of the user.<br>
      * <br>
      * <b> Permissions:</b> <br>
-     * {@link Permission#EMAIL}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#EMAIL}
      * To get the details about the place, use GetPage with this id.
      * @return the email of the user
      */
@@ -362,7 +388,7 @@ public class Profile extends User {
      * The user's hometown <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_HOMETOWN}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_HOMETOWN}<br>
      * <br>
      * To get the details about the place, use GetPage with this id.
      * @return The page id and name of the Place set as user's hometown
@@ -375,7 +401,7 @@ public class Profile extends User {
      * The user's currently "living" location <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_LOCATION}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_LOCATION}<br>
      *
      * @return The page id and name of the Place set as user's current location
      */
@@ -387,7 +413,7 @@ public class Profile extends User {
      * The user's political view <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_RELIGION_POLITICS}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_RELIGION_POLITICS}
      *
      * @return The user's political view
      */
@@ -399,7 +425,7 @@ public class Profile extends User {
      * The user's favorite athletes <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_LIKES}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_LIKES}<br>
      *
      * @return The user's favorite athletes
      */
@@ -411,7 +437,7 @@ public class Profile extends User {
      * The user's favorite teams <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_LIKES}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_LIKES}<br>
      *
      * @return The user's favorite teams
      */
@@ -423,7 +449,7 @@ public class Profile extends User {
      * The user's profile pic <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
      *
      * @return The user's profile pic
      */
@@ -438,7 +464,7 @@ public class Profile extends User {
      * The user's favorite quotes <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_ABOUT_ME}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}<br>
      *
      * @return The user's favorite quotes
      */
@@ -448,24 +474,13 @@ public class Profile extends User {
 
     /**
      * The user's relationship status: <br>
-     *Single
-     * In a relationship
-     * Engaged
-     * Married
-     *
-     *It's complicated
-     * In an open relationship
-     * Widowed
-     *
-     *Separated
-     * Divorced
-     * In a civil union
-     * In a
-     * domestic partnership
-     * <br>
+     * <li>Single</li> <li>In a relationship</li> <li>Engaged</li> <li>Married</li>
+     * <li>It's complicated</li> <li>In an open relationship</li> <li>Widowed</li>
+     * <li>Separated</li> <li>Divorced</li> <li>In a civil union</li> <li>In a
+     * domestic partnership</li> <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_RELATIONSHIPS}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_RELATIONSHIPS}<br>
      *
      * @return The user's relationship status
      */
@@ -477,7 +492,7 @@ public class Profile extends User {
      * The user's religion <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_RELIGION_POLITICS}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_RELIGION_POLITICS}<br>
      *
      * @return The user's religion
      */
@@ -489,7 +504,7 @@ public class Profile extends User {
      * The URL of the user's personal website <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_WEBSITE}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_WEBSITE}<br>
      *
      * @return The URL of the user's personal website
      */
@@ -501,132 +516,12 @@ public class Profile extends User {
      * The user's work history <br>
      * <br>
      * <b> Permissions:</b><br>
-     * {@link Permission#USER_WORK_HISTORY}<br>
+     * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_WORK_HISTORY}<br>
      *
      * @return The user's work history
      */
     public List<Work> getWork() {
         return mWorks;
-    }
-
-    public void setFirstName(String firstName) {
-        mFirstName = firstName;
-    }
-
-    public void setMiddleName(String middleName) {
-        mMiddleName = middleName;
-    }
-
-    public void setLastName(String lastName) {
-        mLastName = lastName;
-    }
-
-    public void setGender(String gender) {
-        mGender = gender;
-    }
-
-    public void setLocale(String locale) {
-        mLocale = locale;
-    }
-
-    public void setLanguages(List<Language> languages) {
-        mLanguages = languages;
-    }
-
-    public void setLink(String link) {
-        mLink = link;
-    }
-
-    public void setAgeRange(AgeRange ageRange) {
-        mAgeRange = ageRange;
-    }
-
-    public void setThirdPartyId(String thirdPartyId) {
-        mThirdPartyId = thirdPartyId;
-    }
-
-    public void setInstalled(Boolean installed) {
-        mIsInstalled = installed;
-    }
-
-    public void setTimeZone(Integer timeZone) {
-        mTimeZone = timeZone;
-    }
-
-    public void setUpdatedTime(Date updatedTime) {
-        mUpdatedTime = updatedTime;
-    }
-
-    public void setVerified(Boolean verified) {
-        mVerified = verified;
-    }
-
-    public void setBio(String bio) {
-        mBio = bio;
-    }
-
-    public void setBirthday(String birthday) {
-        mBirthday = birthday;
-    }
-
-    public void setCover(Photo cover) {
-        mCover = cover;
-    }
-
-    public void setCurrency(String currency) {
-        mCurrency = currency;
-    }
-
-    public void setEducation(List<Education> education) {
-        mEducation = education;
-    }
-
-    public void setEmail(String email) {
-        mEmail = email;
-    }
-
-    public void setHometown(IdName hometown) {
-        mHometown = hometown;
-    }
-
-    public void setCurrentLocation(IdName currentLocation) {
-        mCurrentLocation = currentLocation;
-    }
-
-    public void setPolitical(String political) {
-        mPolitical = political;
-    }
-
-    public void setFavoriteAthletes(List<String> favoriteAthletes) {
-        mFavoriteAthletes = favoriteAthletes;
-    }
-
-    public void setFavoriteTeams(List<String> favoriteTeams) {
-        mFavoriteTeams = favoriteTeams;
-    }
-
-    public void setPicture(Utils.SingleDataResult<Image> picture) {
-        mPicture = picture;
-    }
-
-    public void setQuotes(String quotes) {
-        mQuotes = quotes;
-    }
-
-    public void setRelationshipStatus(String relationshipStatus) {
-        mRelationshipStatus = relationshipStatus;
-    }
-
-    public void setReligion(String religion) {
-        mReligion = religion;
-    }
-
-    public void setWebsite(String website) {
-        mWebsite = website;
-    }
-
-    public void setWorks(List<Work> works) {
-        mWorks = works;
     }
 
     public static class Properties {
@@ -649,7 +544,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String ID = "id";
@@ -660,7 +555,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String NAME = "name";
@@ -671,7 +566,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String FIRST_NAME = "first_name";
@@ -682,7 +577,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String MIDDLE_NAME = "middle_name";
@@ -693,7 +588,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String LAST_NAME = "last_name";
@@ -704,7 +599,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String GENDER = "gender";
@@ -715,7 +610,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String LOCALE = "locale";
@@ -726,7 +621,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_LIKES}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_LIKES}
          *
          */
         public static final String LANGUAGE = "languages";
@@ -737,7 +632,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String LINK = "link";
@@ -748,7 +643,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String AGE_RANGE = "age_range";
@@ -759,7 +654,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String THIRD_PARTY_ID = "third_party_id";
@@ -771,7 +666,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String INSTALLED = "installed";
@@ -782,7 +677,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String TIMEZONE = "timezone";
@@ -796,7 +691,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String UPDATED_TIME = "updated_time";
@@ -807,7 +702,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String VERIFIED = "verified";
@@ -818,7 +713,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String BIO = "bio";
@@ -829,7 +724,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_BIRTHDAY}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_BIRTHDAY}
          *
          */
         public static final String BIRTHDAY = "birthday";
@@ -840,7 +735,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String COVER = "cover";
@@ -851,7 +746,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String CURRENCY = "currency";
@@ -862,7 +757,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String DEVICES = "devices";
@@ -873,7 +768,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_EDUCATION_HISTORY}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_EDUCATION_HISTORY}
          *
          */
         public static final String EDUCATION = "education";
@@ -888,7 +783,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#EMAIL}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#EMAIL}
          */
         public static final String EMAIL = "email";
 
@@ -898,7 +793,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_HOMETOWN}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_HOMETOWN}
          *
          */
         public static final String HOMETOWN = "hometown";
@@ -909,7 +804,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_RELATIONSHIP_DETAILS}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_RELATIONSHIP_DETAILS}
          *
          */
         public static final String INTERESTED_IN = "interested_in";
@@ -920,7 +815,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_LOCATION}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_LOCATION}
          *
          */
         public static final String LOCATION = "location";
@@ -931,7 +826,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_RELIGION_POLITICS}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_RELIGION_POLITICS}
          *
          */
         public static final String POLITICAL = "political";
@@ -943,7 +838,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String PAYMENT_PRICEPOINTS = "payment_pricepoints";
@@ -955,7 +850,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String PAYMENT_MOBILE_PRICEPOINTS = "payment_mobile_pricepoints";
@@ -966,7 +861,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_LIKES}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_LIKES}
          *
          */
         public static final String FAVORITE_ATHLETES = "favorite_athletes";
@@ -977,7 +872,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_LIKES}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_LIKES}
          *
          */
         public static final String FAVORITE_TEAMS = "favorite_teams";
@@ -988,7 +883,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String PICTURE = "picture";
@@ -999,7 +894,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String QUOTES = "quotes";
@@ -1012,7 +907,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_RELATIONSHIPS}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_RELATIONSHIPS}
          *
          */
         public static final String RELATIONSHIP_STATUS = "relationship_status";
@@ -1023,7 +918,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_RELIGION_POLITICS}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_RELIGION_POLITICS}
          *
          */
         public static final String RELIGION = "religion";
@@ -1034,7 +929,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String SECURITY_SETTINGS = "security_settings";
@@ -1045,7 +940,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_RELATIONSHIPS}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_RELATIONSHIPS}
          *
          */
         public static final String SINGNIFICANT_OTHER = "significant_other";
@@ -1057,7 +952,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_ABOUT_ME}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_ABOUT_ME}
          *
          */
         public static final String VIDEO_UPLOAD_LIMITS = "video_upload_limits";
@@ -1068,7 +963,7 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_WEBSITE}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_WEBSITE}
          *
          */
         public static final String WEBSITE = "website";
@@ -1079,12 +974,10 @@ public class Profile extends User {
          * <br>
          *
          * <b>Permissions:</b><br>
-         * {@link Permission#USER_WORK_HISTORY}
+         * {@link com.beltaief.reactivefb.util.PermissionHelper#USER_WORK_HISTORY}
          *
          */
         public static final String WORK = "work";
-
-
 
         public static class Builder {
             Set<String> properties;
@@ -1098,8 +991,8 @@ public class Profile extends User {
              *
              * @param property
              *            The property of the user profile<br>
-             *            For example: {@link Properties#FIRST_NAME}
-             * @return {@link Builder}
+             *            For example: {@link Profile.Properties#FIRST_NAME}
+             * @return {@link Profile.Properties.Builder}
              */
             public Builder add(String property) {
                 properties.add(property);
@@ -1111,11 +1004,11 @@ public class Profile extends User {
              *
              * @param property
              *            The property of the user profile<br>
-             *            For example: {@link Properties#PICTURE}
+             *            For example: {@link Profile.Properties#PICTURE}
              * @param attributes
              *            For example: picture can have type,width and height<br>
              *
-             * @return {@link Builder}
+             * @return {@link Profile.Properties.Builder}
              */
             public Builder add(String property, Attributes attributes) {
                 Map<String, String> map = attributes.getAttributes();
@@ -1133,4 +1026,5 @@ public class Profile extends User {
 
         }
     }
+
 }

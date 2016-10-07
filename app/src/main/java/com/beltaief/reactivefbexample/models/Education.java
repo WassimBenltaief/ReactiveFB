@@ -1,5 +1,8 @@
-package com.beltaief.reactivefb.models;
+package com.beltaief.reactivefbexample.models;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,63 +18,50 @@ public class Education {
     private static final String TYPE = "type";
     private static final String WITH = "with";
 
+    @SerializedName(SCHOOL)
     private IdName mSchool;
 
+    @SerializedName(DEGREE)
     private IdName mDegree;
 
+    @SerializedName(YEAR)
     private IdName mYear;
 
+    @SerializedName(CONCENTRATION)
     private List<IdName> mConcentration;
 
+    @SerializedName(WITH)
     private List<User> mWith;
 
+    @SerializedName(TYPE)
     private String mType;
 
-    public IdName getSchool() {
-        return mSchool;
+    public String getSchool() {
+        return mSchool.getName();
     }
 
-    public void setSchool(IdName school) {
-        mSchool = school;
+    public String getDegree() {
+        return mDegree == null ? null : mDegree.getName();
     }
 
-    public IdName getDegree() {
-        return mDegree;
+    public String getYear() {
+        return mYear.getName();
     }
 
-    public void setDegree(IdName degree) {
-        mDegree = degree;
-    }
-
-    public IdName getYear() {
-        return mYear;
-    }
-
-    public void setYear(IdName year) {
-        mYear = year;
-    }
-
-    public List<IdName> getConcentration() {
-        return mConcentration;
-    }
-
-    public void setConcentration(List<IdName> concentration) {
-        mConcentration = concentration;
+    public List<String> getConcentrations() {
+        List<String> names = new ArrayList<String>();
+        for (IdName idName : mConcentration) {
+            names.add(idName.getName());
+        }
+        return names;
     }
 
     public List<User> getWith() {
         return mWith;
     }
 
-    public void setWith(List<User> with) {
-        mWith = with;
-    }
-
     public String getType() {
         return mType;
     }
 
-    public void setType(String type) {
-        mType = type;
-    }
 }

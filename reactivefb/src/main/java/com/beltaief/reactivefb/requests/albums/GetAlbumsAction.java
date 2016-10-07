@@ -1,17 +1,6 @@
 package com.beltaief.reactivefb.requests.albums;
 
-import android.util.Log;
-
-import com.beltaief.reactivefb.SessionManager;
-import com.beltaief.reactivefb.models.Album;
-import com.beltaief.reactivefb.requests.common.GetAction;
-import com.beltaief.reactivefb.util.GraphPath;
-import com.beltaief.reactivefb.util.JsonUtils;
-import com.facebook.GraphResponse;
-
-import org.json.JSONException;
-
-import java.util.List;
+/*
 
 class GetAlbumsAction extends GetAction<List<Album>> {
 
@@ -40,3 +29,4 @@ class GetAlbumsAction extends GetAction<List<Album>> {
     }
 
 }
+*/

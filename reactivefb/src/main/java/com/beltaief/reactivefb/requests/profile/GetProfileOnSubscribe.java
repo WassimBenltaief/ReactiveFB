@@ -1,17 +1,9 @@
 package com.beltaief.reactivefb.requests.profile;
 
-import android.support.annotation.Nullable;
-
-import com.beltaief.reactivefb.ReactiveFB;
-import com.beltaief.reactivefb.models.Profile;
-import com.beltaief.reactivefb.util.Utils;
-
-import io.reactivex.SingleEmitter;
-import io.reactivex.SingleOnSubscribe;
-
 /**
  * Created by wassim on 9/16/16.
  */
+/*
 public class GetProfileOnSubscribe implements SingleOnSubscribe<Profile> {
 
     private String mBundleString;
@@ -25,9 +17,10 @@ public class GetProfileOnSubscribe implements SingleOnSubscribe<Profile> {
     @Override
     public void subscribe(SingleEmitter<Profile> emitter) throws Exception {
         GetProfileAction getProfileAction = new GetProfileAction(ReactiveFB.getSessionManager());
-        getProfileAction.setBundle(Utils.getBundle(mBundleString));
+        getProfileAction.setBundle(Utils.getBundle(mBundleString, mLimit));
         getProfileAction.setTarget(mProfileId);
         getProfileAction.setSingleEmitter(emitter);
         getProfileAction.execute();
     }
 }
+*/

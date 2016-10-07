@@ -1,13 +1,11 @@
-package com.beltaief.reactivefb.actions.login;
+package com.beltaief.reactivefb.actions;
 
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.SimpleFacebookConfiguration;
-import com.beltaief.reactivefb.models.Permission;
+import com.beltaief.reactivefb.util.PermissionHelper;
 import com.facebook.login.LoginResult;
-
 import java.util.List;
-
 import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeOnSubscribe;
 
@@ -17,11 +15,10 @@ import io.reactivex.MaybeOnSubscribe;
 
 class AdditionalPermissionOnSubscribe implements MaybeOnSubscribe<LoginResult> {
 
-
     private SessionManager sessionManager;
-    private List<Permission> mPermissions;
+    private List<PermissionHelper> mPermissions;
 
-    AdditionalPermissionOnSubscribe(List<Permission> permissions) {
+    AdditionalPermissionOnSubscribe(List<PermissionHelper> permissions) {
         sessionManager = ReactiveFB.getSessionManager();
         mPermissions = permissions;
     }
@@ -35,7 +32,7 @@ class AdditionalPermissionOnSubscribe implements MaybeOnSubscribe<LoginResult> {
 
         switch (flag) {
             case 1:
-                sessionManager.requestReadPermissions(Permission.convert(mPermissions));
+                sessionManager.requestReadPermissions(PermissionHelper.convert(mPermissions));
                 break;
             case 3:
                 // in case of marking in configuration the option of getting publish permission,
@@ -43,13 +40,13 @@ class AdditionalPermissionOnSubscribe implements MaybeOnSubscribe<LoginResult> {
                 if (mConfiguration.isAllPermissionsAtOnce()) {
                     sessionManager.getLoginCallback().askPublishPermissions = true;
                     sessionManager.getLoginCallback().publishPermissions =
-                            Permission.fetchPermissions(mPermissions, Permission.Type.PUBLISH);
+                            PermissionHelper.fetchPermissions(mPermissions, PermissionHelper.Type.PUBLISH);
                 }
                 sessionManager.requestReadPermissions(
-                        Permission.fetchPermissions(mPermissions, Permission.Type.READ));
+                        PermissionHelper.fetchPermissions(mPermissions, PermissionHelper.Type.READ));
                 break;
             case 2:
-                sessionManager.requestPublishPermissions(Permission.convert(mPermissions));
+                sessionManager.requestPublishPermissions(PermissionHelper.convert(mPermissions));
                 break;
         }
     }

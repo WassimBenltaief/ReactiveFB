@@ -1,7 +1,8 @@
-package com.beltaief.reactivefb.models;
+package com.beltaief.reactivefbexample.models;
 
 import com.beltaief.reactivefb.util.Logger;
 import com.beltaief.reactivefb.util.Utils;
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,44 +25,16 @@ public class Privacy {
     private static final String DESCRIPTION = "description";
     // private static final String FRIENDS = "friends";
 
-    public void setPrivacySetting(PrivacySettings privacySetting) {
-        mPrivacySetting = privacySetting;
-    }
-
-    public void setAllowedUsers(ArrayList<String> allowedUsers) {
-        mAllowedUsers = allowedUsers;
-    }
-
-    public void setDeniedUsers(ArrayList<String> deniedUsers) {
-        mDeniedUsers = deniedUsers;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
-    }
-
-    public PrivacySettings getPrivacySetting() {
-        return mPrivacySetting;
-    }
-
-    public ArrayList<String> getAllowedUsers() {
-        return mAllowedUsers;
-    }
-
-    public ArrayList<String> getDeniedUsers() {
-        return mDeniedUsers;
-    }
-
-    public String getDescription() {
-        return mDescription;
-    }
-
+    @SerializedName(PRIVACY)
     private PrivacySettings mPrivacySetting = null;
 
+    @SerializedName(ALLOW)
     private ArrayList<String> mAllowedUsers = new ArrayList<String>();
 
+    @SerializedName(DENY)
     private ArrayList<String> mDeniedUsers = new ArrayList<String>();
 
+    @SerializedName(DESCRIPTION)
     private String mDescription;
 
     public enum PrivacySettings {
@@ -238,7 +211,9 @@ public class Privacy {
          */
         private void validateListsAccessRequest() {
             if (mPrivacySetting != PrivacySettings.CUSTOM) {
-                Logger.logWarning(Privacy.class, "Can't add / delete from allowed / denied lists when privacy setting is different than \"CUSTOM\"");
+                Logger.logWarning(Privacy.class, "Can't add / delete from allowed / " +
+                        "denied lists when privacy setting is different than \"CUSTOM\"");
+
                 mPrivacySetting = PrivacySettings.CUSTOM;
             }
         }
@@ -247,7 +222,7 @@ public class Privacy {
 
     /**
      * Returns the {@code JSON} representation that should be used as the value
-     * of the privacy parameter
+     * of the privacy parameter<br/>
      * in the entities that have privacy settings.
      *
      * @return A {@code String} representing the value of the privacy parameter

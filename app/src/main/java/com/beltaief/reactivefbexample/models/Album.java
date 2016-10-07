@@ -1,120 +1,78 @@
-package com.beltaief.reactivefb.models;
+package com.beltaief.reactivefbexample.models;
 
 import android.os.Bundle;
 
 import com.beltaief.reactivefb.util.GraphPath;
+import com.beltaief.reactivefbexample.util.Cover;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
 /**
- * @author wassim
+ * Album entity.
+ *
+ * @author sromku
  * // @see https://developers.facebook.com/docs/reference/api/album
  */
 public class Album implements Publishable {
 
-    public Album() {
-    }
+    private static final String ID = "id";
+    private static final String FROM = "from";
+    private static final String NAME = "name";
+    private static final String DESCRIPTION = "description";
+    private static final String MESSAGE = "message";
+    private static final String LOCATION = "location";
+    private static final String LINK = "link";
+    private static final String COUNT = "count";
+    private static final String PRIVACY = "privacy";
+    private static final String COVER_PHOTO = "cover_photo";
+    private static final String TYPE = "type";
+    private static final String CREATED_TIME = "created_time";
+    private static final String UPDATED_TIME = "updated_time";
+    private static final String CAN_UPLOAD = "can_upload";
 
-    public static final String ID = "id";
-    public static final String FROM = "from";
-    public static final String NAME = "name";
-    public static final String DESCRIPTION = "description";
-    public static final String MESSAGE = "message";
-    public static final String LOCATION = "location";
-    public static final String LINK = "link";
-    public static final String COUNT = "count";
-    public static final String PRIVACY = "privacy";
-    public static final String COVER_PHOTO = "cover_photo";
-    public static final String TYPE = "type";
-    public static final String CREATED_TIME = "created_time";
-    public static final String UPDATED_TIME = "updated_time";
-    public static final String CAN_UPLOAD = "can_upload";
-
+    @SerializedName(ID)
     private String mId = null;
 
+    @SerializedName(FROM)
     private User mFrom = null;
 
+    @SerializedName(NAME)
     private String mName = null;
 
+    @SerializedName(DESCRIPTION)
     private String mDescription = null;
 
+    @SerializedName(LOCATION)
     private String mLocation = null;
 
+    @SerializedName(LINK)
     private String mLink = null;
 
+    @SerializedName(COUNT)
     private Integer mCount = null;
 
+    @SerializedName(PRIVACY)
     private String mPrivacy = null;
 
+    @SerializedName(COVER_PHOTO)
     private Cover mCover = null;
 
+    @SerializedName(TYPE)
     private String mType = null;
 
+    @SerializedName(CREATED_TIME)
     private Date mCreatedTime;
 
+    @SerializedName(UPDATED_TIME)
     private Date mUpdatedTime;
 
+    @SerializedName(CAN_UPLOAD)
     private boolean mCanUpload;
 
     private Privacy mPublishPrivacy = null;
 
-    public void setId(String id) {
-        mId = id;
-    }
-
-    public void setFrom(User from) {
-        mFrom = from;
-    }
-
-    public void setName(String name) {
-        mName = name;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
-    }
-
-    public void setLocation(String location) {
-        mLocation = location;
-    }
-
-    public void setLink(String link) {
-        mLink = link;
-    }
-
-    public void setCount(Integer count) {
-        mCount = count;
-    }
-
-    public void setPrivacy(String privacy) {
-        mPrivacy = privacy;
-    }
-
-    public void setCover(Cover cover) {
-        mCover = cover;
-    }
-
-    public void setType(String type) {
-        mType = type;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        mCreatedTime = createdTime;
-    }
-
-    public void setUpdatedTime(Date updatedTime) {
-        mUpdatedTime = updatedTime;
-    }
-
-    public void setCanUpload(boolean canUpload) {
-        mCanUpload = canUpload;
-    }
-
-    public void setPublishPrivacy(Privacy publishPrivacy) {
-        mPublishPrivacy = publishPrivacy;
-    }
-
-    public Album(Builder builder) {
+    private Album(Builder builder) {
         mName = builder.mName;
         mDescription = builder.mMessage;
         mPublishPrivacy = builder.mPublishPrivacy;
@@ -193,6 +151,15 @@ public class Album implements Publishable {
     }
 
     /**
+     * The album cover.
+     *
+     * @return The album cover
+     */
+    public Cover getCover() {
+        return mCover;
+    }
+
+    /**
      * The type of the album.
      *
      * @return The type of the album
@@ -254,10 +221,6 @@ public class Album implements Publishable {
         return bundle;
     }
 
-    public Cover getCover() {
-        return mCover;
-    }
-
     /**
      * Builder for preparing the Album object to be published.
      */
@@ -311,10 +274,5 @@ public class Album implements Publishable {
     @Override
     public String getPath() {
         return GraphPath.ALBUMS;
-    }
-
-    @Override
-    public Permission getPermission() {
-        return Permission.PUBLISH_ACTION;
     }
 }

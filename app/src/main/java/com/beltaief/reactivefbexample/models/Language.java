@@ -1,5 +1,4 @@
-package com.beltaief.reactivefb.models;
-
+package com.beltaief.reactivefbexample.models;
 
 public class Language extends IdName {
 

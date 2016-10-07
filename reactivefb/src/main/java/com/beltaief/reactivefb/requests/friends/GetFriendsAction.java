@@ -1,21 +1,6 @@
 package com.beltaief.reactivefb.requests.friends;
 
-import android.os.Bundle;
-import android.util.Log;
-
-import com.beltaief.reactivefb.SessionManager;
-import com.beltaief.reactivefb.models.Profile;
-import com.beltaief.reactivefb.models.Profile.Properties;
-import com.beltaief.reactivefb.requests.common.GetAction;
-import com.beltaief.reactivefb.util.GraphPath;
-import com.beltaief.reactivefb.util.JsonUtils;
-import com.facebook.GraphResponse;
-
-import org.json.JSONException;
-
-import java.util.List;
-
-class GetFriendsAction extends GetAction<List<Profile>> {
+/*class GetFriendsAction extends GetAction<List<Profile>> {
 
     private static final String TAG = GetFriendsAction.class.getSimpleName();
     private Properties mProperties;
@@ -50,4 +35,4 @@ class GetFriendsAction extends GetAction<List<Profile>> {
         throw new RuntimeException("Exception while serializing a list of Profile.class :" + el.getMessage());
     }
 
-}
+}*/

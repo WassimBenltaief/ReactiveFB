@@ -11,13 +11,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.beltaief.reactivefb.ReactiveFB;
-import com.beltaief.reactivefb.actions.login.ReactiveLogin;
-import com.beltaief.reactivefb.models.Album;
-import com.beltaief.reactivefb.models.Permission;
-import com.beltaief.reactivefb.models.Photo;
+import com.beltaief.reactivefb.actions.ReactiveLogin;
 import com.beltaief.reactivefb.requests.ReactiveRequest;
+import com.beltaief.reactivefb.util.PermissionHelper;
 import com.beltaief.reactivefbexample.R;
+import com.beltaief.reactivefbexample.models.Album;
+import com.beltaief.reactivefbexample.models.Photo;
 import com.beltaief.reactivefbexample.util.AlbumsAdapter;
+import com.beltaief.reactivefbexample.util.JsonTransformer;
 import com.beltaief.reactivefbexample.util.RecyclerViewClickListener;
 import com.facebook.login.LoginResult;
 
@@ -53,12 +54,12 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
             @Override
             public void onClick(View view) {
 
-                boolean permissionGranted = ReactiveFB.checkPermission(Permission.USER_PHOTOS);
+                boolean permissionGranted = ReactiveFB.checkPermission(PermissionHelper.USER_PHOTOS);
                 if (permissionGranted) {
                     getAlbums();
                 } else {
-                    List<Permission> permissions = new ArrayList<>();
-                    permissions.add(Permission.USER_PHOTOS);
+                    List<PermissionHelper> permissions = new ArrayList<>();
+                    permissions.add(PermissionHelper.USER_PHOTOS);
                     requestAdditionalPermission(permissions);
                 }
 
@@ -66,7 +67,7 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
         });
     }
 
-    private void requestAdditionalPermission(List<Permission> permissions) {
+    private void requestAdditionalPermission(List<PermissionHelper> permissions) {
         ReactiveLogin.requestAdditionalPermission(permissions, this)
                 .subscribe(new MaybeObserver<LoginResult>() {
                     @Override
@@ -79,7 +80,7 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
                         Log.d(TAG, "onSuccess");
                         // verify if permission was granted
                         if (loginResult.getRecentlyDeniedPermissions()
-                                .contains(Permission.USER_PHOTOS.getValue())) {
+                                .contains(PermissionHelper.USER_PHOTOS.getValue())) {
                             // permission was refused, show a toast :
                             Toast.makeText(getApplicationContext(), "We cannot get your photos " +
                                     "without your permissions", Toast.LENGTH_LONG).show();
@@ -108,7 +109,8 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
         final String photoFields = "album,images";
 
         ReactiveRequest
-                .getAlbums(albumFields)  // get albums
+                .getMyAlbums(albumFields) // get albums
+                .compose(new JsonTransformer<List<Album>>(Album.class))
                 .flatMapObservable(new Function<List<Album>, ObservableSource<Album>>() {
                     @Override
                     public ObservableSource<Album> apply(List<Album> alba) throws Exception {
@@ -120,6 +122,7 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
                     public ObservableSource<Photo> apply(Album album) throws Exception {
                         if (album.getCover() != null) {
                             return ReactiveRequest.getPhoto(album.getCover().getId(), photoFields)
+                                    .compose(new JsonTransformer<Photo>(Photo.class))
                                     .toObservable();
                         } else {
                             return Observable.empty();

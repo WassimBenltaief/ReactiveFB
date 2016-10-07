@@ -1,4 +1,6 @@
-package com.beltaief.reactivefb.models;
+package com.beltaief.reactivefbexample.models;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Locale;
 
@@ -7,20 +9,14 @@ import java.util.Locale;
  */
 public class IdName {
 
-    public static final String ID = "id";
-    public static final String NAME = "name";
+    private static final String ID = "id";
+    private static final String NAME = "name";
 
+    @SerializedName(ID)
     protected String mId;
 
-    String mName;
-
-    public void setId(String id) {
-        mId = id;
-    }
-
-    public void setName(String name) {
-        mName = name;
-    }
+    @SerializedName(NAME)
+    protected String mName;
 
     public String getId() {
         return mId;

@@ -1,7 +1,6 @@
-package com.beltaief.reactivefb.models;
+package com.beltaief.reactivefbexample.models;
 
 import android.os.Bundle;
-
 
 public interface Publishable {
 
@@ -19,12 +18,5 @@ public interface Publishable {
      * @return Kinds of object via the Graph API
      */
     String getPath();
-
-    /**
-     * Get the needed permission for being able to publish this item
-     *
-     * @return {@link Permission}
-     */
-    Permission getPermission();
 
 }

@@ -1,15 +1,6 @@
 package com.beltaief.reactivefb.requests.photo;
 
-import android.util.Log;
-
-import com.beltaief.reactivefb.SessionManager;
-import com.beltaief.reactivefb.models.Photo;
-import com.beltaief.reactivefb.requests.common.GetAction;
-import com.beltaief.reactivefb.util.JsonUtils;
-import com.facebook.GraphResponse;
-
-import org.json.JSONException;
-
+/*
 class GetPhotoAction extends GetAction<Photo> {
 
     private static String TAG = GetPhotoAction.class.getSimpleName();
@@ -37,3 +28,4 @@ class GetPhotoAction extends GetAction<Photo> {
     }
 
 }
+*/

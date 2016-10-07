@@ -1,5 +1,4 @@
-package com.beltaief.reactivefb.models;
-
+package com.beltaief.reactivefb.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,24 +10,24 @@ import java.util.List;
  * @author sromku
  * @version Graph API v2.4
  */
-public enum Permission {
+public enum PermissionHelper {
 
     /**
      * This permission not longer in use in latest graph versions.
-     * Please us Permission#USER_ABOUT_ME instead.
+     * Please us PermissionHelper#USER_ABOUT_ME instead.
      *
      * Provides access to a subset of items that are part of a person's public
-     * profile. These {@link Profile} fields can be retrieved by using this
+     * profile. These Profile fields can be retrieved by using this
      * permission:<br>
      * <ul>
-     * <li>{@link Profile.Properties#ID ID}</li>
-     * <li>{@link Profile.Properties#NAME NAME}</li>
-     * <li>{@link Profile.Properties#FIRST_NAME FIRST_NAME}</li>
-     * <li>{@link Profile.Properties#LAST_NAME LAST_NAME}</li>
-     * <li>{@link Profile.Properties#LINK LINK}</li>
-     * <li>{@link Profile.Properties#GENDER GENDER}</li>
-     * <li>{@link Profile.Properties#LOCALE LOCALE}</li>
-     * <li>{@link Profile.Properties#AGE_RANGE AGE_RANGE}</li>
+     * <li>ID</li>
+     * <li>NAME</li>
+     * <li>FIRST_NAME</li>
+     * <li>LAST_NAME</li>
+     * <li>LINK</li>
+     * <li>GENDER</li>
+     * <li>LOCALE</li>
+     * <li>AGE_RANGE</li>
      * </ul>
      *
      */
@@ -36,8 +35,7 @@ public enum Permission {
     PUBLIC_PROFILE("public_profile", Type.READ),
 
     /**
-     * Provides access to {@link Profile.Properties#BIO BIO} property of the
-     * {@link Profile}
+     * Provides access to BIO property of the
      */
     USER_ABOUT_ME("user_about_me", Type.READ),
 
@@ -95,8 +93,7 @@ public enum Permission {
     USER_BIRTHDAY("user_birthday", Type.READ),
 
     /**
-     * Provides access to {@link Profile.Properties#EDUCATION EDUCATION}
-     * property of the {@link Profile}
+     * Provides access to EDUCATION property of the Profile
      */
     USER_EDUCATION_HISTORY("user_education_history", Type.READ),
 
@@ -122,7 +119,7 @@ public enum Permission {
 
     /**
      * This permission not longer in use in latest graph versions.
-     * Please us Permission#USER_MANAGED_GROUPS instead.
+     * Please us PermissionHelper#USER_MANAGED_GROUPS instead.
      *
      * Enables your app to read the Groups a person is a member of through the
      * groups edge on the User object. This permission does not allow you to
@@ -210,19 +207,19 @@ public enum Permission {
 
     /**
      * Provides access to the person's personal website URL via the website
-     * field on the {@link Profile} entity.
+     * field on the Profile.
      */
     USER_WEBSITE("user_website", Type.READ),
 
     /**
      * Provides access to a person's work history and list of employers via the
-     * work field on the {@link Profile} entity.
+     * work field on the Profile.
      */
     USER_WORK_HISTORY("user_work_history", Type.READ),
 
     /**
      * This permission not longer in use in latest graph versions.
-     * Please us Permission#READ_CUSTOM_FRIENDLISTS instead.
+     * Please us PermissionHelper#READ_CUSTOM_FRIENDLISTS instead.
      *
      * Provides access to the names of custom lists a person has created to organize their friends.
      * This is useful for rendering an audience selector when someone is publishing stories
@@ -261,7 +258,7 @@ public enum Permission {
 
     /**
      * This permission not longer in use in latest graph versions.
-     * Please us Permission#USER_POSTS instead.
+     * Please us PermissionHelper#USER_POSTS instead.
      *
      * Provides access to read the posts in a person's News Feed, or the posts
      * on their Profile.
@@ -281,7 +278,7 @@ public enum Permission {
 
     /**
      * Provides access to the person's primary email address via the
-     * {@link Profile.Properties#EMAIL} property on the {@link Profile} object.<br>
+     * EMAIL property on the Profile object.<br>
      * <br>
      * <b>Note:</b><br>
      * Even if you request the email permission it is not guaranteed you will
@@ -338,9 +335,7 @@ public enum Permission {
     MANAGE_PAGES("manage_pages", Type.PUBLISH);
 
     /**
-     * Permission type enum:
-     * READ
-     * PUBLISH
+     * PermissionHelper type enum: <li>READ</li> <li>PUBLISH</li><br>
      */
     public static enum Type {
         PUBLISH,
@@ -383,7 +378,7 @@ public enum Permission {
     private final String mValue;
     private final Type mType;
 
-    private Permission(String value, Type type) {
+    private PermissionHelper(String value, Type type) {
         mValue = value;
         mType = type;
     }
@@ -396,8 +391,8 @@ public enum Permission {
         return mType;
     }
 
-    public static Permission fromValue(String permissionValue) {
-        for (Permission permission : values()) {
+    public static PermissionHelper fromValue(String permissionValue) {
+        for (PermissionHelper permission : values()) {
             if (permission.mValue.equals(permissionValue)) {
                 return permission;
             }
@@ -405,13 +400,13 @@ public enum Permission {
         return null;
     }
 
-    public static List<Permission> convert(Collection<String> rawPermissions) {
+    public static List<PermissionHelper> convert(Collection<String> rawPermissions) {
         if (rawPermissions == null) {
             return null;
         }
 
-        List<Permission> permissions = new ArrayList<Permission>();
-        for (Permission permission : values()) {
+        List<PermissionHelper> permissions = new ArrayList<PermissionHelper>();
+        for (PermissionHelper permission : values()) {
             if (rawPermissions.contains(permission.getValue())) {
                 permissions.add(permission);
             }
@@ -419,22 +414,22 @@ public enum Permission {
         return permissions;
     }
 
-    public static List<String> convert(List<Permission> permissions) {
+    public static List<String> convert(List<PermissionHelper> permissions) {
         if (permissions == null) {
             return null;
         }
 
         List<String> rawPermissions = new ArrayList<String>();
-        for (Permission permission : permissions) {
+        for (PermissionHelper permission : permissions) {
             rawPermissions.add(permission.getValue());
         }
 
         return rawPermissions;
     }
 
-    public static List<String> fetchPermissions(List<Permission> permissions, Type type) {
+    public static List<String> fetchPermissions(List<PermissionHelper> permissions, PermissionHelper.Type type) {
         List<String> perms = new ArrayList<String>();
-        for (Permission permission : permissions) {
+        for (PermissionHelper permission : permissions) {
             if (type.equals(permission.getType())) {
                 perms.add(permission.getValue());
             }

@@ -1,4 +1,4 @@
-package com.beltaief.reactivefb.actions.login;
+package com.beltaief.reactivefb.actions;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import com.beltaief.reactivefb.ReactiveFB;
-import com.beltaief.reactivefb.models.Permission;
+import com.beltaief.reactivefb.util.PermissionHelper;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -17,7 +17,6 @@ import io.reactivex.Observable;
 import io.reactivex.internal.operators.maybe.MaybeFromObservable;
 
 import static com.beltaief.reactivefb.util.Checker.checkNotNull;
-
 
 /**
  * A static factory to create an Observable of login events.
@@ -119,11 +118,11 @@ public class ReactiveLogin {
      * Request additional permissions from facebook. This launches a new login with additional
      * permissions.
      *
-     * @param permissions List of {@link Permission}
+     * @param permissions List of {@link PermissionHelper}
      * @param activity    current activity instance
      * @return a Maybe of LoginResult.
      */
-    public static Maybe<LoginResult> requestAdditionalPermission(List<Permission> permissions,
+    public static Maybe<LoginResult> requestAdditionalPermission(List<PermissionHelper> permissions,
                                                                  Activity activity) {
 
         checkNotNull(permissions, "permissions == null");

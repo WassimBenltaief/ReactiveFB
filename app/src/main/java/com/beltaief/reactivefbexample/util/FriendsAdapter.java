@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefbexample.R;
+import com.beltaief.reactivefbexample.models.Profile;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

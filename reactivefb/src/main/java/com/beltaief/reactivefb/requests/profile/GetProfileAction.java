@@ -1,18 +1,6 @@
 package com.beltaief.reactivefb.requests.profile;
 
-import android.os.Bundle;
-import android.util.Log;
-
-import com.beltaief.reactivefb.SessionManager;
-import com.beltaief.reactivefb.models.Profile;
-import com.beltaief.reactivefb.models.Profile.Properties;
-import com.beltaief.reactivefb.requests.common.GetAction;
-import com.beltaief.reactivefb.util.JsonUtils;
-import com.facebook.GraphResponse;
-
-import org.json.JSONException;
-
-
+/*
 public class GetProfileAction extends GetAction<Profile> {
 
     private static final String TAG = GetProfileAction.class.getSimpleName();
@@ -54,3 +42,4 @@ public class GetProfileAction extends GetAction<Profile> {
     }
 
 }
+*/

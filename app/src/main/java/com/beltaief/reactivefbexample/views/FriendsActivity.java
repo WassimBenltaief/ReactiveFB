@@ -9,10 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.beltaief.reactivefb.models.Profile;
 import com.beltaief.reactivefb.requests.ReactiveRequest;
 import com.beltaief.reactivefbexample.R;
+import com.beltaief.reactivefbexample.models.Profile;
 import com.beltaief.reactivefbexample.util.FriendsAdapter;
+import com.beltaief.reactivefbexample.util.JsonTransformer;
 import com.beltaief.reactivefbexample.util.RecyclerViewClickListener;
 
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class FriendsActivity extends AppCompatActivity implements RecyclerViewCl
         final String bundleAsString = "picture.width(147).height(147),name,first_name";
 
         ReactiveRequest.getFriends(bundleAsString)
+                .compose(new JsonTransformer<List<Profile>>(Profile.class))
                 .subscribe(new SingleObserver<List<Profile>>() {
                     @Override
                     public void onSubscribe(Disposable d) {

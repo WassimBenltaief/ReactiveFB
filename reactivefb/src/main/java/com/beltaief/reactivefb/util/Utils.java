@@ -8,7 +8,6 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import android.util.Base64;
 
-import com.beltaief.reactivefb.models.IdName;
 
 import java.lang.reflect.Field;
 import java.security.MessageDigest;
@@ -33,10 +32,10 @@ public final class Utils {
     public static final String CHARSET_NAME = "UTF-8";
     private static List<DateFormat> formats = new ArrayList<>();
 
-    private Utils(){
+    private Utils() {
     }
 
-    private static SimpleDateFormat createDateFormat(String format){
+    private static SimpleDateFormat createDateFormat(String format) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat;
@@ -81,16 +80,14 @@ public final class Utils {
      * Joins the elements of the provided {@code Iterator} into a single String
      * containing the provided elements.
      * </p>
-     *
+     * <p>
      * <p>
      * No delimiter is added before or after the list. Null objects or empty
      * strings within the iteration are represented by empty strings.
      * </p>
      *
-     * @param iterator
-     *            the {@code Iterator} of values to join together, may be null
-     * @param separator
-     *            the separator character to use
+     * @param iterator  the {@code Iterator} of values to join together, may be null
+     * @param separator the separator character to use
      * @return the joined String, {@code null} if null iterator input
      */
     public static String join(Iterator<?> iterator, String separator) {
@@ -123,18 +120,15 @@ public final class Utils {
      * Joins the elements of the provided {@code Iterator} into a single String
      * containing the provided elements.
      * </p>
-     *
+     * <p>
      * <p>
      * No delimiter is added before or after the list. Null objects or empty
      * strings within the iteration are represented by empty strings.
      * </p>
      *
      * @param <T>
-     *
-     * @param iterator
-     *            the {@code Iterator} of values to join together, may be null
-     * @param separator
-     *            the separator character to use
+     * @param iterator  the {@code Iterator} of values to join together, may be null
+     * @param separator the separator character to use
      * @return the joined String, {@code null} if null iterator input
      */
     public static <T> String join(Iterator<T> iterator, String separator, Process<T> process) {
@@ -191,23 +185,20 @@ public final class Utils {
         return buf.toString();
     }
 
-    public static List<String> extract(List<IdName> idNames) {
-        List<String> names = new ArrayList<String>();
-        for (IdName idName : idNames) {
-            names.add(idName.getName());
-        }
-        return names;
-    }
-
-    public static Bundle getBundle(String mBundleString) {
+    public static Bundle getBundle(String mFields, int limit) {
         Bundle bundle = new Bundle();
-        bundle.putString("fields", mBundleString);
+        if (mFields != null) {
+            bundle.putString("fields", mFields);
+        }
+        if (limit > 0) {
+            bundle.putString("limit", String.valueOf(limit));
+        }
         return bundle;
     }
 
     static Date formatDate(String stringDate) {
         Exception le = null;
-        if(formats.isEmpty()){
+        if (formats.isEmpty()) {
             formats = new ArrayList<DateFormat>();
             formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
             formats.add(createDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"));

@@ -1,27 +1,11 @@
 package com.beltaief.reactivefb.util;
 
-import com.beltaief.reactivefb.models.Album;
-import com.beltaief.reactivefb.models.Cover;
-import com.beltaief.reactivefb.models.IdName;
-import com.beltaief.reactivefb.models.Image;
-import com.beltaief.reactivefb.models.Language;
-import com.beltaief.reactivefb.models.Photo;
-import com.beltaief.reactivefb.models.Profile;
-import com.beltaief.reactivefb.models.Profile.Properties;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public final class JsonUtils {
 
     private JsonUtils() {
     }
 
-    // TODO finish the mapper with the rest of the fields
+    /*// TODO finish the mapper with the rest of the fields
     public static Profile parseProfile(String jsonProfile) throws JSONException {
         Profile profile = new Profile();
         JSONObject jProfile = new JSONObject(jsonProfile);
@@ -211,5 +195,5 @@ public final class JsonUtils {
         }
 
         return profiles;
-    }
+    }*/
 }

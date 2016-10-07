@@ -5,6 +5,7 @@ package com.beltaief.reactivefb.util;
  */
 public class GraphPath {
 
+    public static final String ME = "me";
     public static final String ATTACHMENTS = "attachments";
     public static final String FRIENDS = "friends";
     public static final String TAGGABLE_FRIENDS = "taggable_friends";
@@ -33,5 +34,4 @@ public class GraphPath {
     public static final Object NOTIFICATIONS = "notifications";
     public static final String TELEVISION = "television";
     public static final String OBJECTS = "objects";
-
 }

@@ -2,8 +2,8 @@ package com.beltaief.reactivefb;
 
 import android.app.Activity;
 
-import com.beltaief.reactivefb.actions.login.ReactiveLoginCallback;
-import com.beltaief.reactivefb.actions.login.ReactiveLoginWithButtonCallback;
+import com.beltaief.reactivefb.actions.ReactiveLoginCallback;
+import com.beltaief.reactivefb.actions.ReactiveLoginWithButtonCallback;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;

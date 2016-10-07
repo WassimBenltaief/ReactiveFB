@@ -1,4 +1,4 @@
-package com.beltaief.reactivefb.models;
+package com.beltaief.reactivefbexample.models;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -7,160 +7,94 @@ import android.os.Parcelable;
 
 import com.beltaief.reactivefb.util.GraphPath;
 import com.beltaief.reactivefb.util.Logger;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author sromku
+ * // @see https://developers.facebook.com/docs/graph-api/reference/photo
+ */
 public class Photo implements Publishable {
 
-    public Photo() {
-    }
+    private static final String ID = "id";
+    private static final String ALBUM = "album";
+    private static final String BACKDATED_TIME = "backdated_time";
+    private static final String BACKDATED_TIME_GRANULARITY = "backdate_time_granularity";
+    private static final String CREATED_TIME = "created_time";
+    private static final String FROM = "from";
+    private static final String HEIGHT = "height";
+    private static final String ICON = "icon";
+    private static final String IMAGES = "images";
+    private static final String LINK = "link";
+    private static final String PAGE_STORY_ID = "page_story_id";
+    private static final String PICTURE = "picture";
+    private static final String PLACE = "place";
+    private static final String SOURCE = "source";
+    private static final String UPDATED_TIME = "updated_time";
+    private static final String WIDTH = "width";
+    private static final String NAME = "name";
+    private static final String MESSAGE = "message"; // same as NAME
+    private static final String PRIVACY = "privacy";
 
-    public static final String ID = "id";
-    public static final String ALBUM = "album";
-    public static final String BACKDATED_TIME = "backdated_time";
-    public static final String BACKDATED_TIME_GRANULARITY = "backdate_time_granularity";
-    public static final String CREATED_TIME = "created_time";
-    public static final String FROM = "from";
-    public static final String HEIGHT = "height";
-    public static final String ICON = "icon";
-    public static final String IMAGES = "images";
-    public static final String LINK = "link";
-    public static final String PAGE_STORY_ID = "page_story_id";
-    public static final String PICTURE = "picture";
-    public static final String PLACE = "place";
-    public static final String SOURCE = "source";
-    public static final String UPDATED_TIME = "updated_time";
-    public static final String WIDTH = "width";
-    public static final String NAME = "name";
-    public static final String MESSAGE = "message"; // same as NAME
-    public static final String PRIVACY = "privacy";
-
+    @SerializedName(ID)
     private String mId;
 
+    @SerializedName(ALBUM)
     private Album mAlbum;
 
+    @SerializedName(BACKDATED_TIME)
     private Date mBackDatetime;
 
+    @SerializedName(BACKDATED_TIME_GRANULARITY)
     private BackDatetimeGranularity mBackDatetimeGranularity;
 
+    @SerializedName(CREATED_TIME)
     private Date mCreatedTime;
 
+    @SerializedName(FROM)
     private User mFrom;
 
+    @SerializedName(HEIGHT)
     private Integer mHeight;
 
+    @SerializedName(ICON)
     private String mIcon;
 
+    @SerializedName(IMAGES)
     private List<Image> mImages;
 
+    @SerializedName(LINK)
     private String mLink;
 
+    @SerializedName(NAME)
     private String mName;
 
+    @SerializedName(PAGE_STORY_ID)
     private String mPageStoryId;
 
+    @SerializedName(PICTURE)
     private String mPicture;
 
+    @SerializedName(SOURCE)
     private String mSource;
 
+    @SerializedName(UPDATED_TIME)
     private Date mUpdatedTime;
 
+    @SerializedName(WIDTH)
     private Integer mWidth;
 
+    @SerializedName(PLACE)
     private Place mPlace;
 
     private String mPlaceId = null;
     private Parcelable mParcelable = null;
     private byte[] mBytes = null;
     private Privacy mPrivacy = null;
-
-
-    public void setId(String id) {
-        mId = id;
-    }
-
-    public void setAlbum(Album album) {
-        mAlbum = album;
-    }
-
-    public void setBackDatetime(Date backDatetime) {
-        mBackDatetime = backDatetime;
-    }
-
-    public void setBackDatetimeGranularity(BackDatetimeGranularity backDatetimeGranularity) {
-        mBackDatetimeGranularity = backDatetimeGranularity;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        mCreatedTime = createdTime;
-    }
-
-    public void setFrom(User from) {
-        mFrom = from;
-    }
-
-    public void setHeight(Integer height) {
-        mHeight = height;
-    }
-
-    public void setIcon(String icon) {
-        mIcon = icon;
-    }
-
-    public void setImages(List<Image> images) {
-        mImages = images;
-    }
-
-    public void setLink(String link) {
-        mLink = link;
-    }
-
-    public void setName(String name) {
-        mName = name;
-    }
-
-    public void setPageStoryId(String pageStoryId) {
-        mPageStoryId = pageStoryId;
-    }
-
-    public void setPicture(String picture) {
-        mPicture = picture;
-    }
-
-    public void setSource(String source) {
-        mSource = source;
-    }
-
-    public void setUpdatedTime(Date updatedTime) {
-        mUpdatedTime = updatedTime;
-    }
-
-    public void setWidth(Integer width) {
-        mWidth = width;
-    }
-
-    public void setPlace(Place place) {
-        mPlace = place;
-    }
-
-    public void setPlaceId(String placeId) {
-        mPlaceId = placeId;
-    }
-
-    public void setParcelable(Parcelable parcelable) {
-        mParcelable = parcelable;
-    }
-
-    public void setBytes(byte[] bytes) {
-        mBytes = bytes;
-    }
-
-    public void setPrivacy(Privacy privacy) {
-        mPrivacy = privacy;
-    }
 
     private Photo(Builder builder) {
         mName = builder.mName;
@@ -173,11 +107,6 @@ public class Photo implements Publishable {
     @Override
     public String getPath() {
         return GraphPath.PHOTOS;
-    }
-
-    @Override
-    public Permission getPermission() {
-        return Permission.PUBLISH_ACTION;
     }
 
     /**
@@ -374,7 +303,8 @@ public class Photo implements Publishable {
         /**
          * Add name/description to the photo
          *
-         * @param name The name/description of the photo
+         * @param name
+         *            The name/description of the photo
          */
         public Builder setName(String name) {
             mName = name;
@@ -384,7 +314,8 @@ public class Photo implements Publishable {
         /**
          * Add place id of the photo
          *
-         * @param placeId The place id of the photo
+         * @param placeId
+         *            The place id of the photo
          */
         public Builder setPlace(String placeId) {
             mPlaceId = placeId;
@@ -394,7 +325,8 @@ public class Photo implements Publishable {
         /**
          * Add privacy setting to the photo
          *
-         * @param privacy The privacy setting of the photo
+         * @param privacy
+         *            The privacy setting of the photo
          * @see Privacy
          */
         public Builder setPrivacy(Privacy privacy) {

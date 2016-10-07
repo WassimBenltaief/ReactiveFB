@@ -4,15 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.beltaief.reactivefb.ReactiveFB;
-import com.beltaief.reactivefb.models.Album;
-import com.beltaief.reactivefb.models.Photo;
-import com.beltaief.reactivefb.models.Profile;
-import com.beltaief.reactivefb.requests.albums.GetAlbumsOnSubscribe;
-import com.beltaief.reactivefb.requests.friends.GetFriendsOnSubscribe;
-import com.beltaief.reactivefb.requests.photo.GetPhotoOnSubscribe;
-import com.beltaief.reactivefb.requests.profile.GetProfileOnSubscribe;
-
-import java.util.List;
+import com.beltaief.reactivefb.util.GraphPath;
+import com.facebook.GraphResponse;
 
 import io.reactivex.Single;
 
@@ -21,39 +14,115 @@ import io.reactivex.Single;
  */
 public class ReactiveRequest {
 
+
     @NonNull
-    public static Single<Profile> getCurrentProfile(@Nullable String bundle) {
+    public static Single<GraphResponse> getMe() {
         ReactiveFB.checkInit();
         // getProfile
-        return Single.create(new GetProfileOnSubscribe(bundle, null));
+        return Single.create(new RequestOnSubscribe(GraphPath.ME, null, null, 0));
     }
 
     @NonNull
-    public static Single<List<Profile>> getFriends(String bundle) {
+    public static Single<GraphResponse> getMe(String fields) {
+        ReactiveFB.checkInit();
+        // getProfile
+        return Single.create(new RequestOnSubscribe(GraphPath.ME, null, fields, 0));
+    }
+
+
+
+    @NonNull
+    public static Single<GraphResponse> getFriends() {
         ReactiveFB.checkInit();
         // get friends
-        return Single.create(new GetFriendsOnSubscribe(bundle));
+        return Single.create(new RequestOnSubscribe(GraphPath.ME, GraphPath.FRIENDS, null, 0));
     }
 
     @NonNull
-    public static Single<Profile> getProfileById(@Nullable String bundle,
+    public static Single<GraphResponse> getFriends(String fields) {
+        ReactiveFB.checkInit();
+        // get friends
+        return Single.create(new RequestOnSubscribe(GraphPath.ME, GraphPath.FRIENDS, fields, 0));
+    }
+
+    @NonNull
+    public static Single<GraphResponse> getFriends(String fields, int limit) {
+        ReactiveFB.checkInit();
+        // get friends
+        return Single.create(new RequestOnSubscribe(GraphPath.ME, GraphPath.FRIENDS, fields, limit));
+    }
+
+
+
+    @NonNull
+    public static Single<GraphResponse> getProfile(@NonNull String profileId) {
+        ReactiveFB.checkInit();
+        // getProfile
+        return Single.create(new RequestOnSubscribe(profileId, null, null, 0));
+    }
+
+    @NonNull
+    public static Single<GraphResponse> getProfile(@Nullable String fields,
                                              @NonNull String profileId) {
         ReactiveFB.checkInit();
         // getProfile
-        return Single.create(new GetProfileOnSubscribe(bundle, profileId));
+        return Single.create(new RequestOnSubscribe(profileId, null, fields, 0));
+    }
+
+
+    @NonNull
+    public static Single<GraphResponse> getMyAlbums(){
+        ReactiveFB.checkInit();
+        // getProfile
+        return Single.create(new RequestOnSubscribe(GraphPath.ME, GraphPath.ALBUMS, null, 0));
     }
 
     @NonNull
-    public static Single<List<Album>> getAlbums(String bundle){
+    public static Single<GraphResponse> getMyAlbums(String fields){
         ReactiveFB.checkInit();
         // getProfile
-        return Single.create(new GetAlbumsOnSubscribe(bundle));
+        return Single.create(new RequestOnSubscribe(GraphPath.ME, GraphPath.ALBUMS, fields, 0));
     }
 
     @NonNull
-    public static Single<Photo> getPhoto(String id, String bundle) {
+    public static Single<GraphResponse> getMyAlbums(String fields, int limit){
         ReactiveFB.checkInit();
         // getProfile
-        return Single.create(new GetPhotoOnSubscribe(id, bundle));
+        return Single.create(new RequestOnSubscribe(GraphPath.ME, GraphPath.ALBUMS, fields, limit));
+    }
+
+    @NonNull
+    public static Single<GraphResponse> getUserAlbums(String userId){
+        ReactiveFB.checkInit();
+        // getProfile
+        return Single.create(new RequestOnSubscribe(userId, GraphPath.ALBUMS, null, 0));
+    }
+
+    @NonNull
+    public static Single<GraphResponse> getUserAlbums(String userId, String fields){
+        ReactiveFB.checkInit();
+        // getProfile
+        return Single.create(new RequestOnSubscribe(userId, GraphPath.ALBUMS, fields, 0));
+    }
+
+    @NonNull
+    public static Single<GraphResponse> getUserAlbums(String userId, String fields, int limit){
+        ReactiveFB.checkInit();
+        // getProfile
+        return Single.create(new RequestOnSubscribe(userId, GraphPath.ALBUMS, fields, limit));
+    }
+
+    @NonNull
+    public static Single<GraphResponse> getPhoto(String photoId) {
+        ReactiveFB.checkInit();
+        // getProfile
+        return Single.create(new RequestOnSubscribe(photoId, null, null, 0));
+    }
+
+    @NonNull
+    public static Single<GraphResponse> getPhoto(String photoId, String fields) {
+        ReactiveFB.checkInit();
+        // getProfile
+        return Single.create(new RequestOnSubscribe(photoId, null, fields, 0));
     }
 }
