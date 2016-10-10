@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.beltaief.reactivefbexample.R;
@@ -17,17 +16,11 @@ import java.util.List;
 /**
  * Created from template by Wassim Beltaief
  */
-public class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private RecyclerViewClickListener mListener;
     private List<Photo> mCollection;
 
-    public AlbumsAdapter(List<Photo> collection, RecyclerViewClickListener listener) {
-        this.mCollection = collection;
-        this.mListener = listener;
-    }
-
-    public AlbumsAdapter(List<Photo> photos) {
+    public PhotosAdapter(List<Photo> photos) {
         this.mCollection = photos;
     }
 
@@ -44,7 +37,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         AlbumHolder mHolder = (AlbumHolder) holder;
         Photo photo = mCollection.get(position);
-        mHolder.title.setText(photo.getAlbum().getName());
+        mHolder.title.setText(photo.getName());
         Glide.with(mHolder.title.getContext())
                 .load(photo.getImages().get(photo.getImages().size() - 1).getSource())
                 .crossFade()
@@ -73,24 +66,15 @@ public class AlbumsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    private class AlbumHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class AlbumHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
         TextView title;
-        RelativeLayout container;
 
         AlbumHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
             title = (TextView) itemView.findViewById(R.id.title);
-            container = (RelativeLayout) itemView.findViewById(R.id.container);
-            container.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mListener != null)
-                mListener.recyclerViewListClicked(view, getLayoutPosition(), view.getId());
         }
     }
 }

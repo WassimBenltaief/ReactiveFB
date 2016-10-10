@@ -1,1 +1,1 @@
-include ':app', ':reactivefb'
+include ':app', ':reactivefb', ':reactivefbmodels'

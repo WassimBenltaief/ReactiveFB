@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.beltaief.reactivefbexample">
+          package="com.beltaief.reactivefbexample">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".App"
@@ -12,32 +13,32 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+            android:value="@string/facebook_app_id"/>
 
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider1764840603767960"
-            android:exported="true" />
+            android:exported="true"/>
 
         <activity android:name=".views.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity
             android:name=".views.LoginActivity"
             android:label="Login Example"
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+                android:value=".views.MainActivity"/>
         </activity>
         <activity
             android:name=".views.LoginButtonActivity"
@@ -45,7 +46,7 @@
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+                android:value=".views.MainActivity"/>
         </activity>
         <activity
             android:name=".views.ProfileActivity"
@@ -53,7 +54,7 @@
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+                android:value=".views.MainActivity"/>
         </activity>
         <activity
             android:name=".views.SingleFriendActivity"
@@ -61,7 +62,7 @@
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+                android:value=".views.MainActivity"/>
         </activity>
         <activity
             android:name=".views.FriendsActivity"
@@ -69,7 +70,7 @@
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+                android:value=".views.MainActivity"/>
         </activity>
         <activity
             android:name=".views.AlbumsActivity"
@@ -77,7 +78,9 @@
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.MainActivity" />
+                android:value=".views.MainActivity"/>
+        </activity>
+        <activity android:name=".views.MyPhotosActivity">
         </activity>
     </application>
 

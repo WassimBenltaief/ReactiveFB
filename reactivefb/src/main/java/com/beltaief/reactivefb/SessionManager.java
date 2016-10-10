@@ -21,13 +21,13 @@ import io.reactivex.ObservableEmitter;
 public class SessionManager {
 
     private WeakReference<Activity> mActivity;
-    static SimpleFacebookConfiguration configuration;
+    private static SimpleFacebookConfiguration configuration;
     private final LoginManager mLoginManager;
     private final ReactiveLoginCallback<LoginResult> mLoginCallback = new ReactiveLoginCallback<>();
     private final ReactiveLoginWithButtonCallback<LoginResult> mLoginWithButtonCallback = new ReactiveLoginWithButtonCallback<>();
     private final CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
-    public SessionManager(SimpleFacebookConfiguration simpleFacebookConfiguration) {
+    SessionManager(SimpleFacebookConfiguration simpleFacebookConfiguration) {
         SessionManager.configuration = simpleFacebookConfiguration;
         mLoginManager = LoginManager.getInstance();
         mLoginManager.setDefaultAudience(configuration.getDefaultAudience());
@@ -64,10 +64,7 @@ public class SessionManager {
      */
     public boolean isLoggedIn() {
         AccessToken accessToken = getAccessToken();
-        if (accessToken == null) {
-            return false;
-        }
-        return !accessToken.isExpired();
+        return accessToken != null && !accessToken.isExpired();
     }
 
     /**

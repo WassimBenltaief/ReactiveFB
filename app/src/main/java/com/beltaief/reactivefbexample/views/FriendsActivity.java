@@ -13,10 +13,18 @@ import com.beltaief.reactivefb.requests.ReactiveRequest;
 import com.beltaief.reactivefbexample.R;
 import com.beltaief.reactivefbexample.models.Profile;
 import com.beltaief.reactivefbexample.util.FriendsAdapter;
-import com.beltaief.reactivefbexample.util.JsonTransformer;
+import com.beltaief.reactivefbexample.util.GsonDateTypeAdapter;
 import com.beltaief.reactivefbexample.util.RecyclerViewClickListener;
+import com.facebook.GraphResponse;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.SingleObserver;
@@ -56,7 +64,7 @@ public class FriendsActivity extends AppCompatActivity implements RecyclerViewCl
         final String bundleAsString = "picture.width(147).height(147),name,first_name";
 
         ReactiveRequest.getFriends(bundleAsString)
-                .compose(new JsonTransformer<List<Profile>>(Profile.class))
+                .map(this::transform)
                 .subscribe(new SingleObserver<List<Profile>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -99,5 +107,22 @@ public class FriendsActivity extends AppCompatActivity implements RecyclerViewCl
         Intent intent = new Intent(this, SingleFriendActivity.class);
         intent.putExtra("id", friends.get(position).getId());
         startActivity(intent);
+    }
+
+    private List<Profile> transform(GraphResponse response) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Date.class, new GsonDateTypeAdapter())
+                .create();
+        String data = null;
+        try {
+            data = response.getJSONObject().has("data") ?
+                    response.getJSONObject().get("data").toString() :
+                    response.getJSONObject().toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Type listType = new TypeToken<List<Profile>>() {
+        }.getType();
+        return gson.fromJson(data, listType);
     }
 }

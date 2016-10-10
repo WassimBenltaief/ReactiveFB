@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         mExamples.add(new Example("Login with button", LoginButtonActivity.class, false));
         mExamples.add(new Example("Current Profile", ProfileActivity.class, true));
         mExamples.add(new Example("Albums Profile", AlbumsActivity.class, true));
+        mExamples.add(new Example("My Pictures", MyPhotosActivity.class, true));
         mExamples.add(new Example("Friends", FriendsActivity.class, true));
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler);

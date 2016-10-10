@@ -6,7 +6,6 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,9 +13,16 @@ import android.widget.TextView;
 import com.beltaief.reactivefb.requests.ReactiveRequest;
 import com.beltaief.reactivefbexample.R;
 import com.beltaief.reactivefbexample.models.Profile;
-import com.beltaief.reactivefbexample.util.JsonTransformer;
+import com.beltaief.reactivefbexample.util.GsonDateTypeAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.facebook.GraphResponse;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONException;
+
+import java.util.Date;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
@@ -36,12 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
         result = (TextView) findViewById(R.id.result);
         imageView = (ImageView) findViewById(R.id.imageView);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getProfile();
-            }
-        });
+        button.setOnClickListener(view -> getProfile());
     }
 
     private void getProfile() {
@@ -49,8 +50,8 @@ public class ProfileActivity extends AppCompatActivity {
         String fields = "picture.width(147).height(147),name,first_name";
 
         ReactiveRequest
-                .getMe(fields)
-                .compose(new JsonTransformer<Profile>(Profile.class))
+                .getMe(fields) // get Profile
+                .map(this::parseProfile) // parse json
                 .subscribe(new SingleObserver<Profile>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -60,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Profile value) {
                         Log.d(TAG, "onSuccess");
-                        fillProfile(value);
+                        fillProfile(value); // fill view with profile data
                     }
 
                     @Override
@@ -88,5 +89,20 @@ public class ProfileActivity extends AppCompatActivity {
                 });
 
         result.setText(value.getName());
+    }
+
+    private Profile parseProfile(GraphResponse response) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Date.class, new GsonDateTypeAdapter())
+                .create();
+        String data = null;
+        try {
+            data = response.getJSONObject().has("data") ?
+                    response.getJSONObject().get("data").toString() :
+                    response.getJSONObject().toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return gson.fromJson(data, Profile.class);
     }
 }

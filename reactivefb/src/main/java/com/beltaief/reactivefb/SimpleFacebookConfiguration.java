@@ -17,7 +17,7 @@ public class SimpleFacebookConfiguration {
     private DefaultAudience mDefaultAudience = null;
     private LoginBehavior mLoginBehavior = null;
     private boolean mHasPublishPermissions = false;
-    boolean mAllAtOnce = false;
+    private boolean mAllAtOnce = false;
     private boolean mUseAppsecretProof = false;
     private String mAppSecret = null;
     private String mGraphVersion = null;

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.beltaief.reactivefb.ReactiveFB;
 import com.beltaief.reactivefb.SessionManager;
 import com.beltaief.reactivefb.SimpleFacebookConfiguration;
-import com.beltaief.reactivefb.requests.common.GetAction;
 import com.beltaief.reactivefb.util.Errors;
 import com.beltaief.reactivefb.util.Logger;
 import com.beltaief.reactivefb.util.Utils;
@@ -21,9 +20,9 @@ import com.facebook.HttpMethod;
 import io.reactivex.SingleEmitter;
 
 /**
+ * Execute a GraphRequest action and redirect result to rx SingleEmitter
  * Created by wassim on 10/7/16.
  */
-
 class RequestAction {
 
     private String mTarget = "me"; // default
@@ -43,7 +42,7 @@ class RequestAction {
         public void onCompleted(GraphResponse response) {
             FacebookRequestError error = response.getError();
             if (error != null) {
-                Logger.logError(GetAction.class,
+                Logger.logError(RequestAction.class,
                         "Failed to get what you have requested", error.getException());
 
                 if (mSingleEmitter != null) {
@@ -51,7 +50,7 @@ class RequestAction {
                 }
             } else {
                 if (response.getRawResponse() == null) {
-                    Logger.logError(GetAction.class, "The response GraphObject " +
+                    Logger.logError(RequestAction.class, "The response GraphObject " +
                             "has null value. Response=" + response.toString(), null);
                     mSingleEmitter.onError(new FacebookGraphResponseException(response,
                             "The response has null value"));

@@ -1,12 +1,10 @@
 package com.beltaief.reactivefbexample.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -15,15 +13,14 @@ import com.beltaief.reactivefb.actions.ReactiveLogin;
 import com.beltaief.reactivefb.requests.ReactiveRequest;
 import com.beltaief.reactivefb.util.PermissionHelper;
 import com.beltaief.reactivefbexample.R;
-import com.beltaief.reactivefbexample.models.Album;
 import com.beltaief.reactivefbexample.models.Photo;
-import com.beltaief.reactivefbexample.util.AlbumsAdapter;
 import com.beltaief.reactivefbexample.util.GsonDateTypeAdapter;
-import com.beltaief.reactivefbexample.util.RecyclerViewClickListener;
+import com.beltaief.reactivefbexample.util.PhotosAdapter;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -34,24 +31,24 @@ import java.util.Date;
 import java.util.List;
 
 import io.reactivex.MaybeObserver;
-import io.reactivex.Observable;
+import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
-public class AlbumsActivity extends AppCompatActivity implements RecyclerViewClickListener {
+public class MyPhotosActivity extends AppCompatActivity {
 
-    private static final String TAG = AlbumsActivity.class.getSimpleName();
-    private AlbumsAdapter mAdapter;
+    private static final String TAG = MyPhotosActivity.class.getSimpleName();
+    private PhotosAdapter mAdapter;
     private List<Photo> photos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_albums);
+        setContentView(R.layout.activity_my_photos);
 
         RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setNestedScrollingEnabled(false);
-        mAdapter = new AlbumsAdapter(photos, this);
+        mAdapter = new PhotosAdapter(photos);
         recycler.setAdapter(mAdapter);
 
         Button button = (Button) findViewById(R.id.button);
@@ -59,7 +56,7 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
             // check permissions
             boolean permissionGranted = ReactiveFB.checkPermission(PermissionHelper.USER_PHOTOS);
             if (permissionGranted) {
-                getAlbums();
+                getPhotos();
             } else {
                 List<PermissionHelper> permissions = new ArrayList<>();
                 permissions.add(PermissionHelper.USER_PHOTOS);
@@ -87,7 +84,7 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
                                     "without your permissions", Toast.LENGTH_LONG).show();
                         } else {
                             // permission was granted, get albums
-                            getAlbums();
+                            getPhotos();
                         }
                     }
 
@@ -103,30 +100,40 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
                 });
     }
 
-    public void getAlbums() {
+    public void getPhotos() {
         mAdapter.clear();
 
-        String albumFields = "cover_photo,description,created_time,count";
         final String photoFields = "album,images";
 
         ReactiveRequest
-                .getMyAlbums(albumFields) // get albums
-                .map(this::parseAlbums) // parse json to list of Album
-                .flatMapObservable(Observable::fromIterable) // iterate throw collection
-                .flatMap(album -> ReactiveRequest.getPhoto(album.getCover().getId(), photoFields).toObservable()) // get singular album photo
-                .doOnError(throwable -> Observable.empty()) // return Observable.empty if error occured
-                .map(this::parsePhoto)// transform json to Photo
-                .subscribe( // subscribe
-                        photo -> {
-                            Log.d(TAG, "onNext");
-                            addPhoto(photo);
-                        },
-                        throwable -> Log.d(TAG, "onError " + throwable.getMessage()),
-                        () -> Log.d(TAG, "onComplete")
-                );
+                .getMyPhotos(photoFields, 20) // get albums
+                .map(this::transform) // parse json to list of Album
+                .subscribe(new SingleObserver<List<Photo>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onSuccess(List<Photo> value) {
+                        Log.d(TAG, "onNext");
+                        appendPhotos(photos);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError " + e.getMessage());
+                    }
+                });
     }
 
-    private List<Album> parseAlbums(GraphResponse response) {
+    private void appendPhotos(List<Photo> photos) {
+        for (Photo photo : photos) {
+            mAdapter.addItem(photo);
+        }
+    }
+
+    private List<Photo> transform(GraphResponse response) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Date.class, new GsonDateTypeAdapter())
                 .create();
@@ -137,40 +144,10 @@ public class AlbumsActivity extends AppCompatActivity implements RecyclerViewCli
                     response.getJSONObject().toString();
         } catch (JSONException e) {
             e.printStackTrace();
+            throw new JsonParseException(e);
         }
-        Type listType = new TypeToken<List<Album>>() {
+        Type listType = new TypeToken<List<Photo>>() {
         }.getType();
         return gson.fromJson(data, listType);
-    }
-
-    private Photo parsePhoto(GraphResponse response) {
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Date.class, new GsonDateTypeAdapter())
-                .create();
-        String data = null;
-        try {
-            data = response.getJSONObject().has("data") ?
-                    response.getJSONObject().get("data").toString() :
-                    response.getJSONObject().toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return gson.fromJson(data, Photo.class);
-    }
-
-    private void addPhoto(Photo photo) {
-        mAdapter.addItem(photo);
-    }
-
-
-    @Override
-    public void recyclerViewListClicked(View v, int position, int id) {
-        // TODO open one album activity
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        ReactiveLogin.onActivityResult(requestCode, resultCode, data);
     }
 }
