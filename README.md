@@ -119,6 +119,7 @@ ReactiveFB.setConfiguration(configuration);
 
 ### Graph Api Requests
 
+The GraphAPI requests returns a ```java Single<GraphResponse>``` and let you provide a json mapping strategy by your own.
 
 ```java
 // Get the profile of the logged in user
