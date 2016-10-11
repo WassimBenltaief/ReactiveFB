@@ -14,33 +14,39 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 /**
- * Created from template by Wassim Beltaief
+ * Created by wassim on 9/28/16.
  */
+
 public class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Photo> mCollection;
 
-    public PhotosAdapter(List<Photo> photos) {
-        this.mCollection = photos;
+    public PhotosAdapter(List<Photo> collection) {
+        this.mCollection = collection;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.item_album, parent, false);
+                .inflate(R.layout.item_photo, parent, false);
 
-        return new AlbumHolder(v);
+        return new PhotosHolder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        AlbumHolder mHolder = (AlbumHolder) holder;
+        PhotosHolder mHolder = (PhotosHolder) holder;
         Photo photo = mCollection.get(position);
-        mHolder.title.setText(photo.getName());
+        String title = " - ";
+        if (photo.getName() != null) {
+            int possibleLength = photo.getName().length() > 20 ? 20 : photo.getName().length() - 1;
+            title = photo.getName().subSequence(0, possibleLength).toString();
+        }
+        mHolder.title.setText(title);
         Glide.with(mHolder.title.getContext())
                 .load(photo.getImages().get(photo.getImages().size() - 1).getSource())
-                .crossFade()
+                .centerCrop()
                 .into(mHolder.image);
     }
 
@@ -51,27 +57,17 @@ public class PhotosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public void setData(List<Photo> data) {
         mCollection.clear();
-        mCollection = data;
-        notifyDataSetChanged();
-    }
-
-    public void addItem(Photo photo) {
-        mCollection.add(photo);
-        notifyItemInserted(getItemCount() - 1);
-    }
-
-    public void clear() {
-        mCollection.clear();
+        mCollection.addAll(data);
         notifyDataSetChanged();
     }
 
 
-    private class AlbumHolder extends RecyclerView.ViewHolder {
+    private class PhotosHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
         TextView title;
 
-        AlbumHolder(View itemView) {
+        PhotosHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
             title = (TextView) itemView.findViewById(R.id.title);

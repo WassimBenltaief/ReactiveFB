@@ -2,10 +2,9 @@ package com.beltaief.reactivefbexample.views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.beltaief.reactivefb.ReactiveFB;
@@ -46,23 +45,21 @@ public class MyPhotosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_photos);
 
         RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-        recycler.setNestedScrollingEnabled(false);
+
+        recycler.setLayoutManager(new GridLayoutManager(this, 2));
+        recycler.setNestedScrollingEnabled(true);
         mAdapter = new PhotosAdapter(photos);
         recycler.setAdapter(mAdapter);
 
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(view -> {
-            // check permissions
-            boolean permissionGranted = ReactiveFB.checkPermission(PermissionHelper.USER_PHOTOS);
-            if (permissionGranted) {
-                getPhotos();
-            } else {
-                List<PermissionHelper> permissions = new ArrayList<>();
-                permissions.add(PermissionHelper.USER_PHOTOS);
-                requestAdditionalPermission(permissions);
-            }
-        });
+        // check permissions
+        boolean permissionGranted = ReactiveFB.checkPermission(PermissionHelper.USER_PHOTOS);
+        if (permissionGranted) {
+            getPhotos();
+        } else {
+            List<PermissionHelper> permissions = new ArrayList<>();
+            permissions.add(PermissionHelper.USER_PHOTOS);
+            requestAdditionalPermission(permissions);
+        }
     }
 
     private void requestAdditionalPermission(List<PermissionHelper> permissions) {
@@ -101,9 +98,8 @@ public class MyPhotosActivity extends AppCompatActivity {
     }
 
     public void getPhotos() {
-        mAdapter.clear();
 
-        final String photoFields = "album,images";
+        final String photoFields = "album,images,name"; // fields passed to GraphAPI like "?fields=x,x"
 
         ReactiveRequest
                 .getMyPhotos(photoFields, 20) // get albums
@@ -117,7 +113,7 @@ public class MyPhotosActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(List<Photo> value) {
                         Log.d(TAG, "onNext");
-                        appendPhotos(photos);
+                        appendPhotos(value);
                     }
 
                     @Override
@@ -127,10 +123,8 @@ public class MyPhotosActivity extends AppCompatActivity {
                 });
     }
 
-    private void appendPhotos(List<Photo> photos) {
-        for (Photo photo : photos) {
-            mAdapter.addItem(photo);
-        }
+    private void appendPhotos(List<Photo> photoList) {
+        mAdapter.setData(photoList);
     }
 
     private List<Photo> transform(GraphResponse response) {
