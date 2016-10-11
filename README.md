@@ -119,22 +119,47 @@ ReactiveFB.setConfiguration(configuration);
 
 ### Graph Api Requests
 
+The GraphAPI requests returns a ```java Single<GraphResponse>``` and let you provide a json mapping strategy by your own.
 
 ```java
-// Get logged in user profile
-Single<Profile> currentProfile = ReactiveRequest.getCurrentProfile(properties);
+// Get the profile of the logged in user
+Single<GraphResponse> me = ReactiveRequest.getMe();
+Single<GraphResponse> me = ReactiveRequest.getMe(fields);
 
-// get logged in user friends
-Single<List<Profile>> friends = ReactiveRequest.getFriends(properties);
+// Get the list of the friends of the logged in user
+Single<GraphResponse> friends = ReactiveRequest.getFriends();
+Single<GraphResponse> friends = ReactiveRequest.getFriends(fields);
+Single<GraphResponse> friends = ReactiveRequest.getFriends(fields, limit);
 
-// get profile by facebook id
-Single<Profile> profile = ReactiveRequest.getProfileById(properties, profileId);
+// Get a user profile by providing his facebookId
+Single<GraphResponse> profile = ReactiveRequest.getProfile(profileId);
+Single<GraphResponse> profile = ReactiveRequest.getProfile(profileId, fields);
+Single<GraphResponse> profile = ReactiveRequest.getProfile(profileId, fields, limits);
 
-// get logged in user albums
-Single<List<Album>> albums = ReactiveRequest.getAlbums();
+// Get a list of albums of the logged in user
+Single<GraphResponse> albums = ReactiveRequest.getMyAlbums();
+Single<GraphResponse> albums = ReactiveRequest.getMyAlbums(fields);
+Single<GraphResponse> albums = ReactiveRequest.getMyAlbums(fields, limit);
 
-// get a photo by id
-Single<Photo> photo = ReactiveRequest.getPhoto(photoId);
+// Get a list of albums of a user
+Single<GraphResponse> albums = ReactiveRequest.getAlbums(userId);
+Single<GraphResponse> albums = ReactiveRequest.getAlbums(userId, fields);
+Single<GraphResponse> albums = ReactiveRequest.getAlbums(userId, fields, limit);
+
+// Get a photo of a user, album, page, event ..
+Single<GraphResponse> photo = ReactiveRequest.getPhoto(photoId);
+Single<GraphResponse> photo = ReactiveRequest.getPhoto(photoId, fields);
+
+// Get list of photos of the logged in user
+Single<GraphResponse> photos = ReactiveRequest.getMyPhotos();
+Single<GraphResponse> photos = ReactiveRequest.getMyPhotos(fields);
+Single<GraphResponse> photos = ReactiveRequest.getMyPhotos(fields, limit);
+
+// Get list of photos of a user
+Single<GraphResponse> photos = ReactiveRequest.getPhotos();
+Single<GraphResponse> photos = ReactiveRequest.getPhotos(fields);
+Single<GraphResponse> photos = ReactiveRequest.getPhotos(fields, limit);
+
 ```
 
 You can compose with rx operators to get to your goal faster and efficiently.
@@ -143,37 +168,20 @@ For example if you wants to get the logged in user albums and every photo of an 
 ```java
 
 ReactiveRequest
-  .getAlbums()
-  .toObservable()
-  .flatMap(new Function<List<Album>, ObservableSource<Album>>() { // stream the album collection
-      @Override
-      public ObservableSource<Album> apply(List<Album> alba) throws Exception {
-          return Observable.fromIterable(alba);
-      }
-  })
-  .flatMap(new Function<Album, ObservableSource<Photo>>() { // get cover_photo data for every album
-      @Override
-      public ObservableSource<Photo> apply(Album album) throws Exception {
-          return ReactiveRequest.getPhoto(album.getCover().getId()).toObservable();
-      }
-  })
-  .subscribe(new DisposableObserver<Photo>() {
-      @Override
-      public void onNext(Photo photo) {
-          Log.d(TAG, "onNext");
-          addPhoto(photo);
-      }
-
-      @Override
-      public void onError(Throwable e) {
-          Log.d(TAG, "onError " + e.getMessage());
-      }
-
-      @Override
-      public void onComplete() {
-          Log.d(TAG, "onComplete");
-      }
-  });
+    .getMyAlbums(albumFields) // get albums
+    .map(this::parseAlbums) // parse json to list of Album
+    .flatMapObservable(Observable::fromIterable) // iterate throw collection
+    .flatMap(album -> ReactiveRequest.getPhoto(album.getCover().getId(), photoFields).toObservable()) // get one alb. photo
+    .doOnError(throwable -> Observable.empty()) // return Observable.empty if error occured
+    .map(this::parsePhoto)// transform json to Photo
+    .subscribe(
+            photo -> {
+                Log.d(TAG, "onNext");
+                addPhoto(photo);
+            },
+            throwable -> Log.d(TAG, "onError " + throwable.getMessage()),
+            () -> Log.d(TAG, "onComplete")
+    );
   
 private void addPhoto(Photo photo) {
   // add item
