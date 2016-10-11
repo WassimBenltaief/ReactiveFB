@@ -197,7 +197,11 @@ private void addPhoto(Photo photo) {
 
 Check the sample [project](https://github.com/WassimBenltaief/ReactiveFB/tree/master/reactivefacebook) for more examples.
 
+### Todo
+- Implement more GraphAPI requests.
+- Pagination
+- ..
 
 ### Credits
 This library is based on a fork of [simple-facebook](https://github.com/sromku/android-simple-facebook) by sromku.
-All credits of the graph api helper classes returns to the nice work of sromku.
+All credits of the graph api GetAction class and Facebook entities returns to the nice work of sromku.
