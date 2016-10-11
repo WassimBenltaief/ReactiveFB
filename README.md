@@ -5,7 +5,6 @@ ReactiveFB provides an API that bridges the reactive world of RxJava 2.0 with th
 The aim of the library is to :
 
 - make the use of the facebook api easy and less boilerplate.
-- provide defined facebook utile classes like LoginResult, Profile, Album, Photo directly in the RxJava onSuccess or onNext Methods.
 - expose the facebook api methods to the possibilities of the reactive world like transformations, filtering, composition.. 
 
 ### Download :
