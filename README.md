@@ -63,7 +63,7 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 Check if permission is granted :
 
 ```java
-boolean permissionIsGranted = ReactiveFB.checkPermission(Permission.USER_PHOTOS);
+boolean permissionIsGranted = ReactiveFB.checkPermission(PermissionHelper.USER_PHOTOS);
 ```
 
 if a specific permission was not granted, ask for it with an additional permission call :
@@ -78,11 +78,11 @@ Note you still have to pass a list of ```Permission``` to ask for additional per
 Example :
 
 ```java
-List<Permission> permissions = new ArrayList<>();
-permissions.add(Permission.USER_PHOTOS);
-permissions.add(Permission.USER_FRIENDS);
-permissions.add(Permission.PUBLISH_ACTION);
-permissions.add(Permission.RSVP_EVENT);
+List<PermissionHelper> permissions = new ArrayList<>();
+permissions.add(PermissionHelper.USER_PHOTOS);
+permissions.add(PermissionHelper.USER_FRIENDS);
+permissions.add(PermissionHelper.PUBLISH_ACTION);
+permissions.add(PermissionHelper.RSVP_EVENT);
 
 ReactiveLogin.requestAdditionalPermission(permissions, activityInstance).subscribe(...)
 ```
@@ -92,17 +92,17 @@ Alternatively, you can configure the permissions when initializing the lib. Prov
 ```java
 // define list of permissions
 Permission[] permissions = new Permission[]{
-        Permission.USER_ABOUT_ME,
-        Permission.EMAIL,
-        Permission.USER_PHOTOS,
-        Permission.USER_EVENTS,
-        Permission.USER_ACTIONS_MUSIC,
-        Permission.USER_FRIENDS,
-        Permission.USER_GAMES_ACTIVITY,
-        Permission.USER_BIRTHDAY,
-        Permission.USER_TAGGED_PLACES,
-        Permission.USER_MANAGED_GROUPS,
-        Permission.PUBLISH_ACTION};
+        PermissionHelper.USER_ABOUT_ME,
+        PermissionHelper.EMAIL,
+        PermissionHelper.USER_PHOTOS,
+        PermissionHelper.USER_EVENTS,
+        PermissionHelper.USER_ACTIONS_MUSIC,
+        PermissionHelper.USER_FRIENDS,
+        PermissionHelper.USER_GAMES_ACTIVITY,
+        PermissionHelper.USER_BIRTHDAY,
+        PermissionHelper.USER_TAGGED_PLACES,
+        PermissionHelper.USER_MANAGED_GROUPS,
+        PermissionHelper.PUBLISH_ACTION};
 
 // add permission to a configuration
 SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
