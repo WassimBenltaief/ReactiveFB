@@ -5,7 +5,6 @@ ReactiveFB provides an API that bridges the reactive world of RxJava 2.0 with th
 The aim of the library is to :
 
 - make the use of the facebook api easy and less boilerplate.
-- provide defined facebook utile classes like LoginResult, Profile, Album, Photo directly in the RxJava onSuccess or onNext Methods.
 - expose the facebook api methods to the possibilities of the reactive world like transformations, filtering, composition.. 
 
 ### Download :
@@ -63,7 +62,7 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 Check if permission is granted :
 
 ```java
-boolean permissionIsGranted = ReactiveFB.checkPermission(Permission.USER_PHOTOS);
+boolean permissionIsGranted = ReactiveFB.checkPermission(PermissionHelper.USER_PHOTOS);
 ```
 
 if a specific permission was not granted, ask for it with an additional permission call :
@@ -78,11 +77,11 @@ Note you still have to pass a list of ```Permission``` to ask for additional per
 Example :
 
 ```java
-List<Permission> permissions = new ArrayList<>();
-permissions.add(Permission.USER_PHOTOS);
-permissions.add(Permission.USER_FRIENDS);
-permissions.add(Permission.PUBLISH_ACTION);
-permissions.add(Permission.RSVP_EVENT);
+List<PermissionHelper> permissions = new ArrayList<>();
+permissions.add(PermissionHelper.USER_PHOTOS);
+permissions.add(PermissionHelper.USER_FRIENDS);
+permissions.add(PermissionHelper.PUBLISH_ACTION);
+permissions.add(PermissionHelper.RSVP_EVENT);
 
 ReactiveLogin.requestAdditionalPermission(permissions, activityInstance).subscribe(...)
 ```
@@ -92,17 +91,17 @@ Alternatively, you can configure the permissions when initializing the lib. Prov
 ```java
 // define list of permissions
 Permission[] permissions = new Permission[]{
-        Permission.USER_ABOUT_ME,
-        Permission.EMAIL,
-        Permission.USER_PHOTOS,
-        Permission.USER_EVENTS,
-        Permission.USER_ACTIONS_MUSIC,
-        Permission.USER_FRIENDS,
-        Permission.USER_GAMES_ACTIVITY,
-        Permission.USER_BIRTHDAY,
-        Permission.USER_TAGGED_PLACES,
-        Permission.USER_MANAGED_GROUPS,
-        Permission.PUBLISH_ACTION};
+        PermissionHelper.USER_ABOUT_ME,
+        PermissionHelper.EMAIL,
+        PermissionHelper.USER_PHOTOS,
+        PermissionHelper.USER_EVENTS,
+        PermissionHelper.USER_ACTIONS_MUSIC,
+        PermissionHelper.USER_FRIENDS,
+        PermissionHelper.USER_GAMES_ACTIVITY,
+        PermissionHelper.USER_BIRTHDAY,
+        PermissionHelper.USER_TAGGED_PLACES,
+        PermissionHelper.USER_MANAGED_GROUPS,
+        PermissionHelper.PUBLISH_ACTION};
 
 // add permission to a configuration
 SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
@@ -197,7 +196,27 @@ private void addPhoto(Photo photo) {
 
 Check the sample [project](https://github.com/WassimBenltaief/ReactiveFB/tree/master/reactivefacebook) for more examples.
 
+### Todo
+- Implement more GraphAPI requests.
+- Pagination
+- ..
 
 ### Credits
 This library is based on a fork of [simple-facebook](https://github.com/sromku/android-simple-facebook) by sromku.
-All credits of the graph api helper classes returns to the nice work of sromku.
+All credits of the graph api GetAction class and Facebook entities returns to the nice work of sromku.
+
+## License
+
+    Copyright 2016 Wassim Beltaief
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
