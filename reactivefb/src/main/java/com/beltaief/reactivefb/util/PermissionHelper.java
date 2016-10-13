@@ -335,7 +335,9 @@ public enum PermissionHelper {
     MANAGE_PAGES("manage_pages", Type.PUBLISH);
 
     /**
-     * PermissionHelper type enum: <li>READ</li> <li>PUBLISH</li><br>
+     * PermissionHelper type enum:
+     * - READ
+     * - PUBLISH
      */
     public static enum Type {
         PUBLISH,

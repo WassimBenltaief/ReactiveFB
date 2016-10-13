@@ -154,7 +154,7 @@ public class ReactiveRequest {
     }
 
     /**
-     * Get a list of albums of a user album
+     * Get a list of albums of a user
      *
      * @param userId the facebookId of the user
      * @return a single of GraphResponse that represents a List of Album Graph Object
