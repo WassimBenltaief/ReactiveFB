@@ -14,14 +14,13 @@ import java.util.List;
 
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
-import io.reactivex.internal.operators.maybe.MaybeFromObservable;
 
 import static com.beltaief.reactivefb.util.Checker.checkNotNull;
 
 /**
  * A static factory to create an Observable of login events.
  */
-public class ReactiveLogin {
+public final class ReactiveLogin {
 
     /**
      * Login with com.facebook.login.LoginManager
@@ -35,12 +34,12 @@ public class ReactiveLogin {
      * @return a Maybe of LoginResult
      */
     @NonNull
-    public static Maybe<LoginResult> login(Activity activity) {
-        checkNotNull(activity, "view == null");
+    public static Maybe<LoginResult> login(@NonNull final Activity activity) {
+        checkNotNull(activity, "activity == null");
         // save a weak reference to the activity
         ReactiveFB.getSessionManager().setActivity(activity);
         // login
-        return MaybeFromObservable.create(new LoginOnSubscribe());
+        return Maybe.create(new LoginOnSubscribe());
     }
 
     /**
@@ -56,7 +55,7 @@ public class ReactiveLogin {
     @NonNull
     public static Observable<LoginResult> loginWithButton(@NonNull final LoginButton loginButton) {
 
-        checkNotNull(loginButton, "view == null");
+        checkNotNull(loginButton, "loginButton == null");
         ReactiveFB.checkInit();
         // login
         return Observable.create(new LoginWithButtonOnSubscribe(loginButton));
@@ -72,9 +71,10 @@ public class ReactiveLogin {
      */
     @NonNull
     public static Observable<LoginResult> loginWithButton(@NonNull final LoginButton loginButton,
-                                                          @NonNull Fragment fragment) {
+                                                          @NonNull final Fragment fragment) {
 
-        checkNotNull(loginButton, "fragment == null");
+        checkNotNull(fragment, "fragment == null");
+        checkNotNull(loginButton, "loginButton == null");
         ReactiveFB.checkInit();
         // login
         return Observable.create(new LoginWithButtonOnSubscribe(loginButton));
@@ -90,9 +90,10 @@ public class ReactiveLogin {
      */
     @NonNull
     public static Observable<LoginResult> loginWithButton(@NonNull final LoginButton loginButton,
-                                                          @NonNull android.app.Fragment fragment) {
+                                                          @NonNull final android.app.Fragment fragment) {
 
-        checkNotNull(loginButton, "fragment == null");
+        checkNotNull(fragment, "fragment == null");
+        checkNotNull(loginButton, "loginButton == null");
         ReactiveFB.checkInit();
         // login
         return Observable.create(new LoginWithButtonOnSubscribe(loginButton));
@@ -122,14 +123,18 @@ public class ReactiveLogin {
      * @param activity    current activity instance
      * @return a Maybe of LoginResult.
      */
-    public static Maybe<LoginResult> requestAdditionalPermission(List<PermissionHelper> permissions,
-                                                                 Activity activity) {
+    public static Maybe<LoginResult> requestAdditionalPermission(@NonNull final List<PermissionHelper> permissions,
+                                                                 @NonNull final Activity activity) {
 
         checkNotNull(permissions, "permissions == null");
-        checkNotNull(activity, "permissions == null");
+        checkNotNull(activity, "activity == null");
 
         ReactiveFB.getSessionManager().setActivity(activity);
 
-        return MaybeFromObservable.create(new AdditionalPermissionOnSubscribe(permissions));
+        return Maybe.create(new AdditionalPermissionOnSubscribe(permissions));
+    }
+
+    private ReactiveLogin() {
+        throw new AssertionError("No instances.");
     }
 }

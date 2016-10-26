@@ -5,7 +5,7 @@ ReactiveFB provides an API that bridges the reactive world of RxJava 2.0 with th
 The aim of the library is to :
 
 - make the use of the facebook api easy and less boilerplate.
-- expose the facebook api methods to the possibilities of the reactive world like transformations, filtering, composition.. 
+- expose the facebook api methods to the possibilities of the reactive world like transformations, filtering, composition.
 
 ### Download :
 
@@ -17,7 +17,7 @@ compile 'com.beltaief.reactivefacebook:reactivefb:0.1.0-alpha.1'
 
 This lib depends on :
 - facebook-android-sdk:4.15.0
-- rxjava:2.0.0-RC3
+- rxjava:2.0.0-RC5
 - rxandroid:2.0.0-RC1
 
 
@@ -181,11 +181,11 @@ ReactiveRequest
             throwable -> Log.d(TAG, "onError " + throwable.getMessage()),
             () -> Log.d(TAG, "onComplete")
     );
-  
+
 private void addPhoto(Photo photo) {
   // add item
   mAdapter.addItem(photo);
-  
+
   // notify inserted
   ...
 }
