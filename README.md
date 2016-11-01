@@ -12,7 +12,19 @@ The aim of the library is to :
 Add this dependency to your app ```build.gradle``` file :
 
 ```groovy
-compile 'com.beltaief.reactivefb:reactivefb:0.1.0-alpha.2'
+compile 'com.beltaief.reactivefb:reactivefb:0.1.0-beta-1'
+```
+
+and these lines to your project ```build.gradle``` file :
+
+```groovy
+allprojects {
+    repositories {
+        maven {
+            url 'https://dl.bintray.com/wassimbenltaief/maven/'
+        }
+    }
+}
 ```
 
 This lib depends on :
