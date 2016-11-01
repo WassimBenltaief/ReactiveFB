@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
-        versionName "0.1.0-alpha.1"
+        versionName "0.1.0-beta-1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 }
@@ -40,7 +40,7 @@ ext {
     gitUrl = 'https://github.com/WassimBenltaief/ReactiveFB.git'
     githubRepository= 'WassimBenltaief/ReactiveFB'
 
-    libraryVersion = '0.1.0-alpha.1'
+    libraryVersion = '0.1.0-beta-1'
 
     developerId = 'wassimbenltaief'
     developerName = 'Wassim Beltaief'
