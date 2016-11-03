@@ -22,7 +22,7 @@ public class SimpleFacebookConfiguration {
     private String mAppSecret = null;
     private String mGraphVersion = null;
 
-    private SimpleFacebookConfiguration(Builder builder) {
+    SimpleFacebookConfiguration(Builder builder) {
         this.mAppId = builder.mAppId;
         this.mNamespace = builder.mNamespace;
         this.mReadPermissions = builder.mReadPermissions;
@@ -155,16 +155,16 @@ public class SimpleFacebookConfiguration {
     }
 
     public static class Builder {
-        private String mAppId = null;
-        private String mNamespace = null;
-        private List<String> mReadPermissions = new ArrayList<String>();
-        private List<String> mPublishPermissions = new ArrayList<String>();
-        private DefaultAudience mDefaultAudience = DefaultAudience.FRIENDS;
-        private LoginBehavior mLoginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
-        private boolean mAllAtOnce = false;
-        private boolean mUseAppsecretProof = false;
-        private String mAppSecret = null;
-        private String mGraphVersion = ServerProtocol.getAPIVersion();
+        String mAppId = null;
+        String mNamespace = null;
+        List<String> mReadPermissions = new ArrayList<String>();
+        List<String> mPublishPermissions = new ArrayList<String>();
+        DefaultAudience mDefaultAudience = DefaultAudience.FRIENDS;
+        LoginBehavior mLoginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
+        boolean mAllAtOnce = false;
+        boolean mUseAppsecretProof = false;
+        String mAppSecret = null;
+        String mGraphVersion = ServerProtocol.getAPIVersion();
 
         public Builder() {
         }

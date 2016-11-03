@@ -34,20 +34,10 @@ public class ReactiveFB {
         }
     }
 
-    /**
-     * Get Session Manager
-     *
-     * @return
-     */
     public static SessionManager getSessionManager() {
         return mSessionManager;
     }
 
-    /**
-     * Get configuration
-     *
-     * @return
-     */
     public static SimpleFacebookConfiguration getConfiguration() {
         return mConfiguration;
     }
