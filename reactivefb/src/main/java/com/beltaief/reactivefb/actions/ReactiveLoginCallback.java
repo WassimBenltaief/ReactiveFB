@@ -12,7 +12,6 @@ import io.reactivex.MaybeEmitter;
  */
 public class ReactiveLoginCallback<T> implements FacebookCallback<T> {
 
-    private static final String TAG = ReactiveLoginCallback.class.getSimpleName();
     private MaybeEmitter<T> maybeEmitter;
     boolean askPublishPermissions;
     List<String> publishPermissions;

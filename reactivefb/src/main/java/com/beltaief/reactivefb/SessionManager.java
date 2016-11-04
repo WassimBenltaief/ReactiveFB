@@ -67,14 +67,9 @@ public class SessionManager {
         return accessToken != null && !accessToken.isExpired();
     }
 
-    /**
-     * Get the Access Token
-     * @return
-     */
     public AccessToken getAccessToken() {
         return AccessToken.getCurrentAccessToken();
     }
-
 
     public CallbackManager getCallbackManager() {
         return mCallbackManager;

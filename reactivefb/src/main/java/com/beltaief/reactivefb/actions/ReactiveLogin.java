@@ -108,7 +108,6 @@ public final class ReactiveLogin {
      * @param resultCode
      * @param data
      */
-    @NonNull
     public static void onActivityResult(int requestCode, int resultCode, Intent data) {
         ReactiveFB.getSessionManager()
                 .getCallbackManager()

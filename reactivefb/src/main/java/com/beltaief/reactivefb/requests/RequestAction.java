@@ -27,7 +27,7 @@ class RequestAction {
 
     private String mTarget = "me"; // default
     private String mEdge = null;
-    private SingleEmitter<GraphResponse> mSingleEmitter = null;
+    SingleEmitter<GraphResponse> mSingleEmitter = null;
     private Bundle mBundle;
     private SessionManager sessionManager;
     private SimpleFacebookConfiguration configuration;
